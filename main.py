@@ -1,8 +1,10 @@
+# Main Flask application file
+
 from flask import Flask
 
-app = Flask(__name__)
+app = Flask(__name__)    # initialises the application            
 
-@app.route("/")
+@app.route("/")    # Route for home page
 def home():
     return "hello how are you"
 
