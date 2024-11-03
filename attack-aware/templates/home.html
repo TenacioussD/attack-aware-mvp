@@ -3,3 +3,11 @@
 {% extends 'base.html' %}
 
 {% block title %} Attack Aware - Protect Yourself {% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Stay Safe Online with Attack Aware</h1>
+    <p>Your trusted guide to understanding cybersecurity risks and protecting your digital identity.</p>
+    <a href="{{ url_for('static', filename='/about.html') }}" class="btn-primary">Learn More</a>
+</section>
+{% endblock %}
