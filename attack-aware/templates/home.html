@@ -1,0 +1,67 @@
+<!-- Main home page -->
+
+{% extends 'base.html' %}           <!-- Inherits code from the base.html file -->
+
+{% block title %} Attack Aware - Protect Yourself {% endblock %}  <!-- Custom header -->
+
+{% block content %}
+
+<section class="hero">
+    <h1>Stay Safe Online with Attack Aware</h1>
+    <p>Your trusted guide to understanding cybersecurity risks and protecting your digital identity.</p>
+    <a href="{{ url_for('static', filename='/about.html') }}" class="btn-primary">Learn More</a>    <!-- Learn more button -->
+</section>
+
+<section class="key-sections">
+    <h2>What You Will Learn</h2>
+    <div class="section-grid">
+        <div class="section-item">
+            <h3>Common Threats</h3>
+            <p>Understand the types of cyber threats you may face, from phishing to ransomware.</p>
+            <a href="{{ url_for('static', filename='/threats.html') }}">Explore Threats</a>
+        </div>
+        <div class="section-item">
+            <h3>Protection Tips</h3>
+            <p>Get tips and tricks to safeguard your personal information and devices.</p>
+            <a href="{{ url_for('static', filename='/tips.html') }}">View Tips</a>
+        </div>
+        <div class="section-item">
+            <h3>Latest News</h3>
+            <p>Stay up-to-date with recent cybersecurity news and incidents.</p>
+            <a href="{{ url_for('static', filename='/news.html') }}">Read News</a>
+        </div>
+    </div>
+</section>
+
+<section class="quick-tips">
+    <h2>Quick Security Tips</h2>
+    <ul>
+        <li>Enable two-factor authentication on all accounts.</li>
+        <li>Avoid using the same password for multiple accounts.</li>
+        <li>Be cautious of suspicious emails or links.</li>
+        <li>Keep your software and antivirus updated.</li>
+    </ul>
+</section>
+
+<section class="testimonials">
+    <h2>Success Stories</h2>
+    <blockquote>
+        <p>"Thanks to Attack Aware, I learned how to recognize phishing emails and secure my accounts!"</p>
+        <footer>- Jane D.</footer>
+    </blockquote>
+    <blockquote>
+        <p>"A great resource for anyone looking to protect themselves online."</p>
+        <footer>- Mike R.</footer>
+    </blockquote>
+</section>
+
+<section class="subscribe">
+    <h2>Want to Stay Updated?</h2>
+    <p>Sign up for our newsletter to get the latest cybersecurity tips directly in your inbox.</p>
+    <form action="{{ url_for('subscribe') }}" method="post">
+        <input type="email" name="email" placeholder="Enter your email">
+        <button type="submit" class="btn-primary">Subscribe</button>
+    </form>
+</section>
+
+{% endblock %}
