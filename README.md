@@ -5,6 +5,8 @@
 - Test before pushing to dev: Ensure all your code works as expected before pushing to the dev branch. This includes running tests, checking for errors, and confirming functionality.
 - No direct pushes to main: The main branch is protected. Only push changes to dev -never directly to main.
 
+
+## REMEMBER TO ADD REGULAR COMMENTS THROUGHOUT YOUR CODE! 
  
 # Attack Aware :detective:
 
