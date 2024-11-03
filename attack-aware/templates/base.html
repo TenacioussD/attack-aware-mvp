@@ -5,19 +5,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- For responsive webpage, mobile friendly-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <script src="https://kit.fontawesome.com/017c367aad.js"></script>  <!-- Font/icon kit -->
     <title>Attack Aware - Protect Yourself</title>
 </head>
 
 <body>
-    <header>
+
+<header>
         <!-- Header content -->
-    </header>
-    <nav>
+</header>
+
+<nav>
         <!-- Navigation bar -->
-    </nav>
-    <main></main>
-    <footer>
+</nav>
+
+<main>{% block content %} {% endblock %}</main>
+
+<footer>
         <!-- Footer content -->
-    </footer>
+</footer>
+
 </body>
 </html>
