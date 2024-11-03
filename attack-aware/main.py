@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 app = Flask(__name__)    # Initialises the application 
 app.secret_key = 'attackaware'  # Needed for flashing messages           
 
-@app.route('/')    # Route for home page URL
+@app.route('/')    # Route for home page URL decorator
 def home():
     return render_template('home.html') # Renders the HTML file from templates
 
@@ -23,4 +23,4 @@ def subscribe():
     return redirect(url_for('home'))
 
 if __name__ == "__main__":
-    app.run(debug=True)  # Enables debug mode
+    app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
