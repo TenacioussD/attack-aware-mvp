@@ -1,5 +1,12 @@
 .line {
     height: 10px;
-    width: 100%;
-    background-color: #084FC7; /* Set the background color */
+    width: auto;
+    background-image: linear-gradient(to bottom, #084FC7, white); /* Fades from blue to while (vertically) */ 
+    border: none;
+    margin: 20px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
+}
+
+.logoTwo {
+    height: 400px;
+    width: 400px;
 }
