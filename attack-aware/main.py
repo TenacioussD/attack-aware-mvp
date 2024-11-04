@@ -9,10 +9,6 @@ app.secret_key = 'attackaware'  # Needed for flashing messages
 def home():
     return render_template('home.html') # Renders the HTML file from templates
 
-@app.route('/Login', methods=['POST'])
-def subscribe():
-    return render_template('login.html') # Render the HTML file (login) from templates/
-
 @app.route('/subscribe', methods=['POST'])
 def subscribe():
     email = request.form.get('email')      # Get the email from the form data
@@ -24,7 +20,7 @@ def subscribe():
     # Add code here to save the email or process the subscription (e.g., save to a database)
     # just flash a message and redirect back to the homepage
     flash("Thank you for subscribing!", "success")
-    return redirect(url_for('home'))
+    return redirect(url_for('home')) #Direct to the login page
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode
