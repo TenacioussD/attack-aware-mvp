@@ -9,6 +9,10 @@ app.secret_key = 'attackaware'  # Needed for flashing messages
 def home():
     return render_template('home.html') # Renders the HTML file from templates
 
+@app.route('/Login', methods=['POST'])
+def subscribe():
+    return render_template('login.html') # Render the HTML file (login) from templates/
+
 @app.route('/subscribe', methods=['POST'])
 def subscribe():
     email = request.form.get('email')      # Get the email from the form data
