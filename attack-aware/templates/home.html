@@ -2,9 +2,15 @@
 
 {% extends 'base.html' %}           <!-- Inherits code from the base.html file -->
 
-{% block title %} Attack Aware - Protect Yourself {% endblock %}  <!-- Custom header -->
+{% block title %}  {% endblock %}  <!-- Custom header -->
+
+{% block head %}
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
 
 {% block content %}
+
+<hr class="line"/>
 
 <section class="hero">
     <h1>Stay Safe Online with Attack Aware</h1>
