@@ -1,12 +1,32 @@
+/*
+body {
+    margin: 0;
+    padding: 0;
+}
+    */
+
 .line {
     height: 10px;
     width: auto;
-    background-image: linear-gradient(to bottom, #084FC7, white); /* Fades from blue to while (vertically) */ 
+    background-image: linear-gradient(to bottom, #084FC7 50%, white 100%); /* Fades from blue to while (vertically) */ 
     border: none;
-    margin: 20px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
+    margin: 0px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
 }
 
 .logoTwo {
     height: 400px;
-    width: 400px;
+    width: auto;
+    display: block;
+    margin: 0;
+    padding: 0; /* removing padding and margin on img itself */
+    border: none;
+    
+}
+
+.logoTwoDiv {
+     display: flex;
+     justify-content: flex-start; /* Align img to the left */
+     padding: 0;
+     margin: 0;
+
 }
