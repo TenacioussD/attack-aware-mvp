@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    line-heightL 1.6;                 /* Sets font for the page */
+    color: #333;                      /* Setting the text color  */
+    margin: 0;
+    padding: 0;
+}
+
+.header {                          /* Header Styling */
+    background-color: #001f3f;     /* Dark blue background */
+    padding: 20px;                 /* Space inside the Header */
+    text-align: center;
+    color: #fff;
+}
+
+.content {
+    padding: 20px;                 /* Space around content */
+}
+
+.section{
+   margin: 20px 0;                 /* Space between the sections */
+}
+
+.section h2{
+   color: #001f3f;                 /* Light Blue */
+}
+
+.highlight{
+   color: #007bff;                /* Light blue color for the highlighted text */
+}
+
+.warning {                         /* Warning box styling */
+   background-color: #f8d7da;      /* Light red color */
+   color: #721c24;                 /* Dark red color */
+   padding: 15px:                  /* Space inside the warning box */
+   border-left: 5px solid #f5c6cb;
+   margin: 20px 0;                 /* Space around the warning box */
+}
+
+.video-section{
+   text-align: center;             /* This centers the video */
+   margin: 30px 0;                 /* Creating space above the video section */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
