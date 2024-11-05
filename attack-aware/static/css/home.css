@@ -7,6 +7,10 @@
     margin: 0px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
 }
 
+.imgAndFormDiv {
+    display: inline-flex;
+}
+
 .logoTwo {
     height: 400px;
     width: auto;
@@ -22,5 +26,13 @@
      justify-content: flex-start; /* Align img to the left */
      padding: 0; /* removing padding and margin on container itself */
      margin: 0;
+
+}
+
+.loginForm {
+
+    display:inline-flex;
+    align-items: center;
+    
 
 }

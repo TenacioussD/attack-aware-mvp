@@ -12,8 +12,27 @@
 
 <hr class="line"/>  <!-- Addming horizontal lines -->
 
+<div class="imgAndFormDiv"> <!-- Creating div to align img & form with each other -->
+
 <div class="logoTwoDiv"> 
 <img class="logoTwo" src="{{ url_for('static', filename='/img/logos/Logo 2.png') }}" alt="Attack Aware Logo Dark Blue"> 
+</div>
+
+<div class="loginForm">
+<form action=" "> <!-- Action still needs to be called -->
+<label for="emailAddress">Email Address: </label>
+<br>
+<input type="text" class="emailInput" name="emailInput" value="example@gmail.com" />
+<br>
+<label for="password">Password:</label>
+<br>
+<input type="text" class="passwordInput" name="passwordInput" value="Example: 9f@B#6q8!u$W3z^T" />
+<br>
+<br>
+<input type="submit" value="Login">
+</form>
+</div>
+
 </div>
 
 <hr class="line"/>
