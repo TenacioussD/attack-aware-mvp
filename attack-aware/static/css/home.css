@@ -8,17 +8,19 @@
 }
 
 .imgAndFormDiv {
-    display: inline-flex;
+    display: flex;
+    align-items: center; /* Aligns items vertically */
 }
 
 .logoTwo {
-    height: 400px;
-    width: auto;
-    display: block;
+    max-height: 400px; /* max width of the logo */
+    max-width: 400px;
+    width: 100%; /* Allows logo to scale down */
+    height: auto; /* maintain aspect ratio */
+    display: block; /* Ensure that img is treated as a block element  */
     margin: 0;
     padding: 0; /* removing padding and margin on img itself */
     border: none;
-    
 }
 
 .logoTwoDiv {
@@ -26,13 +28,48 @@
      justify-content: flex-start; /* Align img to the left */
      padding: 0; /* removing padding and margin on container itself */
      margin: 0;
-
 }
 
 .loginForm {
-
-    display:inline-flex;
-    align-items: center;
-    
-
+    margin-left: 15px; /* Adjust as needed for spacing */
 }
+
+/* New container for email, password, and login button */
+.inputContainer {
+    display: flex; /* Align all inputs and button horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.emailDiv, .passwordDiv {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+}
+
+.loginDiv {
+    display: flex;
+    align-items: center;
+}
+
+input[type="text"], input[type="submit"] {
+    margin-top: 5px; /* Space between label and input */
+}
+
+/* Optional: Add some width to inputs to make them look better */
+.emailInput, .passwordInput {
+    width: 150px; /* Adjust width as needed */
+}
+
+/* Style for the submit button */
+input[type="submit"] {
+    margin-left: 5px; /* Optional space between the last input and button */
+    margin-right: 10px;
+}
+
+
+@media (max-width: 1920px) { /* We can adjust max-width as needed */
+    .loginForm {
+        flex-direction: column;
+    }
+}
+

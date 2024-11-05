@@ -20,16 +20,23 @@
 
 <div class="loginForm">
 <form action=" "> <!-- Action still needs to be called -->
-<label for="emailAddress">Email Address: </label>
-<br>
-<input type="text" class="emailInput" name="emailInput" value="example@gmail.com" />
-<br>
-<label for="password">Password:</label>
-<br>
-<input type="text" class="passwordInput" name="passwordInput" value="Example: 9f@B#6q8!u$W3z^T" />
-<br>
-<br>
-<input type="submit" value="Login">
+
+<div class="inputContainer"> <!-- New container for inputs and button -->
+  <div class="emailDiv">
+    <label for="emailAddress">Email Address: </label>
+    <input type="text" class="emailInput" name="emailInput" value="example@gmail.com" />
+  </div>
+
+  <div class="passwordDiv">
+    <label for="password">Password:</label>
+    <input type="text" class="passwordInput" name="passwordInput" value="Example: 9f@B#6q8!u$W3z^T" />
+  </div>
+
+  <div class="loginDiv">
+    <input type="submit" value="Login">
+  </div>
+
+</div>
 </form>
 </div>
 
