@@ -11,7 +11,7 @@ body {
     color: #333;
 }
 
-nav {                                                   /* Navbar styling */
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,7 +20,7 @@ nav {                                                   /* Navbar styling */
     color: white;
 }
 
-nav ul {                                                /* Navbar links */
+nav ul {
     display: flex;
     list-style: none;
 }
@@ -34,13 +34,25 @@ nav ul li a {
     text-decoration: none;
 }
 
-nav input[type="text"] {                                   /* Search bar styling */
+nav input[type="text"] {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    margin-left: 20px;
 }
 
-main {                                                      /* Main content styling */
+/* Log Out Button */
+nav button {
+    margin-left: 20px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+main {
     max-width: 1200px;
     margin: 20px auto;
     padding: 0 20px;
@@ -53,7 +65,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-.top-risks, .other-threats {                                /* Styling for top risks section */
+.top-risks, .other-threats {
     margin-top: 30px;
 }
 
@@ -63,11 +75,11 @@ h1 {
     font-size: 2rem;
 }
 
-.top-risks .highlight, .other-threats .highlight {         /* Highlight styling for "Top Five Risks" and "Other Threats" */
+.top-risks .highlight, .other-threats .highlight {
     color: #1a73e8;
 }
 
-.top-risks p, .other-threats p {                           /* Styling the Paragraph and sections */
+.top-risks p, .other-threats p {
     text-align: center;
     max-width: 800px;
     margin: 10px auto;
@@ -75,7 +87,7 @@ h1 {
     color: #555;
 }
 
-.risks-container {                                        /* Styling of the risk card container  */
+.risks-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -83,17 +95,18 @@ h1 {
     margin-top: 20px;
 }
 
-.risk-card {                                             /* Styling of risk card  */
+.risk-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
-    width: 200px;
+    width: 220px; /* Adjusted for consistent look */
+    height: 300px; /* Adjusted for consistent look */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.risk-card img {                                         /*Styling of the risk card image*/
+.risk-card img {
     width: 100%;
     height: auto;
 }
@@ -109,5 +122,3 @@ h1 {
     padding-bottom: 30px;
     text-align: center;
 }
-
-/* Footer styling to go here for later development*/

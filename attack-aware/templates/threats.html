@@ -3,78 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Cyber Attacks - Threats</title>
-    <link rel="stylesheet" href="threats.css">
-</head>
+    <title>Cyber Attacks - Threats</title>
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/threats.css') }}">          <!-- to dynamically generate the path to your static CSS file -->
+</head>
 <body>
 
-<nav>                                                     <!-- Navbar -->
+<nav> <!-- Navbar -->
     <button>Log Out</button>
-    <div class = "logo">AttackAware</div>
-
-    <ul>                                                  <!-- Navigation links that might change -->
+    <div class="logo">AttackAware</div>
+    <ul> <!-- Navigation links that might change -->
         <li><a href="home.html">Home</a></li>
         <li><a href="profile.html">Profile</a></li>
         <li><a href="modules.html">Modules</a></li>
         <li><a href="contact.html">Contact Us</a></li>
     </ul>
-    <input type="text" placeholder="search">               <!-- For the Search bar -->
+    <input type="text" placeholder="search"> <!-- For the Search bar -->
 </nav>
 
 <main>
     <h1>Cyber Attacks</h1>
-
-    <section class="Top-Risks">
-        <h2> Top <span class="highlight">Five Risks</span></h2>
+    <section class="top-risks">
+        <h2>Top <span class="highlight">Five Risks</span></h2>
         <p>In today's rapidly evolving digital landscape, these top 5 cyber risks highlight the most critical threats individuals and organisations face, offering insight into the vulnerabilities that require immediate attention and proactive defence.</p>
 
-
         <div class="risks-container">
-            <div class="risks-card">                                                   <!-- Risk card for Social Engineering -->
+            <div class="risk-card"> <!-- Risk card for Social Engineering -->
                 <img src="social-engineering.jpg" alt="Social Engineering / Phishing">
                 <p>Social Engineering Attacks / Phishing</p>
             </div>
-
-         <div class="risk card">                                                   <!-- Risk card for Ransomware -->
-             <img src="ransomware.jpg" alt="Ransomware">
-             <p>Ransomware</p>
-         </div>
-
-         <div class="risk-card">                                                  <!-- Risk card for Poor Cyber Hygiene -->
-             <img src="cyber_hygiene.jpg" alt="Poor Cyber Hygiene">
-             <p>Poor Cyber Hygiene</p>
-             </div>
-
-         <div class="risk card">                                                  <!-- Risk card for IoT Device Hacking -->
-             <img src="iot_device_hacking.jpg" alt="IoT Device Hacking">
-             <p>IoT Device Hacking</p>
-         </div>
-
-            <div class="risk card">                                                <!-- Risk card for Phishing Scam -->
-                <img src="phishing_scan.jpg" alt="Phishing Scam">
-                <p>Phishing Scam</p>
+            <div class="risk-card"> <!-- Risk card for Ransomware -->
+                <img src="ransomware.jpg" alt="Ransomware">
+                <p>Ransomware</p>
             </div>
-        </div>
-
-    </section>
-
-            <section class="other-threats">
-                <h2>Other<span class="highlight">Threats</span></h2>
-                <p>While the spotlight often shines on the most notorious cyber threats, users must remain vigilant for other lurking dangers which might exploit vulnerabilities and compromise security</p>
-            </section>
-</main>
-
-<!-- Footer to be placed here -->
-
-
-
-
-
-
-
-
-
-
-
-</body>
+            <div class="risk-card"> <!-- Risk card for Poor Cyber Hygiene -->
+                <img src="cyber_hygiene.jpg" alt="Poor Cyber Hygiene">
+                <p>Poor Cyber Hygiene</p>
+            </div>
+            <div class="risk-card"> <!-- Risk card for IoT Device Hacking -->
+                <img src="iot_device_hacking.jpg" alt="IoT Device Hacking">
+                <p>IoT Devic
