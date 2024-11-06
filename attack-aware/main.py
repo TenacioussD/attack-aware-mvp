@@ -22,5 +22,18 @@ def subscribe():
     flash("Thank you for subscribing!", "success")
     return redirect(url_for('home'))
 
+    @app.route('/threats')           # Route to render the threats page
+    def threats():
+        return render_template('threats.html')  # This renders HTML file from the templates
+
+    @app.route('/ransomware')  # Route to render the ransomware page
+    def ransomware():
+        return render_template('ransomware.html')  # Renders ransomware HTML file from templates
+
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
+
+
+
+
+
