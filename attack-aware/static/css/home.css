@@ -1,12 +1,11 @@
 
 label {
-    font-size: 25px;
     color: #4E596B;
 }
 
 input {
     background-color: white;
-    width: 330px;
+    width: 250px;
     height: 38px;
     border: solid;
     border-width: 1.5px;
@@ -67,11 +66,7 @@ input {
     display: flex;
     flex-direction: column;
     gap: 5px; /* Adds space between form elements */
-
 }
-
-
-/* New container for email, password, and login button */
 
 .inputContainer {
     display: flex; /* Align all inputs and button horizontally */
@@ -79,8 +74,6 @@ input {
     flex-wrap: wrap;
     gap: 5px; /* Space between items */
 }
-
-
 
 .emailDiv, .passwordDiv {
     display: flex;
@@ -101,17 +94,42 @@ input[type="text"], input[type="submit"] {
     margin-top: 5px; /* Space between label and input */
 }
 
-/* Optional: Add some width to inputs to make them look better */
-.emailInput, .passwordInput {
-    width: 150px; /* Adjust width as needed */
-}
-
 /* Style for the submit button */
 input[type="submit"] {
     margin-left: 5px; /* Optional space between the last input and button */
     margin-right: 10px;
 }
 
+.archContainer {
+    position: absolute; /* Establish a reference point for absolute positioning */
+    width: 100%;
+}
+
+.largeArchImg, .medArchImg, .smallArchImg {
+    transform: rotate(270deg);
+    opacity: 0.25;
+    position: absolute;
+}
+
+.largeArchImg {
+    width: 320px;
+    height: 400px;
+    right: -130px;
+}
+
+.medArchImg {
+    width: 260px;
+    height: 340px;
+    right: -100px;
+    margin-top: 30px;
+}
+
+.smallArchImg {
+    width: 200px;
+    height: 280px;
+    right: -70px;
+    margin-top: 60px;
+}
 
 @media (max-width: 1920px) { /* We can adjust max-width as needed */
     .loginForm {

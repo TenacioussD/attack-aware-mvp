@@ -24,12 +24,12 @@
 <div class="inputContainer"> <!-- New container for inputs and button -->
   <div class="emailDiv">
     <label for="emailAddress">Email Address: </label>
-    <input type="text" class="emailInput" name="emailInput" value="example@gmail.com" />
+    <input type="text" class="emailInput" name="emailInput"/>
   </div>
 
   <div class="passwordDiv">
     <label for="password">Password:</label>
-    <input type="text" class="passwordInput" name="passwordInput" value="Example: 9f@B#6q8!u$W3z^T" />
+    <input type="text" class="passwordInput" name="passwordInput"/>
   </div>
 
   <div class="loginDiv">
@@ -40,7 +40,14 @@
 </form>
 </div>
 
+<div class="archContainer">
+<img class="largeArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+<img class="medArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+<img class="smallArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
 </div>
+
+</div>
+
 
 <hr class="line"/>
 
