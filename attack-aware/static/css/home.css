@@ -112,23 +112,24 @@ input[type="submit"] {
 }
 
 .largeArchImg {
-    width: 320px;
-    height: 400px;
-    right: -130px;
+    width: 500px;
+    height: 500px;
+    right: -205px;
+    margin-top: -120px;
 }
 
 .medArchImg {
-    width: 260px;
-    height: 340px;
-    right: -100px;
-    margin-top: 30px;
+    width: 420px;
+    height: 470px;
+    right: -170px;
+    margin-top: -105px;
 }
 
 .smallArchImg {
-    width: 200px;
-    height: 280px;
-    right: -70px;
-    margin-top: 60px;
+    width: 350px;
+    height: 440px;
+    right: -140px;
+    margin-top: -90px;
 }
 
 @media (max-width: 1920px) { /* We can adjust max-width as needed */
