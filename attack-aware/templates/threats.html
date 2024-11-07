@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Attacks - Threats</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/threats.css') }}">          <!-- to dynamically generate the path to your static CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/threats.css') }}"> <!-- to dynamically generate the path to your static CSS file -->
 </head>
 <body>
 
@@ -29,17 +29,35 @@
 
         <div class="risks-container">
             <div class="risk-card"> <!-- Risk card for Social Engineering -->
-                <img src="social-engineering.jpg" alt="Social Engineering / Phishing">
+                <img src="{{ url_for('static', filename='img/social_engineering.png') }}" alt="Social Engineering / Phishing">
                 <p>Social Engineering Attacks / Phishing</p>
             </div>
             <div class="risk-card"> <!-- Risk card for Ransomware -->
-                <img src="ransomware.jpg" alt="Ransomware">
+                <img src="{{ url_for('static', filename='img/ransomware.png') }}" alt="Ransomware">
                 <p>Ransomware</p>
             </div>
             <div class="risk-card"> <!-- Risk card for Poor Cyber Hygiene -->
-                <img src="cyber_hygiene.jpg" alt="Poor Cyber Hygiene">
+                <img src="{{ url_for('static', filename='img/cyber_hygiene.png') }}" alt="Poor Cyber Hygiene">
                 <p>Poor Cyber Hygiene</p>
             </div>
             <div class="risk-card"> <!-- Risk card for IoT Device Hacking -->
-                <img src="iot_device_hacking.jpg" alt="IoT Device Hacking">
-                <p>IoT Devic
+                <img src="{{ url_for('static', filename='img/iot.png') }}" alt="IoT Device Hacking">
+                <p>IoT Device Hacking</p>
+            </div>
+            <div class="risk-card"> <!-- Risk card for Phishing Scam -->
+                <img src="{{ url_for('static', filename='img/phishing.png') }}" alt="Phishing Scam">
+                <p>Phishing Scam</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="other-threats">
+        <h2>Other <span class="highlight">Threats</span></h2>
+        <p>While the spotlight often shines on the most notorious cyber threats, users must remain vigilant for other lurking dangers which might exploit vulnerabilities and compromise security.</p>
+    </section>
+</main>
+
+<!-- Footer to be placed here -->
+
+</body>
+</html>
