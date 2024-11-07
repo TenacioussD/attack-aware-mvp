@@ -1,4 +1,26 @@
 
+label {
+    font-size: 25px;
+    color: #4E596B;
+}
+
+input {
+    background-color: white;
+    width: 330px;
+    height: 38px;
+    border: solid;
+    border-width: 1.5px;
+    border-color: #1D1D45;
+    border-radius: 7px;
+}
+
+.button {
+    width: auto;
+    height: 38px;
+    color: white;
+    background-image: linear-gradient(to left, #083F9B 0%, #7F56D9 100%);
+}
+
 .line {
     height: 10px;
     width: auto;
@@ -9,7 +31,9 @@
 
 .imgAndFormDiv {
     display: flex;
-    align-items: center; /* Aligns items vertically */
+    justify-content: space-between;
+    flex-wrap: nowrap; /*Allows wrapping when screen gets smaller */
+    align-items: flex-start; /* Aligns items vertically */
 }
 
 .logoTwo {
@@ -21,6 +45,8 @@
     margin: 0;
     padding: 0; /* removing padding and margin on img itself */
     border: none;
+    flex: 0 1 auto; /* Ensures the logo div maintains its size */
+    min-width: 150px; /* Prevents the logo from becoming too small */
 }
 
 .logoTwoDiv {
@@ -28,27 +54,47 @@
      justify-content: flex-start; /* Align img to the left */
      padding: 0; /* removing padding and margin on container itself */
      margin: 0;
+     flex: 1;
+     min-width: 150px; /* Prevents the logo from being too small */
 }
 
 .loginForm {
-    margin-left: 15px; /* Adjust as needed for spacing */
+    margin-left: auto; /* Adjust as needed for spacing */
+    margin-right: 15%;
+    margin-bottom: 15px;
+    flex: 1; /* Ensures the form takes more space */
+    min-width: 300px; /* Keeps form usable on smaller screens */
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Adds space between form elements */
+
 }
 
+
 /* New container for email, password, and login button */
+
 .inputContainer {
     display: flex; /* Align all inputs and button horizontally */
     align-items: center; /* Center vertically */
+    flex-wrap: wrap;
+    gap: 5px; /* Space between items */
 }
+
+
 
 .emailDiv, .passwordDiv {
     display: flex;
     flex-direction: column;
     margin-right: 15px;
+    flex: 1 1 auto; /* Full width when wrapping */
 }
 
 .loginDiv {
     display: flex;
     align-items: center;
+    align-self: flex-end; /* Align button with bottom input fields */
+    margin-top: 15px; /* Adjust to control vertical */
+    flex: 1 1 auto; /* Full width when wrapping */
 }
 
 input[type="text"], input[type="submit"] {
@@ -69,7 +115,12 @@ input[type="submit"] {
 
 @media (max-width: 1920px) { /* We can adjust max-width as needed */
     .loginForm {
-        flex-direction: column;
+        margin-top: auto; /* Adds top margin for spacing */
+        margin-left: 10px;
+        margin-bottom: auto;
+    }
+    .imgAndFormDiv {
+        flex-direction: wrap; /* Allows wrapping on smaller screens */
     }
 }
 
