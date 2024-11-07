@@ -23,7 +23,15 @@ input {
 .line {
     height: 10px;
     width: auto;
-    background-image: linear-gradient(to bottom, #084FC7 50%, white 100%); /* Fades from blue to while (vertically) */ 
+    background-image: linear-gradient(to bottom, #084FC7 0%, white 100%); /* Fades from blue to while (vertically) */ 
+    border: none;
+    margin: 0px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
+}
+
+.thickLine {
+    height: 170px;
+    width: auto;
+    background-image: linear-gradient(to bottom, #084FC7 0%, white 100%); /* Fades from blue to while (vertically) */ 
     border: none;
     margin: 0px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
 }
@@ -131,6 +139,38 @@ input[type="submit"] {
     right: -140px;
     margin-top: -90px;
 }
+
+.headingBlack, .headingTeal {
+    display: inline-block;
+}
+
+.headingBlack {
+    color: #323232;
+}
+
+.headingTeal {
+    color: #2AAA94;
+}
+
+.welcomeContainer {
+    display: flex;
+    justify-content: space-between; /* Adjust space between elements */
+    align-items:flex-start; /* Align items at top */
+    gap: 30px; /* Adding some spacing between divs */
+}
+
+.welcomeGraph {
+    flex: 1;
+    margin-right: auto; /* Adds space on the right side */
+    margin-left: 15px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.signUpForm {
+    flex: 1; /* Narrower section for the signup form */
+    min-width: 300px; /* Ensures form stays usable on smaller screens */
+  }
 
 @media (max-width: 1920px) { /* We can adjust max-width as needed */
     .loginForm {
