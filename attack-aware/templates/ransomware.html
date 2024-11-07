@@ -14,13 +14,19 @@
 
     <div class="content"> <!-- Main Content of page -->
 
+        <!-- Full-width image section -->
+        <div class="image-section">
+    <img src="{{ url_for('static', filename='img/Computer.png') }}" alt="Computer Image">
+</div>
+
+
         <div class="section">
-            <h2 class="highlight">What is Ransomware?</h2>
+            <h2 class="ransomware-heading">What is <span class="highlight">Ransomware?</span></h2>
             <p>Ransomware is a type of malicious software designed to block access to a computer system until a sum of money is paid. It typically encrypts the user's data, making it inaccessible.</p>
         </div>
 
         <div class="section">
-            <h2 class="highlight">How to Prevent Ransomware?</h2>
+            <h2 class="ransomware-heading">How to Prevent <span class="highlight">Ransomware?</span></h2>
             <ul>
                 <li>Regularly update your software and operating systems.</li>
                 <li>Use strong passwords and multi-factor authentication.</li>
@@ -29,8 +35,8 @@
             </ul>
         </div>
 
-        <div class="section warning">
-            <h2>What to do if you're hit by Ransomware?</h2>
+        <div class="section">
+            <h2 class="ransomware-heading">What to Do If You’re Hit by <span class="highlight">Ransomware?</span></h2>
             <ol>
                 <li>Disconnect your device from the network immediately.</li>
                 <li>Report the incident to your local Cybersecurity team or authorities.</li>
@@ -42,11 +48,17 @@
             </ol>
         </div>
 
-
-        <div class="video section">
-            <h3>For more information, watch this</h3>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/sample-video" frameborder="0" allowfullscreen></iframe> <!--Embedded YT video -->
+        <!-- Warning message styled as per the requirements -->
+        <div class="dangerous-action">
+            DO <span style="color: black;">NOT</span> PAY THE RANSOM
         </div>
-    </div>
+
+        <div class="video-section">
+     <div class="video-block">
+        <h3><span class="info-text">For more Information</span>, <span class="highlight-text">watch this</span></h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/sample-video" frameborder="0" allowfullscreen></iframe>
+     </div>
+</div>
+
 </body>
 </html>

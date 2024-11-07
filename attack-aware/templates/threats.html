@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Attacks - Threats</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/threats.css') }}"> <!-- to dynamically generate the path to your static CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/threats.css') }}">
 </head>
 <body>
 
@@ -24,37 +23,44 @@
 <main>
     <h1>Cyber Attacks</h1>
     <section class="top-risks">
-        <h2>Top <span class="highlight">Five Risks</span></h2>
+        <h2>Top<span class="highlight-top"> Five</span> Risks</h2>
         <p>In today's rapidly evolving digital landscape, these top 5 cyber risks highlight the most critical threats individuals and organisations face, offering insight into the vulnerabilities that require immediate attention and proactive defence.</p>
 
         <div class="risks-container">
-            <div class="risk-card"> <!-- Risk card for Social Engineering -->
+            <a href="social_engineering.html" class="risk-card"> <!-- Link to Social Engineering html -->
                 <img src="{{ url_for('static', filename='img/social_engineering.png') }}" alt="Social Engineering / Phishing">
                 <p>Social Engineering Attacks / Phishing</p>
-            </div>
-            <div class="risk-card"> <!-- Risk card for Ransomware -->
+            </a>
+
+            <a href="{{ url_for('ransomware') }}" class="risk-card"> <!-- Link to Ransomware html -->
                 <img src="{{ url_for('static', filename='img/ransomware.png') }}" alt="Ransomware">
                 <p>Ransomware</p>
-            </div>
-            <div class="risk-card"> <!-- Risk card for Poor Cyber Hygiene -->
+            </a>
+
+            <a href="cyber_hygiene.html" class="risk-card"> <!-- Link to Poor Cyber Hygiene html-->
                 <img src="{{ url_for('static', filename='img/cyber_hygiene.png') }}" alt="Poor Cyber Hygiene">
                 <p>Poor Cyber Hygiene</p>
-            </div>
-            <div class="risk-card"> <!-- Risk card for IoT Device Hacking -->
+            </a>
+
+            <a href="iot_hacking.html" class="risk-card"> <!-- Link to IoT Device Hacking html -->
                 <img src="{{ url_for('static', filename='img/iot.png') }}" alt="IoT Device Hacking">
                 <p>IoT Device Hacking</p>
-            </div>
-            <div class="risk-card"> <!-- Risk card for Phishing Scam -->
+            </a>
+
+            <a href="phishing_scam.html" class="risk-card"> <!-- Risk card for Phishing Scam -->
                 <img src="{{ url_for('static', filename='img/phishing.png') }}" alt="Phishing Scam">
                 <p>Phishing Scam</p>
-            </div>
+            </a>
         </div>
     </section>
 
     <section class="other-threats">
-        <h2>Other <span class="highlight">Threats</span></h2>
-        <p>While the spotlight often shines on the most notorious cyber threats, users must remain vigilant for other lurking dangers which might exploit vulnerabilities and compromise security.</p>
-    </section>
+    <h2>Other <span class="highlight-top">Threats</span></h2>
+    <p>While the spotlight often shines on the most notorious cyber threats, users must remain vigilant for other lurking dangers which might exploit vulnerabilities and compromise security.</p>
+    <img src="{{ url_for('static', filename='img/other_threats.png') }}" alt="Other Threats">
+</section>
+
+
 </main>
 
 <!-- Footer to be placed here -->

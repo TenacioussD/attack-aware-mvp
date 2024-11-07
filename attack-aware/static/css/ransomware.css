@@ -1,57 +1,87 @@
 body {
     font-family: Arial, sans-serif;
-    line-heightL 1.6;                 /* Sets font for the page */
-    color: #333;                      /* Setting the text color  */
+    line-height: 1.6;               /* Sets font for the page */
+    color: #333;                    /* Setting the text color */
     margin: 0;
     padding: 0;
 }
 
-.header {                          /* Header Styling */
-    background-color: #001f3f;     /* Dark blue background */
-    padding: 20px;                 /* Space inside the Header */
+.header {                           /* Header Styling */
+    background-color: #F1F7FF;      /* Header background */
+    padding: 20px;                  /* Space inside the Header */
     text-align: center;
-    color: #fff;
+    color: #04016C;
 }
 
 .content {
-    padding: 20px;                 /* Space around content */
+    padding: 20px;                  /* Space around content */
 }
 
-.section{
-   margin: 20px 0;                 /* Space between the sections */
+.section {
+    margin: 20px 0;                 /* Space between the sections */
 }
 
-.section h2{
-   color: #001f3f;                 /* Light Blue */
+.section h2 {
+    color: #001f3f;                 /* Dark Blue */
 }
 
-.highlight{
-   color: #007bff;                /* Light blue color for the highlighted text */
+.highlight {
+    color: #2AAA94;                 /* Green color for the highlighted text */
 }
 
-.warning {                         /* Warning box styling */
-   background-color: #f8d7da;      /* Light red color */
-   color: #721c24;                 /* Dark red color */
-   padding: 15px:                  /* Space inside the warning box */
-   border-left: 5px solid #f5c6cb;
-   margin: 20px 0;                 /* Space around the warning box */
+                                    /* Full-width image styling */
+.image-section img {
+    width: 100%;                    /* Makes image span the entire width */
+    height: auto;                   /* Keeps the aspect ratio */
 }
 
-.video-section{
-   text-align: center;             /* This centers the video */
-   margin: 30px 0;                 /* Creating space above the video section */
+.warning {                          /* Styling for warning box */
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;                  /* Space inside the warning box */
+    border-left: 5px solid #f5c6cb;
+    margin: 20px 0;                 /* Space around the warning box */
 }
 
-
-/* Footer styling to follow */
-
-
-
-
-
-
-
-
-
-
+                                     /* Styling for headings with two colors */
+.ransomware-heading {
+    color: #2AAA94;                 /* Primary color */
 }
+.ransomware-heading .highlight {
+    color: #2AAA94;                 /* Secondary color for highlight */
+}
+
+.dangerous-action {
+    text-align: center;
+    background-color: #084FC7;      /* Dark blue background */
+    color: #2AAA94;                 /*  green */
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+                                    /* Section styling */
+.video-section {
+    text-align: center;
+    margin: 30px 0;                 /* Space above and below the video section */
+}
+
+.video-block {
+    background-color: #4A16BD;      /* Color block around video */
+    padding: 20px;                  /* Padding inside the color block */
+    border-radius: 8px;             /* Optional: rounded corners */
+}
+
+.video-block h3 {
+    margin: 0 0 15px 0;             /* Space below heading */
+    font-size: 1.2em;
+}
+
+.info-text {
+    color: white;                   /* White color for "For more Information" */
+}
+
+.highlight-text {
+    color: #4BE5CA;                 /* Teal color for "watch this" */
+}
+
