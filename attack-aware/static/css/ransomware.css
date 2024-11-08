@@ -39,8 +39,11 @@ body {
 
                                     /* Full-width image styling */
 .image-section img {
-    width: 100%;                    /* Makes image span the entire width */
-    height: auto;                   /* Keeps the aspect ratio */
+    width: 100%;                   /* Makes the image span the entire width of the page */
+    height: 450px;                 /* Adjusts the height of the image */
+    object-fit: cover;             /* Ensures the image covers the specified height */
+    display: block;                /* Ensures the image is treated as a block element */
+    margin: 0 auto;                /* Centers the image horizontally */
 }
 
 .warning {                          /* Styling for warning box */
@@ -66,21 +69,20 @@ body {
     padding: 30px;
     font-weight: bold;
     font-size: 1.7em;
-    border-radius: 5px; /* Optional: for rounded corners */
+    border-radius: 5px;                     /* Optional: for rounded corners */
 }
 
 .dangerous-action .highlight {
-    color: #4BE5CA; /* Teal color for "DO" */
+    color: #4BE5CA;                          /* Teal color for "DO" */
 }
 
 .dangerous-action .bold {
-    color: black; /* Black color for "NOT" */
+    color: black;                             /* Black color for "NOT" */
 }
 
 .dangerous-action .white {
-    color: white; /* White color for "PAY THE RANSOM" */
+    color: white;                              /* White color for "PAY THE RANSOM" */
 }
-
 
 
                                     /* Section styling */
