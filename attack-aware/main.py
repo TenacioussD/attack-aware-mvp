@@ -22,7 +22,7 @@ def subscribe():
     # Add code here to save the email or process the subscription (e.g., save to a database)
     # just flash a message and redirect back to the homepage currently
     flash("Thank you for subscribing!", "success")
-    return redirect(url_for('home'))
+    return redirect(url_for('home')) #Direct to the login page
 
 
 # Route to render the threats page
