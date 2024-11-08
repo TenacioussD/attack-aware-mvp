@@ -4,6 +4,7 @@ body {
     color: #333;                    /* Setting the text color */
     margin: 0;
     padding: 0;
+    background-color: #F1F7FF;      /* Matches header background color */
 }
 
 .header {                           /* Header Styling */
@@ -11,6 +12,13 @@ body {
     padding: 20px;                  /* Space inside the Header */
     text-align: center;
     color: #04016C;
+}
+
+.blue-line {
+    width: 100%;                   /* Full width of the page */
+    height: 4px;                    /* Adjust thickness */
+    background-color: #1a73e8;      /* Blue color matching the h1 color */
+    margin: 20px 0 40px 0;          /* Optional: spacing around the line */
 }
 
 .content {
@@ -53,12 +61,27 @@ body {
 
 .dangerous-action {
     text-align: center;
-    background-color: #084FC7;      /* Dark blue background */
-    color: #2AAA94;                 /*  green */
-    padding: 10px;
+    background-image: linear-gradient(to bottom, #084FC7, #4A90E2, white); /* Gradient from dark blue to light blue to white */
+    color: white;
+    padding: 30px;
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.7em;
+    border-radius: 5px; /* Optional: for rounded corners */
 }
+
+.dangerous-action .highlight {
+    color: #4BE5CA; /* Teal color for "DO" */
+}
+
+.dangerous-action .bold {
+    color: black; /* Black color for "NOT" */
+}
+
+.dangerous-action .white {
+    color: white; /* White color for "PAY THE RANSOM" */
+}
+
+
 
                                     /* Section styling */
 .video-section {
