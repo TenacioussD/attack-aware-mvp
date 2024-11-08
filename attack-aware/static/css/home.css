@@ -13,6 +13,26 @@ input {
     border-radius: 7px;
 }
 
+.nameInputs {
+    display: flex;
+    margin-bottom: 15px;
+    gap: 20px;
+}
+
+
+
+.firstName, .lastName {
+    width: calc(50% - 5px); /* Calculate based on available space */
+    max-width: 240px;
+}
+
+.mobileOrEmail, .newPassword {
+    max-width: 500px; /* max width of out input fields */
+    width: 100%; /* allows for scaling down */
+    display: block; /* Want to trreat it as a block */
+    min-width: 250px; /* Minimum allowed width */
+}
+
 .button {
     width: auto;
     height: 38px;
@@ -170,6 +190,7 @@ input[type="submit"] {
 .signUpForm {
     flex: 1; /* Narrower section for the signup form */
     min-width: 300px; /* Ensures form stays usable on smaller screens */
+    margin-bottom: 30px;
   }
 
 @media (max-width: 1920px) { /* We can adjust max-width as needed */
@@ -180,6 +201,12 @@ input[type="submit"] {
     }
     .imgAndFormDiv {
         flex-direction: wrap; /* Allows wrapping on smaller screens */
+    }
+
+    .signUpForm {
+        margin-top: auto;
+        margin-bottom: 15px;
+        margin-right: 15px;
     }
 }
 
