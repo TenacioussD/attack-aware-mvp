@@ -19,8 +19,6 @@ input {
     gap: 20px;
 }
 
-
-
 .firstName, .lastName {
     width: calc(50% - 5px); /* Calculate based on available space */
     max-width: 240px;
@@ -185,6 +183,12 @@ input[type="submit"] {
     margin-left: 15px;
     text-align: center;
     margin-top: 60px;
+}
+
+.featuredGraph {
+    text-align: center;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .signUpForm {

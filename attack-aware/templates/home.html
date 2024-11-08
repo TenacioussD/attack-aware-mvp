@@ -62,7 +62,7 @@
 </div>
 
 <div class="signUpForm">
-<form>
+<form action="">         <!-- Action still needs to be called -->
       <h1>Sign Up</h1>
       <p>Create an Account</p>
       <br>
@@ -74,6 +74,8 @@
       <input type="text" class="mobileOrEmail" name="mobileOrEmail" value="Mobile or Emial Address" required>
       <input type="text" class="newPassword" name="newPasword" value="New Password" required>
 
+      <input class="button" type="submit" value="Create Account"> 
+
 </form>
 
 </div>
@@ -81,5 +83,20 @@
 </div>
 
 <hr class="thickLine">
+
+<div class="featuredGraph">
+
+<h1>  <div class="headingBlack">Featured </div> 
+  <div class="headingTeal">Courses</div>  
+</h1>
+
+<p>
+  Explore our top cybersecurity guides, including step-by-step 
+  advice on handling the most common threats like ransomware 
+  and phishing. Dive into interactive scenarios to 
+  test your skills and improve your response to real-world cyber attacks.
+</p>
+
+</div>
 
 {% endblock %}
