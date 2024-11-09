@@ -38,10 +38,11 @@
                 <p>Ransomware</p>
             </a>
 
-            <a href="cyber_hygiene.html" class="risk-card">              <!-- Link to Poor Cyber Hygiene html-->
-                <img src="{{ url_for('static', filename='img/img/cyber_hygiene.png') }}" alt="Poor Cyber Hygiene">
-                <p>Poor Cyber Hygiene</p>
+            <a href="{{ url_for('cyber_hygiene') }}" class="risk-card"> <!-- Link to Poor Cyber Hygiene page -->
+                 <img src="{{ url_for('static', filename='img/img/cyber_hygiene.png') }}" alt="Poor Cyber Hygiene">
+                 <p>Poor Cyber Hygiene</p>
             </a>
+
 
             <a href="iot_hacking.html" class="risk-card">              <!-- Link to IoT Device Hacking html -->
                 <img src="{{ url_for('static', filename='img/img/iot.png') }}" alt="IoT Device Hacking">
