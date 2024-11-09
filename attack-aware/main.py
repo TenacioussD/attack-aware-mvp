@@ -1,14 +1,23 @@
 # Main Flask application file
 
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask_sqlalchemy import SQLAlchemy
+from signup import Signup
+from models import db, User
+
 
 app = Flask(__name__)  # Initializes the application
 app.secret_key = 'attackaware'  # Needed for flashing messages
 
 
-@app.route('/')  # Route for home page URL decorator
+@app.route('/', methods = ['GET', 'POST'])  # Route for home page URL decorator
 def home():
-    return render_template('home.html')  # Renders the HTML file from templates
+            if request.method == 'POST':
+                 action = request.form.get('action')
+                 if action == 'signup':
+                      signup_instance= Signup()
+                      signup_instance.post()
+            return render_template('home.html')  # Renders the HTML file from templates
 
 
 @app.route('/subscribe', methods=['POST'])

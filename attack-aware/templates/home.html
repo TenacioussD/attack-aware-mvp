@@ -24,12 +24,12 @@
 <div class="inputContainer"> <!-- New container for inputs and button -->
   <div class="emailDiv">
     <label for="emailAddress">Email Address: </label>
-    <input type="text" class="emailInput" name="emailInput"/>
+    <input type="text" class="emailInput" name="email"/>
   </div>
 
   <div class="passwordDiv">
     <label for="password">Password:</label>
-    <input type="text" class="passwordInput" name="passwordInput"/>
+    <input type="text" class="passwordInput" name="password"/>
   </div>
 
   <div class="loginDiv">
@@ -64,7 +64,7 @@
 <img class="decorCircle" src="{{ url_for('static', filename='img/icons/circle.png') }}">
 
 <div class="signUpForm">
-<form action="" method="POST">         <!-- Action still needs to be called -->
+<form action="{{ url_for('home') }}" method="POST">         <!-- Action still needs to be called -->
       <h1>Sign Up</h1>
       <p>Create an Account</p>
       <br>
@@ -73,10 +73,10 @@
       <input type="text" class="firstName" name="firstName" value="First Name" required>
       <input type="text" class="lastName" name="lastName" value="Last Name" required>
     </div>
-      <input type="text" class="mobileOrEmail" name="mobileOrEmail" value="Mobile or Emial Address" required>
-      <input type="text" class="newPassword" name="newPasword" value="New Password" required>
+      <input type="text" class="email" name="email" value="Email Address" required>
+      <input type="text" class="newPassword" name="newPassword" value="New Password" required>
 
-      <input class="button" type="submit" value="Create Account"> 
+      <input class="button" type="submit" name='action' value="Create Account"> 
 
 </form>
 
