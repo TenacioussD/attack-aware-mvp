@@ -13,6 +13,38 @@ input {
     border-radius: 7px;
 }
 
+.tile {
+    font-weight: bold;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    min-height: 200px;
+    max-height: 485px;
+    height: 100%;
+}
+
+.tileImg {
+    width: 100%;
+    height: 50%; /* Ensure it only takes up 50% of the tile */
+    object-fit: cover; /* Maintain aspect ratio and fill the space */
+    border-radius: 8px 8px 0 0; /* Optional: rounded corners for the top of the image */
+}
+
+.tilesContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* This will create 3 columns */
+    gap: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.tile:hover {
+    transform: scale(1.05);
+}
+
 .nameInputs {
     display: flex;
     margin-bottom: 15px;
@@ -156,6 +188,15 @@ input[type="submit"] {
     height: 440px;
     right: -140px;
     margin-top: -90px;
+}
+
+.decorCircle {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    opacity: 0.25;
+    margin-left: 160px;
+    margin-top: 250px;
 }
 
 .headingBlack, .headingTeal {

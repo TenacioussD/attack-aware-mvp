@@ -19,7 +19,7 @@
 </div>
 
 <div class="loginForm">
-<form action=" "> <!-- Action still needs to be called -->
+<form action=" " method="POST"> <!-- Action still needs to be called -->
 
 <div class="inputContainer"> <!-- New container for inputs and button -->
   <div class="emailDiv">
@@ -61,8 +61,10 @@
 </p>
 </div>
 
+<img class="decorCircle" src="{{ url_for('static', filename='img/icons/circle.png') }}">
+
 <div class="signUpForm">
-<form action="">         <!-- Action still needs to be called -->
+<form action="" method="POST">         <!-- Action still needs to be called -->
       <h1>Sign Up</h1>
       <p>Create an Account</p>
       <br>
@@ -98,5 +100,32 @@
 </p>
 
 </div>
+
+<section class="tilesContainer">
+     <div class="tile"> 
+      <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/puzzel.jpg') }}">
+      Interactive Cyber Threat Simulations 
+    </div>
+     <div class="tile">
+     <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/fiveStars.png') }}">
+     Latest Threat Alerts
+    </div>
+    <div class="tile"> 
+      <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/play.png') }}">
+      Stay Updated on the Top 5 Cyber Risks
+    </div>
+     <div class="tile"> 
+      <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/bullsEye.png') }}">
+      Step-by-Step Security Guides
+    </div>
+      <div class="tile"> 
+        <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/profile.png') }}">
+        Manage your own Account
+      </div>
+     <div class="tile">
+      <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/questMark.png') }}">
+      Knowledge Quizzes 
+    </div>
+</section>
 
 {% endblock %}
