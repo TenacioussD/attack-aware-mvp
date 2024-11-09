@@ -1,0 +1,163 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #F1F7FF;                            /* Background color */
+    color: #333;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #20232a;
+    padding: 10px 20px;
+    color: white;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+nav input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-left: 20px;
+}
+
+/* Log Out Button */
+nav button {
+    margin-left: 20px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #04016C;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.blue-line {
+    width: 100%;                                             /* Full width of the page */
+    height: 4px;                                             /* Adjust thickness */
+    background-color: #1a73e8;                               /* Blue color matching the h1 color */
+    margin: 20px 0 40px 0;                                   /* Optional: spacing around the line */
+}
+
+.top-risks, .other-threats {
+    margin-top: 30px;
+}
+
+.top-risks h2, .other-threats h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;                                        /* Add spacing below the heading */
+}
+
+.top-risks .highlight, .other-threats .highlight {
+    color: #1a73e8;
+}
+
+.top-risks p, .other-threats p {
+    text-align: center;
+    max-width: 800px;
+    margin: 20px auto;                                          /* Increase spacing around the paragraph */
+    font-size: 1rem;
+    color: #555;
+}
+
+.highlight-top {
+    color: #2AAA94;
+}
+
+/* Container for risk cards using flex layout */
+.risks-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;                                /* Ensures the cards are evenly spaced */
+    gap: 20px;                                                     /* Adding even space between cards */
+    margin-top: 80px;
+}
+
+/* Risk card styles */
+.risk-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    width: calc(33.33% - 20px);                             /* Ensures 3 cards in the first row */
+    height: 300px;                                          /* Consistent height for all cards */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 20px;                                      /* Adds space below the cards */
+}
+
+.risk-card img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;                                        /* Scales the image to fit within the specified dimensions without distortion */
+}
+
+.risk-card p {
+    padding: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Media Query for smaller screens (Tablets) */
+@media (max-width: 768px) {
+    .risk-card {
+        width: calc(50% - 20px);                                 /* 2 cards per row on medium screens */
+    }
+}
+
+/* Media Query for very small screens (Phones) */
+@media (max-width: 480px) {
+    .risk-card {
+        width: 100%;                                                /* 1 card per row on small screens */
+    }
+}
+
+.other-threats {
+    margin-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.other-threats img {
+    display: block;
+    margin: 90px auto 0;                                            /* Add spacing above the image */
+    max-width: 100%;
+    height: auto;
+}

@@ -1,0 +1,216 @@
+
+label {
+    color: #4E596B;
+}
+
+input {
+    background-color: white;
+    width: 250px;
+    height: 38px;
+    border: solid;
+    border-width: 1.5px;
+    border-color: #1D1D45;
+    border-radius: 7px;
+}
+
+.nameInputs {
+    display: flex;
+    margin-bottom: 15px;
+    gap: 20px;
+}
+
+.firstName, .lastName {
+    width: calc(50% - 5px); /* Calculate based on available space */
+    max-width: 240px;
+}
+
+.mobileOrEmail, .newPassword {
+    max-width: 500px; /* max width of out input fields */
+    width: 100%; /* allows for scaling down */
+    display: block; /* Want to trreat it as a block */
+    min-width: 250px; /* Minimum allowed width */
+}
+
+.button {
+    width: auto;
+    height: 38px;
+    color: white;
+    background-image: linear-gradient(to left, #083F9B 0%, #7F56D9 100%);
+}
+
+.line {
+    height: 10px;
+    width: auto;
+    background-image: linear-gradient(to bottom, #084FC7 0%, white 100%); /* Fades from blue to while (vertically) */ 
+    border: none;
+    margin: 0px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
+}
+
+.thickLine {
+    height: 170px;
+    width: auto;
+    background-image: linear-gradient(to bottom, #084FC7 0%, white 100%); /* Fades from blue to while (vertically) */ 
+    border: none;
+    margin: 0px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
+}
+
+.imgAndFormDiv {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap; /*Allows wrapping when screen gets smaller */
+    align-items: flex-start; /* Aligns items vertically */
+}
+
+.logoTwo {
+    max-height: 400px; /* max width of the logo */
+    max-width: 400px;
+    width: 100%; /* Allows logo to scale down */
+    height: auto; /* maintain aspect ratio */
+    display: block; /* Ensure that img is treated as a block element  */
+    margin: 0;
+    padding: 0; /* removing padding and margin on img itself */
+    border: none;
+    flex: 0 1 auto; /* Ensures the logo div maintains its size */
+    min-width: 150px; /* Prevents the logo from becoming too small */
+}
+
+.logoTwoDiv {
+     display: flex;
+     justify-content: flex-start; /* Align img to the left */
+     padding: 0; /* removing padding and margin on container itself */
+     margin: 0;
+     flex: 1;
+     min-width: 150px; /* Prevents the logo from being too small */
+}
+
+.loginForm {
+    margin-left: auto; /* Adjust as needed for spacing */
+    margin-right: 15%;
+    margin-bottom: 15px;
+    flex: 1; /* Ensures the form takes more space */
+    min-width: 300px; /* Keeps form usable on smaller screens */
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Adds space between form elements */
+}
+
+.inputContainer {
+    display: flex; /* Align all inputs and button horizontally */
+    align-items: center; /* Center vertically */
+    flex-wrap: wrap;
+    gap: 5px; /* Space between items */
+}
+
+.emailDiv, .passwordDiv {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    flex: 1 1 auto; /* Full width when wrapping */
+}
+
+.loginDiv {
+    display: flex;
+    align-items: center;
+    align-self: flex-end; /* Align button with bottom input fields */
+    margin-top: 15px; /* Adjust to control vertical */
+    flex: 1 1 auto; /* Full width when wrapping */
+}
+
+input[type="text"], input[type="submit"] {
+    margin-top: 5px; /* Space between label and input */
+}
+
+/* Style for the submit button */
+input[type="submit"] {
+    margin-left: 5px; /* Optional space between the last input and button */
+    margin-right: 10px;
+}
+
+.archContainer {
+    position: absolute; /* Establish a reference point for absolute positioning */
+    width: 100%;
+}
+
+.largeArchImg, .medArchImg, .smallArchImg {
+    transform: rotate(270deg);
+    opacity: 0.25;
+    position: absolute;
+}
+
+.largeArchImg {
+    width: 500px;
+    height: 500px;
+    right: -205px;
+    margin-top: -120px;
+}
+
+.medArchImg {
+    width: 420px;
+    height: 470px;
+    right: -170px;
+    margin-top: -105px;
+}
+
+.smallArchImg {
+    width: 350px;
+    height: 440px;
+    right: -140px;
+    margin-top: -90px;
+}
+
+.headingBlack, .headingTeal {
+    display: inline-block;
+}
+
+.headingBlack {
+    color: #323232;
+}
+
+.headingTeal {
+    color: #2AAA94;
+}
+
+.welcomeContainer {
+    display: flex;
+    justify-content: space-between; /* Adjust space between elements */
+    align-items:flex-start; /* Align items at top */
+    gap: 30px; /* Adding some spacing between divs */
+}
+
+.welcomeGraph {
+    flex: 1;
+    margin-right: auto; /* Adds space on the right side */
+    margin-left: 15px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.featuredGraph {
+    text-align: center;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.signUpForm {
+    flex: 1; /* Narrower section for the signup form */
+    min-width: 300px; /* Ensures form stays usable on smaller screens */
+    margin-bottom: 30px;
+  }
+
+@media (max-width: 1920px) { /* We can adjust max-width as needed */
+    .loginForm {
+        margin-top: auto; /* Adds top margin for spacing */
+        margin-left: 10px;
+        margin-bottom: auto;
+    }
+    .imgAndFormDiv {
+        flex-direction: wrap; /* Allows wrapping on smaller screens */
+    }
+
+    .signUpForm {
+        margin-top: auto;
+        margin-bottom: 15px;
+        margin-right: 15px;
+    }
+}
+

@@ -2,66 +2,101 @@
 
 {% extends 'base.html' %}           <!-- Inherits code from the base.html file -->
 
-{% block title %} Attack Aware - Protect Yourself {% endblock %}  <!-- Custom header -->
+{% block title %}  {% endblock %}  <!-- Custom header -->
+
+{% block head %}
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
 
 {% block content %}
 
-<section class="hero">
-    <h1>Stay Safe Online with Attack Aware</h1>
-    <p>Your trusted guide to understanding cybersecurity risks and protecting your digital identity.</p>
-    <a href="{{ url_for('static', filename='/about.html') }}" class="btn-primary">Learn More</a>    <!-- Learn more button -->
-</section>
+<hr class="line"/>  <!-- Addming horizontal lines -->
 
-<section class="key-sections">
-    <h2>What You Will Learn</h2>
-    <div class="section-grid">
-        <div class="section-item">
-            <h3>Common Threats</h3>
-            <p>Understand the types of cyber threats you may face, from phishing to ransomware.</p>
-            <a href="{{ url_for('static', filename='/threats.html') }}">Explore Threats</a>
-        </div>
-        <div class="section-item">
-            <h3>Protection Tips</h3>
-            <p>Get tips and tricks to safeguard your personal information and devices.</p>
-            <a href="{{ url_for('static', filename='/tips.html') }}">View Tips</a>
-        </div>
-        <div class="section-item">
-            <h3>Latest News</h3>
-            <p>Stay up-to-date with recent cybersecurity news and incidents.</p>
-            <a href="{{ url_for('static', filename='/news.html') }}">Read News</a>
-        </div>
+<div class="imgAndFormDiv"> <!-- Creating div to align img & form with each other -->
+
+<div class="logoTwoDiv"> 
+<img class="logoTwo" src="{{ url_for('static', filename='/img/logos/Logo 2.png') }}" alt="Attack Aware Logo Dark Blue"> 
+</div>
+
+<div class="loginForm">
+<form action=" "> <!-- Action still needs to be called -->
+
+<div class="inputContainer"> <!-- New container for inputs and button -->
+  <div class="emailDiv">
+    <label for="emailAddress">Email Address: </label>
+    <input type="text" class="emailInput" name="emailInput"/>
+  </div>
+
+  <div class="passwordDiv">
+    <label for="password">Password:</label>
+    <input type="text" class="passwordInput" name="passwordInput"/>
+  </div>
+
+  <div class="loginDiv">
+    <input class="button" type="submit" value="Login">
+  </div>
+
+</div>
+</form>
+</div>
+
+<div class="archContainer">
+<img class="largeArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+<img class="medArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+<img class="smallArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+</div>
+
+</div>
+
+<hr class="line"/>
+
+<div class="welcomeContainer">
+
+<div class="welcomeGraph">
+<h1>
+      <div class="headingBlack">Welcome</div> <div class="headingTeal">Message</div>
+</h1>
+<p>
+    Welcome to AttackAware! Start your journey to better cybersecurity. Sign in or create an account to begin protecting your digital world....
+</p>
+</div>
+
+<div class="signUpForm">
+<form action="">         <!-- Action still needs to be called -->
+      <h1>Sign Up</h1>
+      <p>Create an Account</p>
+      <br>
+      <br>
+    <div class="nameInputs">
+      <input type="text" class="firstName" name="firstName" value="First Name" required>
+      <input type="text" class="lastName" name="lastName" value="Last Name" required>
     </div>
-</section>
+      <input type="text" class="mobileOrEmail" name="mobileOrEmail" value="Mobile or Emial Address" required>
+      <input type="text" class="newPassword" name="newPasword" value="New Password" required>
 
-<section class="quick-tips">
-    <h2>Quick Security Tips</h2>
-    <ul>
-        <li>Enable two-factor authentication on all accounts.</li>
-        <li>Avoid using the same password for multiple accounts.</li>
-        <li>Be cautious of suspicious emails or links.</li>
-        <li>Keep your software and antivirus updated.</li>
-    </ul>
-</section>
+      <input class="button" type="submit" value="Create Account"> 
 
-<section class="testimonials">
-    <h2>Success Stories</h2>
-    <blockquote>
-        <p>"Thanks to Attack Aware, I learned how to recognize phishing emails and secure my accounts!"</p>
-        <footer>- Jane D.</footer>
-    </blockquote>
-    <blockquote>
-        <p>"A great resource for anyone looking to protect themselves online."</p>
-        <footer>- Mike R.</footer>
-    </blockquote>
-</section>
+</form>
 
-<section class="subscribe">
-    <h2>Want to Stay Updated?</h2>
-    <p>Sign up for our newsletter to get the latest cybersecurity tips directly in your inbox.</p>
-    <form action="{{ url_for('subscribe') }}" method="post">
-        <input type="email" name="email" placeholder="Enter your email">
-        <button type="submit" class="btn-primary">Subscribe</button>
-    </form>
-</section>
+</div>
+
+</div>
+
+<hr class="thickLine">
+
+<div class="featuredGraph">
+
+<h1>  <div class="headingBlack">Featured </div> 
+  <div class="headingTeal">Courses</div>  
+</h1>
+
+<p>
+  Explore our top cybersecurity guides, including step-by-step 
+  advice on handling the most common threats like ransomware 
+  and phishing. Dive into interactive scenarios to 
+  test your skills and improve your response to real-world cyber attacks.
+</p>
+
+</div>
 
 {% endblock %}
