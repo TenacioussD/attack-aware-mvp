@@ -44,5 +44,14 @@ def social_engineering():
 def cyber_hygiene():
     return render_template('cyber_hygiene.html')  # Renders cyber hygiene HTML file from templates
 
+@app.route('/IoT')
+def IoT():
+    return render_template('IoT.html')  # Renders IoT HTML file from templates
+
+@app.route('/phishing_scam')
+def phishing_scam():
+    return render_template('phishing_scam.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
