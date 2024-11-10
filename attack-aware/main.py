@@ -48,9 +48,9 @@ def cyber_hygiene():
 def IoT():
     return render_template('IoT.html')  # Renders IoT HTML file from templates
 
-@app.route('/phishing_scam')
-def phishing_scam():
-    return render_template('phishing_scam.html')
+@app.route('/phishing_scams')
+def phishing_scams():
+    return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
 
 if __name__ == "__main__":

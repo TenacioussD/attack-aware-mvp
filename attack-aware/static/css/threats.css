@@ -114,23 +114,23 @@ h1 {
 
 /* Risk card styles */
 .risk-card {
-    width: 300px; /* Fixed width */
+    width: 300px;                            /* Fixed width */
     text-align: center;
-    margin-bottom: 20px; /* Space below the cards */
+    margin-bottom: 20px;                      /* Space below the cards */
 }
 
 
 .risk-card img {
-    width: 100%; /* Full width of the card */
-    height: 200px; /* Fixed height for consistency */
-    object-fit: cover; /* Scale image to cover dimensions */
-    border-radius: 12px; /* Slightly rounded corners */
+    width: 100%;                                /* Full width of the card */
+    height: 200px;                              /* Fixed height for consistency */
+    object-fit: cover;                          /* Scale image to cover dimensions */
+    border-radius: 12px;                        /* Slightly rounded corners */
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); /* Increased shadow for better depth */
-    transition: transform 0.3s; /* Smooth transition for hover effect */
+    transition: transform 0.3s;                  /* Smooth transition for hover effect */
 }
 
 .risk-card img:hover {
-    transform: translateY(-10px); /* Lift the image on hover */
+    transform: translateY(-10px);                /* Lift the image on hover */
 }
 
 .risk-card p {

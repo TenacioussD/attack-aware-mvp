@@ -39,18 +39,22 @@ body {
 
                                     /* Full-width image styling */
 .image-section {
-    width: 100%;                   /* Full-width container */
+    width: 100%;           /* Full-width container for alignment */
     display: flex;
-    justify-content: center;       /* Centers the image horizontally */
-    overflow: hidden;              /* Hides any overflow to prevent cut-off issues */
+    justify-content: center; /* Centers the image within the container */
+    overflow: hidden;       /* Prevents overflow */
 }
 
 .image-section img {
-    width: 1250px;                  /* Set a fixed width */
-    height: 450px;                 /* Set a fixed height */
-    object-fit: cover;             /* Ensures the image fills the specified dimensions without distortion */
+    width: 1250px;           /* Set the desired fixed width */
+    height: 450px;          /* Set the desired fixed height */
     display: block;
+    object-fit: cover;      /* Ensures the image is scaled to cover without distortion */
 }
+
+
+
+
 
 
 .warning {                          /* Styling for warning box */
@@ -62,10 +66,10 @@ body {
 }
 
                                      /* Styling for headings with two colors */
-.social_engineering-heading {
+.phishing_scams-heading {
     color: #2AAA94;                 /* Primary color */
 }
-.social_engineering-heading .highlight {
+.phishing_scams .highlight {
     color: #2AAA94;                 /* Secondary color for highlight */
 }
 
@@ -90,7 +94,6 @@ body {
 .dangerous-action .white {
     color: white;                              /* White color for "PAY THE RANSOM" */
 }
-
 
                                     /* Section styling */
 .video-section {
