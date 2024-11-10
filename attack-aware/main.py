@@ -36,6 +36,22 @@ def threats():
 def ransomware():
     return render_template('ransomware.html')  # Renders ransomware HTML file from templates
 
+@app.route('/social_engineering')
+def social_engineering():
+    return render_template('social_engineering.html')  # Renders social engineering HTML file from templates
+
+@app.route('/cyber_hygiene')
+def cyber_hygiene():
+    return render_template('cyber_hygiene.html')  # Renders cyber hygiene HTML file from templates
+
+@app.route('/IoT')
+def IoT():
+    return render_template('IoT.html')  # Renders IoT HTML file from templates
+
+@app.route('/phishing_scams')
+def phishing_scams():
+    return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
+
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
