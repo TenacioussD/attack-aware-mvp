@@ -1,39 +1,36 @@
 from flask import request, flash, redirect, url_for
 from flask_login import login_user
+from werkzeug.security import generate_password_hash  # Ensure password is hashed before storing it
 from models import db, User
 
 class Signup:
     def post(self):
         # Get data from signup form and assign them to instance variables
-        self.firstName = request.form.get('firstName')
-        self.lastName = request.form.get('lastName')
-        self.email = request.form.get('email')
-        self.newPassword = request.form.get('newPassword')
+        firstName = request.form["firstName"]
+        lastName = request.form["lastName"]
+        email = request.form["email"]
+        newPassword = request.form["newPassword"]
+        if not firstName or not lastName or not email or not newPassword:
+            flash('Please enter all the fields', 'error')
+            return redirect(url_for('main'))
 
-        # Check if any fields are empty
-        if not self.firstName or not self.lastName or not self.email or not self.newPassword:
-            flash('Please enter all fields', 'Error')
-            return redirect(url_for('home'))
-
-        # Check if user already exists
-        existing_user = User.query.filter_by(email=self.email).first()
+        # Check if the user already exists
+        existing_user = User.query.filter_by(email=email).first()
         if existing_user:
-            flash('A user with the same Email or Mobile already exists', 'Error')
+            flash("An account with this email already exists.")
             return redirect(url_for('home'))
-
-        # Create a new user
+        
+        # Create a new user instance
         user = User(
-            firstName=self.firstName,
-            lastName=self.lastName,
-            email=self.email,
-            password=self.newPassword
+            firstName=firstName,
+            lastName=lastName,
+            email=email,
+            password=generate_password_hash(newPassword)  # Secure password storage
         )
-
-        # Add user to the database
+        
+        # Add the new user to the database
         db.session.add(user)
         db.session.commit()
 
-        # Log the user in immediately after signup, if desired
-        login_user(user)
-
-        flash('Account created successfully!', 'Success')
+        flash("Account created successfully! Please login.")
+        return redirect(url_for('home'))  # Redirect to home page after successful signup

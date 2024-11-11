@@ -51,32 +51,46 @@
 <hr class="line"/>
 
 <div class="welcomeContainer">
-
 <div class="welcomeGraph">
-<h1>
-      <div class="headingBlack">Welcome</div> <div class="headingTeal">Message</div>
-</h1>
-<p>
-    Welcome to AttackAware! Start your journey to better cybersecurity. Sign in or create an account to begin protecting your digital world....
-</p>
+    <h1>
+         <div class="headingBlack">Welcome</div> <div class="headingTeal">Message</div>
+    </h1>
+    <p>
+       Welcome to AttackAware! Start your journey to better cybersecurity. Sign in or create an account to begin protecting your digital world....
+    </p>
 </div>
 
 <img class="decorCircle" src="{{ url_for('static', filename='img/icons/circle.png') }}">
 
 <div class="signUpForm">
-<form action="{{ url_for('home') }}" method="POST">         <!-- Action still needs to be called -->
+<form action="{{ url_for('home') }}" method="post">         <!-- Action still needs to be called -->
       <h1>Sign Up</h1>
       <p>Create an Account</p>
       <br>
+    
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          <ul class="flashes contactUL">
+              {% for message in messages %}
+                  <li class="flashItem contactLI">
+                      <img class="iconSpesification" src="{{ url_for('static', filename='/img/icons/warning.png') }}" alt="Warning Icon"> 
+                      <span class="flashMessage">{{ message }}</span>
+                  </li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+  {% endwith %}
+  
+               
       <br>
     <div class="nameInputs">
-      <input type="text" class="firstName" name="firstName" value="First Name" required>
-      <input type="text" class="lastName" name="lastName" value="Last Name" required>
+      <input type="text" class="firstName" name="firstName" placeholder="First Name"required>
+      <input type="text" class="lastName" name="lastName" placeholder="Last Name" required>
     </div>
-      <input type="text" class="email" name="email" value="Email Address" required>
-      <input type="text" class="newPassword" name="newPassword" value="New Password" required>
+      <input type="text" class="email" name="email" placeholder="Email Address"  required>
+      <input type="text" class="newPassword" name="newPassword" placeholder="New Password" required>
 
-      <input class="button" type="submit" name='action' value="Create Account"> 
+      <input class="button" type="submit" name="action" value="signup"> 
 
 </form>
 

@@ -1,3 +1,30 @@
+/* For Flashes, can discuss adding to the base.css when team is ready  */
+.flashes {
+    background-color: lightsalmon;
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+
+.flashItem {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.iconSpesification {
+    margin-right: 10 px;
+}
+
+/* Flash custom ends */
+
+
+
 
 label {
     color: #4E596B;

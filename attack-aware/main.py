@@ -2,43 +2,56 @@
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
-from signup import Signup
 from models import db, User
+from signup import Signup
+from flask_login import current_user
+
+def create_app():
+    app = Flask(__name__)  # Initializes the application
+    app.secret_key = 'attackaware'  # Needed for flashing messages
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///your_database.db'  # The database that will be created
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    # Initialize the database
+    db.init_app(app)
+
+    # Create database tables
+    with app.app_context():
+        db.create_all()  # Creates the tables if they don't exist
+
+    return app
 
 
-app = Flask(__name__)  # Initializes the application
-app.secret_key = 'attackaware'  # Needed for flashing messages
+
+#create the app by calling the function
+app = create_app()
 
 
-@app.route('/', methods = ['GET', 'POST'])  # Route for home page URL decorator
+@app.route('/', methods=['GET', 'POST'])
 def home():
-            if request.method == 'POST':
-                 action = request.form.get('action')
-                 if action == 'signup':
-                      signup_instance= Signup()
-                      signup_instance.post()
-            return render_template('home.html')  # Renders the HTML file from templates
+    if request.method == 'POST':
+        action = request.form.get('action')
+        if action == 'signup':
+            signup_instance = Signup()
+            result = signup_instance.post()  # Capture the result from post()
 
+            # After handling the signup, redirect to avoid resubmission upon refresh
+            if result:  # Check if signup was successful
+                flash("Signup successful!")
+                return redirect(url_for('home'))  # Redirect to the 'threats' page (or another page)
 
-@app.route('/subscribe', methods=['POST'])
-def subscribe():
-    email = request.form.get('email')  # Get the email from the form data
+            # If signup failed, flash an error message
+            flash("Signup failed! Please try again.")
+            return redirect(url_for('home'))  # Redirect back to the home page
 
-    if not email or "@" not in email:  # Error message if email is entered incorrectly
-        flash("Please enter a valid email address.", "error")
-        return redirect(url_for('home'))
-
-    # Add code here to save the email or process the subscription (e.g., save to a database)
-    # just flash a message and redirect back to the homepage currently
-    flash("Thank you for subscribing!", "success")
-    return redirect(url_for('home')) #Direct to the login page
-
+    return render_template('home.html')  # Render the home page template
 
 # Route to render the threats page
 @app.route('/threats')
 def threats():
     return render_template('threats.html')  # This renders HTML file from the templates
-
+   
+   
 
 # Route to render the ransomware page
 @app.route('/ransomware')
