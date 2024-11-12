@@ -52,6 +52,9 @@ def IoT():
 def phishing_scams():
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
+@app.route('/contact_us')
+def contact_us():
+    return render_template('contact_us.html')  # Renders contact us HTML file from templates
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
