@@ -4,13 +4,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
 from signup import Signup
-from flask_login import current_user
+from flask_login import current_user, LoginManager
 from login import Login
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
     app.secret_key = 'attackaware'  # Needed for flashing messages
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///your_database.db'  # The database that will be created
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_profile.db'  # The database that will be created
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Initialize the database
@@ -25,13 +25,29 @@ def create_app():
 #create the app by calling the function
 app = create_app()
 
+# Initialize the database and login manager
+login_manager = LoginManager(app)
+
+# Define the login view (this is the page users will be redirected to if they need to log in)
+login_manager.login_view = 'login'
+
+# Initialize the login manager with the app
+login_manager.init_app(app)
+
+#user loader function for Flask-login
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         action = request.form.get('action')
+
         if action == 'signup':
             signup_instance = Signup()  # Create an instance of Signup
             return signup_instance.post()  # Call the post method on the instance
+        
         elif action == 'login':
             login_instance = Login()  # Create an instance of Login
             return login_instance.post()  # Call the post method on the instance

@@ -94,6 +94,8 @@ input {
     height: 38px;
     color: white;
     background-image: linear-gradient(to left, #083F9B 0%, #7F56D9 100%);
+    position: relative;
+    z-index: 100;
 }
 
 .line {
@@ -269,6 +271,7 @@ input[type="submit"] {
         margin-top: auto; /* Adds top margin for spacing */
         margin-left: 10px;
         margin-bottom: auto;
+        display: block;
     }
     .imgAndFormDiv {
         flex-direction: wrap; /* Allows wrapping on smaller screens */
@@ -278,6 +281,10 @@ input[type="submit"] {
         margin-top: auto;
         margin-bottom: 15px;
         margin-right: 15px;
+    }
+
+    .button {
+        width: 100%;
     }
 }
 
