@@ -6,9 +6,6 @@ from models import db, User
 from signup import Signup
 from flask_login import current_user
 
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
 def create_app():
@@ -38,20 +35,11 @@ def home():
         action = request.form.get('action')
         if action == 'signup':
             signup_instance = Signup()
-            result = signup_instance.post()  # Capture the result from post()
-
-            # After handling the signup, redirect to avoid resubmission upon refresh
-            if result:  # Check if signup was successful
-                flash("Signup successful!")
-                return redirect(url_for('home'))  # Redirect to the 'threats' page (or another page)
-
-            # If signup failed, flash an error message
-            flash("Signup failed! Please try again.")
-            return redirect(url_for('home'))  # Redirect back to the home page
+            return signup_instance.post()  # Directly call `post()` which handles flashing and redirecting
 
     return render_template('home.html')  # Render the home page template
-
 # Route to render the threats page
+
 @app.route('/threats')
 def threats():
     return render_template('threats.html')  # This renders HTML file from the templates

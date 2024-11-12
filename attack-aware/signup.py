@@ -10,27 +10,22 @@ class Signup:
         lastName = request.form["lastName"]
         email = request.form["email"]
         newPassword = request.form["newPassword"]
-        if not firstName or not lastName or not email or not newPassword:
-            flash('Please enter all the fields', 'error')
-            return redirect(url_for('main'))
 
         # Check if the user already exists
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
             flash("An account with this email already exists.")
             return redirect(url_for('home'))
-        
-        # Create a new user instance
-        user = User(
-            firstName=firstName,
-            lastName=lastName,
-            email=email,
-            password=generate_password_hash(newPassword)  # Secure password storage
-        )
-        
-        # Add the new user to the database
-        db.session.add(user)
-        db.session.commit()
-
-        flash("Account created successfully! Please login.")
-        return redirect(url_for('home'))  # Redirect to home page after successful signup
+        else:
+            # Create a new user instance
+            user = User(
+                firstName=firstName,
+                lastName=lastName,
+                email=email,
+                password=generate_password_hash(newPassword)  # Secure password storage
+            )
+            # Add the new user to the database
+            db.session.add(user)
+            db.session.commit()
+            flash("Account created successfully! Please login.")
+            return redirect(url_for('home'))  # Redirect to home page after successful signup
