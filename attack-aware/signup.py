@@ -3,6 +3,7 @@ from flask_login import login_user
 from werkzeug.security import generate_password_hash  # Ensure password is hashed before storing it
 from models import db, User
 
+
 class Signup:
     def post(self):
         # Get data from signup form and assign them to instance variables
@@ -29,3 +30,4 @@ class Signup:
             db.session.commit()
             flash("Account created successfully! Please login.")
             return redirect(url_for('home'))  # Redirect to home page after successful signup
+        

@@ -19,21 +19,38 @@
 </div>
 
 <div class="loginForm">
-<form action=" " method="POST"> <!-- Action still needs to be called -->
+
+<!--For Flash messages when required-->
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      <ul class="flashes contactUL">
+          {% for message in messages %}
+              <li class="flashItem contactLI">
+                  <img class="iconSpesification" src="{{ url_for('static', filename='/img/icons/warning.png') }}" alt="Warning Icon"> 
+                  <span class="flashMessage">{{ message }}</span>
+              </li>
+          {% endfor %}
+      </ul>
+  {% endif %}
+{% endwith %}
+
+
+<form action=" {{ url_for('home') }} " method="POST"> <!-- Action still needs to be called -->
 
 <div class="inputContainer"> <!-- New container for inputs and button -->
   <div class="emailDiv">
     <label for="emailAddress">Email Address: </label>
-    <input type="text" class="emailInput" name="email"/>
+    <input type="text" class="emailInput" name="email" required/>
   </div>
 
   <div class="passwordDiv">
     <label for="password">Password:</label>
-    <input type="text" class="passwordInput" name="password"/>
+    <input type="password" class="passwordInput" name="password" required/>
   </div>
 
   <div class="loginDiv">
-    <input class="button" type="submit" value="Login">
+    <input class="button" name="action" type="submit" value="login">
   </div>
 
 </div>

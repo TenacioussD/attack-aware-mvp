@@ -5,8 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from models import db, User
 from signup import Signup
 from flask_login import current_user
-
-
+from login import Login
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -23,29 +22,29 @@ def create_app():
 
     return app
 
-
-
 #create the app by calling the function
 app = create_app()
-
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         action = request.form.get('action')
         if action == 'signup':
-            signup_instance = Signup()
-            return signup_instance.post()  # Directly call `post()` which handles flashing and redirecting
+            signup_instance = Signup()  # Create an instance of Signup
+            return signup_instance.post()  # Call the post method on the instance
+        elif action == 'login':
+            login_instance = Login()  # Create an instance of Login
+            return login_instance.post()  # Call the post method on the instance
 
     return render_template('home.html')  # Render the home page template
 # Route to render the threats page
 
 @app.route('/threats')
 def threats():
-    return render_template('threats.html')  # This renders HTML file from the templates
-   
-   
+    user = current_user
 
+    return render_template('threats.html', user=user.id)  # This renders HTML file from the templates
+   
 # Route to render the ransomware page
 @app.route('/ransomware')
 def ransomware():
@@ -66,7 +65,6 @@ def IoT():
 @app.route('/phishing_scams')
 def phishing_scams():
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
-
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
