@@ -6,6 +6,11 @@ from models import db, User
 from signup import Signup
 from flask_login import current_user
 
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+
 def create_app():
     app = Flask(__name__)  # Initializes the application
     app.secret_key = 'attackaware'  # Needed for flashing messages
