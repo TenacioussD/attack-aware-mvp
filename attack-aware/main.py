@@ -95,6 +95,10 @@ def IoT():
 def phishing_scams():
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 @app.route('/logout')
 @login_required
 def logout():
