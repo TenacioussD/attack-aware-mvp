@@ -1,0 +1,26 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.profileContain {
+    width: 100vw; /* Full viewport width */
+    overflow: hidden;
+    border: none;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: fixed; /* Forces it to the edges of the page */
+    top: 120px; /* Aligns to the top */
+    left: 0; /* Aligns to the left */
+    z-index: 1; /* Ensures it stays on top if needed */
+}
+
+.profileImg {
+    width: 100%; /* Ensures the image width fills the container */
+    height: auto; /* Keeps the aspect ratio intact */
+    display: block; /* Ensures there is no extra space below the image */
+    margin: 0;
+    max-height: 586px;
+    object-fit:cover;
+}

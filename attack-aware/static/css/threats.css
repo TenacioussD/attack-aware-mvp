@@ -60,11 +60,12 @@ main {
     padding: 0 20px;                    /* Horizontal padding */
 }
 
-h1 {
+.headerOne {
     text-align: center;                 /* Center align the main heading */
     color: #04016C;                     /* Dark blue color for the heading */
     font-size: 2.5rem;                 /* Large font size */
     margin-bottom: 20px;               /* Space below the heading */
+    font-weight: bold;
 }
 
 /* Decorative blue line under the main heading */
