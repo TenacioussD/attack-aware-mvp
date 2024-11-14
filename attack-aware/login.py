@@ -11,9 +11,9 @@ class Login():
 
         if user and user.check_password(password):  # Use the check_password method created in models.py
             login_user(user)
-            flash(f'Welcome {user.firstName}. You logged in successfully')
+            flash(f'Welcome {user.firstName}. You logged in successfully', 'threats')
             return redirect(url_for('threats'))
         else:
-            flash('Invalid email or password', 'error')
+            flash('Invalid email or password', 'login')
             return redirect(url_for('home'))
  

@@ -15,7 +15,7 @@ class Signup:
         # Check if the user already exists
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
-            flash("An account with this email already exists.")
+            flash("An account with this email already exists.", 'signup')
             return redirect(url_for('home'))
         else:
             # Create a new user instance
@@ -28,6 +28,6 @@ class Signup:
             # Add the new user to the database
             db.session.add(user)
             db.session.commit()
-            flash("Account created successfully! Please login.")
+            flash("Account created successfully! Please login.", 'signup')
             return redirect(url_for('home'))  # Redirect to home page after successful signup
         

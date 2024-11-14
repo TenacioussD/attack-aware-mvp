@@ -22,7 +22,7 @@
 
 <!--For Flash messages when required-->
 
-  {% with messages = get_flashed_messages() %}
+  {% with messages = get_flashed_messages(category_filter='login') %}
   {% if messages %}
       <ul class="flashes contactUL">
           {% for message in messages %}
@@ -85,7 +85,7 @@
       <p>Create an Account</p>
       <br>
     
-      {% with messages = get_flashed_messages() %}
+      {% with messages = get_flashed_messages(category_filter='signup') %}
       {% if messages %}
           <ul class="flashes contactUL">
               {% for message in messages %}
