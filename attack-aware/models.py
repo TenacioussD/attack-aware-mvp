@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
     lastName = db.Column(db.String(30))  # Last name, with a max length of 30 characters
     email = db.Column(db.String(100), unique=True, nullable=False)  # Email, must be unique and required
     password = db.Column(db.String, nullable=False)  # Password, required for every user
+    is_admin = db.Column(db.Boolean, default=False)  # Mark if user is admin
 
     # Define how to represent a User object when printed or logged
     def __repr__(self):

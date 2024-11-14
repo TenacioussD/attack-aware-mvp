@@ -13,6 +13,9 @@ class Login():
             login_user(user)
             flash(f'Welcome {user.firstName}. You logged in successfully', 'threats') #spesify which form the flash message should show up on ('threats')
             return redirect(url_for('threats'))
+        if user.is_admin:
+                flash('Welcome Admin', 'threats')
+                return redirect(url_for('threats'))  # Redirect to the home page or dashboard
         else:
             flash('Invalid email or password', 'login') #spesify which form the flash message should show up on ('login')
             return redirect(url_for('home'))

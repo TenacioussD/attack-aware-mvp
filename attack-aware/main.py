@@ -4,14 +4,16 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
 from signup import Signup
-from flask_login import current_user, LoginManager
+from flask_login import current_user, LoginManager, login_required, logout_user
 from login import Login
+from admin import Admin
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
     app.secret_key = 'attackaware'  # Needed for flashing messages
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_profile.db'  # The database that will be created
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = 'your-secret-key'
 
     # Initialize the database
     db.init_app(app)
@@ -55,6 +57,17 @@ def home():
     return render_template('home.html')  # Render the home page template
 # Route to render the threats page
 
+@app.route('/make_admin/<int:user_id>', methods=['POST'])
+@login_required
+def make_admin(user_id):
+    if not current_user.is_admin:
+        flash("You do not have permission to perform this action.", 'admin')
+        return redirect(url_for('home'))
+    
+    result = Admin.promore_to_admin(user_id)
+    flash(result)
+    return redirect(url_for('home'))
+
 @app.route('/threats')
 def threats():
     user = current_user
@@ -81,6 +94,13 @@ def IoT():
 @app.route('/phishing_scams')
 def phishing_scams():
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have logged out.', 'login') #let flash pop-up on home login form
+    return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
