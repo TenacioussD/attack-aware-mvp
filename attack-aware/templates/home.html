@@ -22,7 +22,8 @@
 
 <!--For Flash messages when required-->
 
-  {% with messages = get_flashed_messages(category_filter='login') %}
+  {% with messages = get_flashed_messages(category_filter='login') %} <!-- category_filter='login' is the part that lets the flash message
+                                                                            only show up for this form -->
   {% if messages %}
       <ul class="flashes contactUL">
           {% for message in messages %}
@@ -85,7 +86,8 @@
       <p>Create an Account</p>
       <br>
     
-      {% with messages = get_flashed_messages(category_filter='signup') %}
+      {% with messages = get_flashed_messages(category_filter='signup') %} <!-- category_filter='signup' is the part that lets the flash message
+                                                                                 only show up for this form -->
       {% if messages %}
           <ul class="flashes contactUL">
               {% for message in messages %}
