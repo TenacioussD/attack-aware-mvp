@@ -99,6 +99,11 @@ def phishing_scams():
 def profile():
     return render_template('profile.html')
 
+# Route to render the contact-us page
+@app.route('/contact-us')
+def contact():
+    return render_template('contact-us.html')
+
 @app.route('/logout')
 @login_required
 def logout():
