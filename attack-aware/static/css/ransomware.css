@@ -110,3 +110,10 @@ body {
     color: #4BE5CA;                 /* Teal color for "watch this" */
 }
 
+.video-block {
+    background-color: #4A16BD;      /* Color block around video */
+    padding: 20px;                  /* Padding inside the color block */
+    border-radius: 8px;             /* Optional: rounded corners */
+    position: relative;             /* Make it the reference for absolute positioning */
+}
+

@@ -39,23 +39,18 @@ body {
 
                                     /* Full-width image styling */
 .image-section {
-    width: 100%;           /* Full-width container for alignment */
+    width: 100%;                     /* Full-width container for alignment */
     display: flex;
-    justify-content: center; /* Centers the image within the container */
-    overflow: hidden;       /* Prevents overflow */
+    justify-content: center;         /* Centers the image within the container */
+    overflow: hidden;                /* Prevents overflow */
 }
 
 .image-section img {
-    width: 1250px;           /* Set the desired fixed width */
-    height: 450px;          /* Set the desired fixed height */
+    width: 1250px;                  /* Set the desired fixed width */
+    height: 450px;                  /* Set the desired fixed height */
     display: block;
-    object-fit: cover;      /* Ensures the image is scaled to cover without distortion */
+    object-fit: cover;              /* Ensures the image is scaled to cover without distortion */
 }
-
-
-
-
-
 
 .warning {                          /* Styling for warning box */
     background-color: #f8d7da;
@@ -67,10 +62,10 @@ body {
 
                                      /* Styling for headings with two colors */
 .phishing_scams-heading {
-    color: #2AAA94;                 /* Primary color */
+    color: #2AAA94;                  /* Primary color */
 }
 .phishing_scams .highlight {
-    color: #2AAA94;                 /* Secondary color for highlight */
+    color: #2AAA94;                   /* Secondary color for highlight */
 }
 
 .dangerous-action {
@@ -95,28 +90,29 @@ body {
     color: white;                              /* White color for "PAY THE RANSOM" */
 }
 
-                                    /* Section styling */
+ /* Section styling */
 .video-section {
     text-align: center;
-    margin: 30px 0;                 /* Space above and below the video section */
+    margin: 30px 0;                            /* Space above and below the video section */
 }
 
 .video-block {
-    background-color: #4A16BD;      /* Color block around video */
-    padding: 20px;                  /* Padding inside the color block */
-    border-radius: 8px;             /* Optional: rounded corners */
+    background-color: #4A16BD;                  /* Color block around video */
+    padding: 20px;                             /* Padding inside the color block */
+    border-radius: 8px;                        /* Optional: rounded corners */
 }
 
 .video-block h3 {
-    margin: 0 0 15px 0;             /* Space below heading */
+    margin: 0 0 15px 0;                         /* Space below heading */
     font-size: 1.2em;
 }
 
 .info-text {
-    color: white;                   /* White color for "For more Information" */
+    color: white;                              /* White color for "For more Information" */
 }
 
 .highlight-text {
-    color: #4BE5CA;                 /* Teal color for "watch this" */
+    color: #4BE5CA;                             /* Teal color for "watch this" */
 }
+
 
