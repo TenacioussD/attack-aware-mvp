@@ -6,16 +6,46 @@
    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
    <link rel="stylesheet" href="{{ url_for('static', filename='css/threats.css') }}">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
 
 {% block content %}
 
 <h1 class="headerOne">User Profile</h1>
 
-<div class="profileContain">
-<img class="profileImg" src="{{ url_for('static', filename='img/img/profileImg.jpg') }}" alt="Picture of laptop with darker background">
+<div class="profileContainer">
+<div class="bgContain">
+<img class="profileBg" src="{{ url_for('static', filename='img/img/profileImg.jpg') }}" alt="Picture of laptop with darker background">
 </div>
 
-<!-- For profile pic https://www.youtube.com/watch?v=5PkulS_7KJo&list=PLCC34OHNcOtolz2Vd9ZSeSXWc8Bq23yEz&index=36-->
+<!--Create default profile-->
+<div class="userProf">
+<img class="defualtProfilePic" src="{{ url_for('static', filename='img/icons/user.png') }}" alt="Default Image for User Profile">
+<img class="plus" type="button" src="{{ url_for('static', filename='img/icons/plusTwo.png') }}">
+</div>
+
+</div>
+
+<div class="userProfInfo">
+   <form action="" method="post"> 
+      <h1 class="headerTwo">
+         <div class="headingBlack">User</div> <div class="headingTeal">Profile</div>
+    </h1>
+
+    <br>
+    <div class="profInfoFields">
+      <label for="firstName">First Name: </label>
+      <input type="text" class="firstName" name="firstName" value="user.firstName" required>
+      <label for="lastName">Last Name:</label>
+      <input type="text" class="lastName" name="lastName" value="user.lastName" required>
+      <input class="button" name="" type="button" value="Change Password">
+      <input class="confirmButton" name="action" type="submit" value="login">
+
+    </div>
+
+   </form>
+
+
+</div>
 
 {% endblock %}
