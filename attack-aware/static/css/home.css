@@ -1,4 +1,4 @@
-/* For Flashes, can discuss adding to the base.css when team is ready  */
+/* For Flashes, can discuss adding to the base.css when team is ready 
 .flashes {
     background-color: lightsalmon;
     list-style-type: none; 
@@ -25,11 +25,11 @@
 
 /* Flash custom ends */
 
-label {
+.welcomeContainer label, .home-container label, .featuredGraph label {
     color: #4E596B;
 }
 
-input {
+.welcomeContainer input, .home-container input {
     background-color: white;
     width: 250px;
     height: 38px;
@@ -39,7 +39,7 @@ input {
     border-radius: 7px;
 }
 
-.tile {
+.featuredGraph .tile {
     font-weight: bold;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -52,7 +52,7 @@ input {
     height: 100%;
 }
 
-.tileImg {
+.tile .tileImg {
     width: 100%;
     height: 50%; /* Ensure it only takes up 50% of the tile */
     object-fit: cover; /* Maintain aspect ratio and fill the space */
@@ -67,29 +67,29 @@ input {
     margin-right: 20px;
 }
 
-.tile:hover {
+.featuredGraph .tile:hover {
     transform: scale(1.05);
 }
 
-.nameInputs {
+.welcomeContainer .nameInputs {
     display: flex;
     margin-bottom: 15px;
     gap: 20px;
 }
 
-.firstName, .lastName {
+.welcomeContainer .firstName, .lastName {
     width: calc(50% - 5px); /* Calculate based on available space */
     max-width: 240px;
 }
 
-.mobileOrEmail, .newPassword {
+.welcomeContainer .mobileOrEmail, .newPassword {
     max-width: 500px; /* max width of out input fields */
     width: 100%; /* allows for scaling down */
     display: block; /* Want to trreat it as a block */
     min-width: 250px; /* Minimum allowed width */
 }
 
-.button {
+.welcomeContainer .button, .home-container .button {
     width: auto;
     height: 38px;
     color: white;
@@ -98,7 +98,7 @@ input {
     z-index: 100;
 }
 
-.line {
+.welcomeContainer .line, .home-container .line  {
     height: 10px;
     width: auto;
     background-image: linear-gradient(to bottom, #084FC7 0%, white 100%); /* Fades from blue to while (vertically) */ 
@@ -114,14 +114,14 @@ input {
     margin: 0px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
 }
 
-.imgAndFormDiv {
+.home-container .imgAndFormDiv {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap; /*Allows wrapping when screen gets smaller */
     align-items: flex-start; /* Aligns items vertically */
 }
 
-.logoTwo {
+.home-container .logoTwo {
     max-height: 400px; /* max width of the logo */
     max-width: 400px;
     width: 100%; /* Allows logo to scale down */
@@ -134,7 +134,7 @@ input {
     min-width: 150px; /* Prevents the logo from becoming too small */
 }
 
-.logoTwoDiv {
+.home-container .logoTwoDiv {
      display: flex;
      justify-content: flex-start; /* Align img to the left */
      padding: 0; /* removing padding and margin on container itself */
@@ -143,7 +143,7 @@ input {
      min-width: 150px; /* Prevents the logo from being too small */
 }
 
-.loginForm {
+.home-container .loginForm {
     margin-left: auto; /* Adjust as needed for spacing */
     margin-right: 15%;
     margin-bottom: 15px;
@@ -154,21 +154,21 @@ input {
     gap: 5px; /* Adds space between form elements */
 }
 
-.inputContainer {
+.home-container .inputContainer {
     display: flex; /* Align all inputs and button horizontally */
     align-items: center; /* Center vertically */
     flex-wrap: wrap;
     gap: 5px; /* Space between items */
 }
 
-.emailDiv, .passwordDiv {
+.home-container .emailDiv, .passwordDiv {
     display: flex;
     flex-direction: column;
     margin-right: 15px;
     flex: 1 1 auto; /* Full width when wrapping */
 }
 
-.loginDiv {
+.home-container .loginDiv {
     display: flex;
     align-items: center;
     align-self: flex-end; /* Align button with bottom input fields */
@@ -186,39 +186,39 @@ input[type="submit"] {
     margin-right: 10px;
 }
 
-.archContainer {
+.home-container .archContainer {
     position: absolute; /* Establish a reference point for absolute positioning */
     width: 100%;
 }
 
-.largeArchImg, .medArchImg, .smallArchImg {
+.home-container .largeArchImg, .medArchImg, .smallArchImg {
     transform: rotate(270deg);
     opacity: 0.25;
     position: absolute;
 }
 
-.largeArchImg {
+.home-container .largeArchImg {
     width: 500px;
     height: 500px;
     right: -205px;
     margin-top: -120px;
 }
 
-.medArchImg {
+.home-container .medArchImg {
     width: 420px;
     height: 470px;
     right: -170px;
     margin-top: -105px;
 }
 
-.smallArchImg {
+.home-container .smallArchImg {
     width: 350px;
     height: 440px;
     right: -140px;
     margin-top: -90px;
 }
 
-.decorCircle {
+.welcomeContainer .decorCircle {
     width: 75px;
     height: 75px;
     position: absolute;
@@ -260,30 +260,30 @@ input[type="submit"] {
     margin-right: 15px;
 }
 
-.signUpForm {
+.welcomeContainer .signUpForm {
     flex: 1; /* Narrower section for the signup form */
     min-width: 300px; /* Ensures form stays usable on smaller screens */
     margin-bottom: 30px;
   }
 
 @media (max-width: 1920px) { /* We can adjust max-width as needed */
-    .loginForm {
+    .home-container .loginForm {
         margin-top: auto; /* Adds top margin for spacing */
         margin-left: 10px;
         margin-bottom: auto;
         display: block;
     }
-    .imgAndFormDiv {
+    .home-container .imgAndFormDiv {
         flex-direction: wrap; /* Allows wrapping on smaller screens */
     }
 
-    .signUpForm {
+    .welcomeContainer .signUpForm {
         margin-top: auto;
         margin-bottom: 15px;
         margin-right: 15px;
     }
 
-    .button {
+    .home-container .button, .welcomeContainer .button {
         width: 100%;
     }
 }

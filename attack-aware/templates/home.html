@@ -11,7 +11,7 @@
 {% block content %}
 
 <hr class="line"/>  <!-- Addming horizontal lines -->
-
+<div class="home-container">
 <div class="imgAndFormDiv"> <!-- Creating div to align img & form with each other -->
 
 <div class="logoTwoDiv"> 
@@ -42,7 +42,7 @@
 <div class="inputContainer"> <!-- New container for inputs and button -->
   <div class="emailDiv">
     <label for="emailAddress">Email Address: </label>
-    <input type="text" class="emailInput" name="email" required>
+    <input type="text" class="emailInput" name="email" required> 
   </div>
 
   <div class="passwordDiv">
@@ -62,6 +62,7 @@
 <img class="largeArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
 <img class="medArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
 <img class="smallArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+</div>
 </div>
 
 </div>

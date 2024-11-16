@@ -20,95 +20,96 @@
 /* BODY */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #F1F7FF;
+    background-color: #f8f9fa;
 }
 
 /* Header */
-header.navbar {
+body .navbar {
     background-color: #f8f9fa;
     border-bottom: 1px solid #ddd;
     padding: 10px 20px;
 }
 
 /* Logo */
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 5px; /* spacing between logo and text */
-}
 
-.navbar-brand img {
-    width: 60px;
+body .navbar .logo-image {
+    width: 110px;
     height: auto;
+    transition: width 0.3s ease;
 }
 
-.logo-text {
-    font-weight: bold;
-    color: #2a2a72;
-    font-size: 16px;
+@media (max-width: 768px) {
+    body .navbar .logo-image {
+        width: 50px; /* Resize for medium screens */
+    }
 }
 
-.logo-subtext {
-    color: #39b1a6;
-    font-size: 12px;
-    font-style: italic;
+@media (max-width: 576px) {
+    body .navbar .logo-image {
+        width: 40px; /* Resize for small screens */
+    }
 }
+
 
 /* Navigation Links */
-.navbar-nav .nav-item .nav-link {
+body .navbar-nav .nav-item .nav-link {
     color: #333;
-    font-size: 16px;
-    margin: 0 10px;
+    font-size: 18px;
+    margin: 0 15px;
 }
 
-.navbar-nav .nav-item .nav-link.active {
-    color: #2a2a72;
-    font-weight: bold;
-}
-
-.navbar-nav .nav-item .nav-link:hover {
+body .navbar-nav .nav-item .nav-link:hover {
     color: #39b1a6;
 }
 
 /* Vertical Divider */
-.vertical-divider {
+body .vertical-divider {
     border-left: 1px dashed #8a2be2;
-    height: 40px;
+    height: 60px;
     margin: 0 15px;
 }
 
 /* Login and Signup Buttons */
-.auth-buttons .btn-outline-primary {
-    border-color: #2AAA94;
-    color: #2AAA94;
-    border-radius: 20px;
+body .auth-buttons .btn-outline-primary, .auth-buttons .btn-primary {
+    border-radius: 25px; 
+    padding: 5px 20px; 
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
 
-.auth-buttons .btn-outline-primary:hover {
-    background-color: #2AAA94;
+body .auth-buttons .btn-outline-primary {
+    border-color: #2AAA94;
+    color: #2AAA94;
+   
+}
+
+body .auth-buttons .btn-outline-primary:hover {
+    background-color: #826f8e;
+    border-color: #826f8e;
     color: #fff;
 }
 
-.auth-buttons .btn-primary {
+body .auth-buttons .btn-primary {
     background-color: #2AAA94;
     border-color: #2AAA94;
     border-radius: 20px;
 }
 
-.auth-buttons .btn-primary:hover {
-    background-color: #6c1fa1;
-    border-color: #6c1fa1;
+body .auth-buttons .btn-primary:hover {
+    background-color: #826f8e;
+    border-color: #826f8e;
 }
 
-/* Responsive for small screens*/
+/* Responsive adjustments for small screens */
 @media (max-width: 992px) {
-    .navbar-nav .nav-item {
+    body .navbar-nav .nav-item {
         margin-bottom: 10px;
     }
-    .navbar-nav .nav-item .nav-link {
+    body .navbar-nav .nav-item .nav-link {
         font-size: 14px;
     }
-    .vertical-divider {
+    body .vertical-divider {
         display: none;
     }
 }
