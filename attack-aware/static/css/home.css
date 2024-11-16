@@ -1,5 +1,5 @@
-/* For Flashes, can discuss adding to the base.css when team is ready 
-.flashes {
+/* For Flashes, can discuss adding to the base.css when team is ready */
+main .flashes {
     background-color: lightsalmon;
     list-style-type: none; 
     padding: 0;
@@ -11,13 +11,13 @@
     align-items: center;
 }
 
-.flashItem {
+main .flashItem {
     display: flex;
     align-items: center;
     margin: 10px 0;
 }
 
-.iconSpesification {
+main .iconSpesification {
     margin-right: 10 px;
     height: 100px;
     width: 100px;
@@ -25,11 +25,11 @@
 
 /* Flash custom ends */
 
-.welcomeContainer label, .home-container label, .featuredGraph label {
+main label {
     color: #4E596B;
 }
 
-.welcomeContainer input, .home-container input {
+main input {
     background-color: white;
     width: 250px;
     height: 38px;
@@ -39,7 +39,7 @@
     border-radius: 7px;
 }
 
-.featuredGraph .tile {
+main .tile {
     font-weight: bold;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -52,14 +52,14 @@
     height: 100%;
 }
 
-.tile .tileImg {
+main .tileImg {
     width: 100%;
     height: 50%; /* Ensure it only takes up 50% of the tile */
     object-fit: cover; /* Maintain aspect ratio and fill the space */
     border-radius: 8px 8px 0 0; /* Optional: rounded corners for the top of the image */
 }
 
-.tilesContainer {
+main .tilesContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* This will create 3 columns */
     gap: 20px;
@@ -67,29 +67,29 @@
     margin-right: 20px;
 }
 
-.featuredGraph .tile:hover {
+main .tile:hover {
     transform: scale(1.05);
 }
 
-.welcomeContainer .nameInputs {
+main .nameInputs {
     display: flex;
     margin-bottom: 15px;
     gap: 20px;
 }
 
-.welcomeContainer .firstName, .lastName {
+main .firstName, main .lastName {
     width: calc(50% - 5px); /* Calculate based on available space */
     max-width: 240px;
 }
 
-.welcomeContainer .mobileOrEmail, .newPassword {
+main .mobileOrEmail, main .newPassword {
     max-width: 500px; /* max width of out input fields */
     width: 100%; /* allows for scaling down */
     display: block; /* Want to trreat it as a block */
     min-width: 250px; /* Minimum allowed width */
 }
 
-.welcomeContainer .button, .home-container .button {
+main .button, main .button {
     width: auto;
     height: 38px;
     color: white;
@@ -98,7 +98,7 @@
     z-index: 100;
 }
 
-.welcomeContainer .line, .home-container .line  {
+main .line {
     height: 10px;
     width: auto;
     background-image: linear-gradient(to bottom, #084FC7 0%, white 100%); /* Fades from blue to while (vertically) */ 
@@ -106,7 +106,7 @@
     margin: 0px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
 }
 
-.thickLine {
+main .thickLine {
     height: 170px;
     width: auto;
     background-image: linear-gradient(to bottom, #084FC7 0%, white 100%); /* Fades from blue to while (vertically) */ 
@@ -114,14 +114,14 @@
     margin: 0px -10000px; /* Forces line outside hidden container using negative horizontal margins to get full view */
 }
 
-.home-container .imgAndFormDiv {
+main .imgAndFormDiv {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap; /*Allows wrapping when screen gets smaller */
     align-items: flex-start; /* Aligns items vertically */
 }
 
-.home-container .logoTwo {
+main .logoTwo {
     max-height: 400px; /* max width of the logo */
     max-width: 400px;
     width: 100%; /* Allows logo to scale down */
@@ -134,7 +134,7 @@
     min-width: 150px; /* Prevents the logo from becoming too small */
 }
 
-.home-container .logoTwoDiv {
+main .logoTwoDiv {
      display: flex;
      justify-content: flex-start; /* Align img to the left */
      padding: 0; /* removing padding and margin on container itself */
@@ -143,7 +143,7 @@
      min-width: 150px; /* Prevents the logo from being too small */
 }
 
-.home-container .loginForm {
+main .loginForm {
     margin-left: auto; /* Adjust as needed for spacing */
     margin-right: 15%;
     margin-bottom: 15px;
@@ -154,21 +154,21 @@
     gap: 5px; /* Adds space between form elements */
 }
 
-.home-container .inputContainer {
+main .inputContainer {
     display: flex; /* Align all inputs and button horizontally */
     align-items: center; /* Center vertically */
     flex-wrap: wrap;
     gap: 5px; /* Space between items */
 }
 
-.home-container .emailDiv, .passwordDiv {
+main .emailDiv, main .passwordDiv {
     display: flex;
     flex-direction: column;
     margin-right: 15px;
     flex: 1 1 auto; /* Full width when wrapping */
 }
 
-.home-container .loginDiv {
+main .loginDiv {
     display: flex;
     align-items: center;
     align-self: flex-end; /* Align button with bottom input fields */
@@ -176,49 +176,51 @@
     flex: 1 1 auto; /* Full width when wrapping */
 }
 
-input[type="text"], input[type="submit"] {
+main input[type="text"], main input[type="submit"] {
     margin-top: 5px; /* Space between label and input */
 }
 
 /* Style for the submit button */
-input[type="submit"] {
+main input[type="submit"] {
     margin-left: 5px; /* Optional space between the last input and button */
     margin-right: 10px;
 }
 
-.home-container .archContainer {
-    position: absolute; /* Establish a reference point for absolute positioning */
-    width: 100%;
+main .archContainer {
+    position: right; /* Establish a reference point for absolute positioning */
+    width: 70%;
+    height: 70%;
+    margin-top: 70px;
 }
 
-.home-container .largeArchImg, .medArchImg, .smallArchImg {
+main .largeArchImg, main .medArchImg, main .smallArchImg {
     transform: rotate(270deg);
     opacity: 0.25;
     position: absolute;
 }
 
-.home-container .largeArchImg {
+main .largeArchImg {
     width: 500px;
     height: 500px;
     right: -205px;
     margin-top: -120px;
 }
 
-.home-container .medArchImg {
+main .medArchImg {
     width: 420px;
     height: 470px;
     right: -170px;
     margin-top: -105px;
 }
 
-.home-container .smallArchImg {
+main .smallArchImg {
     width: 350px;
     height: 440px;
     right: -140px;
     margin-top: -90px;
 }
 
-.welcomeContainer .decorCircle {
+main .decorCircle {
     width: 75px;
     height: 75px;
     position: absolute;
@@ -227,26 +229,26 @@ input[type="submit"] {
     margin-top: 250px;
 }
 
-.headingBlack, .headingTeal {
+main .headingBlack, main .headingTeal {
     display: inline-block;
 }
 
-.headingBlack {
+main .headingBlack {
     color: #323232;
 }
 
-.headingTeal {
+main .headingTeal {
     color: #2AAA94;
 }
 
-.welcomeContainer {
+main .welcomeContainer {
     display: flex;
     justify-content: space-between; /* Adjust space between elements */
     align-items:flex-start; /* Align items at top */
     gap: 30px; /* Adding some spacing between divs */
 }
 
-.welcomeGraph {
+main .welcomeGraph {
     flex: 1;
     margin-right: auto; /* Adds space on the right side */
     margin-left: 15px;
@@ -254,36 +256,37 @@ input[type="submit"] {
     margin-top: 60px;
 }
 
-.featuredGraph {
+main .featuredGraph {
     text-align: center;
     margin-left: 15px;
     margin-right: 15px;
 }
 
-.welcomeContainer .signUpForm {
+main .inputContainer .signUpForm {
     flex: 1; /* Narrower section for the signup form */
+
     min-width: 300px; /* Ensures form stays usable on smaller screens */
     margin-bottom: 30px;
-  }
+}
 
-@media (max-width: 1920px) { /* We can adjust max-width as needed */
-    .home-container .loginForm {
+@media (max-width: 2560px) { /* We can adjust max-width as needed */
+    main .loginForm {
         margin-top: auto; /* Adds top margin for spacing */
         margin-left: 10px;
         margin-bottom: auto;
         display: block;
     }
-    .home-container .imgAndFormDiv {
+    main .imgAndFormDiv {
         flex-direction: wrap; /* Allows wrapping on smaller screens */
     }
 
-    .welcomeContainer .signUpForm {
+    main .signUpForm {
         margin-top: auto;
         margin-bottom: 15px;
         margin-right: 15px;
     }
 
-    .home-container .button, .welcomeContainer .button {
+    main .button {
         width: 100%;
     }
 }

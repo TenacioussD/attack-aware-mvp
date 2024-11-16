@@ -4,7 +4,7 @@ body, html {
     padding: 0;
 }
 
-.profileContain {
+main .profileContain {
     width: 100vw; /* Full viewport width */
     overflow: hidden;
     border: none;
@@ -16,7 +16,7 @@ body, html {
     z-index: 1; /* Ensures it stays on top if needed */
 }
 
-.profileImg {
+main .profileImg {
     width: 100%; /* Ensures the image width fills the container */
     height: auto; /* Keeps the aspect ratio intact */
     display: block; /* Ensures there is no extra space below the image */
