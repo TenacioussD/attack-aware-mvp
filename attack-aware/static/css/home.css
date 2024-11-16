@@ -82,7 +82,7 @@ input {
     max-width: 240px;
 }
 
-.mobileOrEmail, .newPassword {
+.email, .newPassword, .birthday {
     max-width: 500px; /* max width of out input fields */
     width: 100%; /* allows for scaling down */
     display: block; /* Want to trreat it as a block */
@@ -96,6 +96,7 @@ input {
     background-image: linear-gradient(to left, #083F9B 0%, #7F56D9 100%);
     position: relative;
     z-index: 100;
+    max-width: 500px;
 }
 
 .line {
@@ -154,6 +155,7 @@ input {
     gap: 5px; /* Adds space between form elements */
 }
 
+
 .inputContainer {
     display: flex; /* Align all inputs and button horizontally */
     align-items: center; /* Center vertically */
@@ -176,7 +178,7 @@ input {
     flex: 1 1 auto; /* Full width when wrapping */
 }
 
-input[type="text"], input[type="submit"] {
+input[type="text"], input[type="submit"], input[type="date"] {
     margin-top: 5px; /* Space between label and input */
 }
 

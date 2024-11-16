@@ -11,6 +11,7 @@ class Signup:
         lastName = request.form["lastName"]
         email = request.form["email"]
         newPassword = request.form["newPassword"]
+        birthday = request.form["birthday"]
 
         # Check if the user already exists
         existing_user = User.query.filter_by(email=email).first()
@@ -23,7 +24,8 @@ class Signup:
                 firstName=firstName,
                 lastName=lastName,
                 email=email,
-                password=generate_password_hash(newPassword)  # Secure password storage
+                password=generate_password_hash(newPassword),  # Secure password storage
+                birthday=birthday
             )
             # Add the new user to the database
             db.session.add(user)
