@@ -2,7 +2,7 @@
 
 {% extends 'base.html' %}           <!-- Inherits code from the base.html file -->
 
-{% block title %} Home Page {% endblock %}  <!-- Custom header -->
+{% block title %} Home {% endblock %}  <!-- Custom header -->
 
 {% block head %}
    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
@@ -15,7 +15,7 @@
 <div class="imgAndFormDiv"> <!-- Creating div to align img & form with each other -->
 
 <div class="logoTwoDiv"> 
-<img class="logoTwo" src="{{ url_for('static', filename='/img/logos/Logo 2.png') }}" alt="Attack Aware Logo Dark Blue"> 
+<img class="logoTwo" src="{{ url_for('static', filename='/img/logos/blue-logo.png') }}" alt="Attack Aware Logo Dark Blue"> 
 </div>
 
 <div class="loginForm">
