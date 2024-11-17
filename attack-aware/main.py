@@ -1,12 +1,13 @@
 # Main Flask application file
 
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
 from signup import Signup
 from flask_login import current_user, LoginManager, login_required, logout_user
 from login import Login
 from admin import Admin
+from create_admin import create_initial_admin  # Import the function
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -21,6 +22,7 @@ def create_app():
     # Create database tables
     with app.app_context():
         db.create_all()  # Creates the tables if they don't exist
+        create_initial_admin()  # Call the function to create the admin
 
     return app
 
@@ -108,3 +110,4 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
+

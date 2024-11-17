@@ -2,6 +2,7 @@ from flask import request, flash, redirect, url_for
 from flask_login import login_user
 from werkzeug.security import generate_password_hash  # Ensure password is hashed before storing it
 from models import db, User
+from datetime import datetime
 
 
 class Signup:
@@ -11,12 +12,20 @@ class Signup:
         lastName = request.form["lastName"]
         email = request.form["email"]
         newPassword = request.form["newPassword"]
-        birthday = request.form["birthday"]
+        birthday_str = request.form["birthday"]
+
+        # Convert the birthday string to a date object
+        try:
+          birthday = datetime.strptime(birthday_str, '%Y-%m-%d').date()
+        except ValueError:
+          flash("Invalid birthday format. Please use YYYY-MM-DD", 'signup')
+          return redirect(url_for('home'))
+
 
         # Check if the user already exists
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
-            flash("An account with this email already exists.", 'signup') #spesify which form the flash message should show up on ('signup')
+            flash("An account with this email already exists.", 'signup')  # Specify which form the flash message should show up on ('signup')
             return redirect(url_for('home'))
         else:
             # Create a new user instance
@@ -30,6 +39,5 @@ class Signup:
             # Add the new user to the database
             db.session.add(user)
             db.session.commit()
-            flash("Account created successfully! Please login.", 'signup') #spesify which form the flash message should show up on ('signup')
+            flash("Account created successfully! Please login.", 'signup')  # Specify which form the flash message should show up on ('signup')
             return redirect(url_for('home'))  # Redirect to home page after successful signup
-        
