@@ -1,0 +1,294 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;           /* Set the font for the page */
+    margin: 0;                                 /* Removing the default margin */
+    padding: 0;                                 /* Removing default padding */
+    background-color: #f0f4ff;                   /* Light blue background*/
+}
+
+.manage-container {
+    width: 80%;                                      /* Setting container width */
+    margin: 0 auto;                                  /* Container in the center */
+    padding: 20px;                                   /* Adding padding inside the container */
+    display: flex;                                    /* Using flexbox for layout */
+    flex-direction: column;                           /* Stacking content vertically */
+    align-items: center;                              /* Align items to the center */
+    gap: 20px;                                         /* Space between sections */
+}
+
+/* Header Section */
+.header-section h1 {
+    font-size: 28px;                                  /* Setting font size */
+    color: #1a1aff;                                   /* Blue color for text */
+    text-align: center;                               /* Center align of text */
+    margin-bottom: 10px;                              /* Space below the header */
+}
+
+/* Image Section */
+.image-section img {
+    width: 100%;                                      /* Making image responsive */
+    height: 450px;                                    /* Setting the fixed height */
+    object-fit: cover;                                /* Making sure the image covers the space */
+    display: block;                                   /* Removing space below image */
+    margin: 0 auto;                                   /* Center the image */
+}
+
+/* Form Section */
+.form-section {
+    width: 100%;                                         /* Full width for form */
+    background: white;                                   /* White background */
+    padding: 20px;                                       /* Adding padding inside the form */
+    border-radius: 8px;                                  /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);           /* Light shadow */
+    box-sizing: border-box;
+    overflow: hidden;                             /* Ensure content doesn't overflow */
+}
+
+.form-section form {
+    display: flex;                                    /* Using flexbox for layout */
+    flex-direction: column;                           /* Stacking fields vertically */
+    gap: 15px;                                        /* Space between fields */
+}
+
+.form-section label {
+    font-weight: bold;                                /* Making the labels bold */
+    color: #1a1aff;                                   /* Blue label color */
+}
+
+.form-section input,
+.form-section textarea {
+    padding: 10px;                                  /* Adding some padding inside the fields */
+    border: 1px solid #ccc;                         /* Light grey border */
+    border-radius: 5px;                             /* Rounded corners */
+    width: calc(100% - 22px);                 /* Adjust width considering padding and border */
+    box-sizing: border-box;
+}
+
+/* Reduced Button Length */
+.form-section button {
+    background: #17a2b8;
+    color: white;
+    padding: 8px 16px;                  /* Control button padding */
+    width: auto;                        /* Ensure the width is determined by content */
+    max-width: 200px;                   /* Set a max-width to control the button's length */
+    border: none;                         /* Removing the border */
+    border-radius: 5px;                   /* Rounded corners */
+    cursor: pointer;                      /* Pointer curser on hover */
+    font-weight: bold;                    /* Bold text */
+    text-align: center;                    /* Center text */
+    font-size: 14px;                       /* Adjust font size if needed */
+    margin: 5px 0;                          /* Space between buttons */
+}
+
+.form-section button:hover {
+    background: #138496;
+}
+
+.form-section .btn-danger {
+    background: #dc3545;                   /* Red background for danger buttons */
+}
+
+.form-section .btn-danger:hover {
+    background: #c82333;                         /* Darker red on hover */
+}
+
+/*  Attacks Section */
+.attacks-section {
+    width: 100%;                               /* Full width for the section */
+    margin-top: 20px;                          /* Space above the section */
+    text-align: left;                         /* Left-align text */
+}
+
+.attacks-section h2 {
+    font-size: 20px;                          /* Font size for section title */
+    color: #1a1aff;                            /* Blue color for title */
+}
+
+.attacks-section ul {
+    list-style-type: none;                    /* Remove bullet points */
+    padding: 0;                              /* Remove padding */
+}
+
+.attacks-section li {
+    margin: 5px 0;                             /* Space between list items */
+    font-size: 16px;                          /* Font size for list items */
+}
+
+.attacks-section a {
+    color: #17a2b8;                          /* Blue color for links */
+    text-decoration: none;                    /* Remove underline from links */
+}
+
+.attacks-section a:hover {
+    text-decoration: underline;                /* Underline links on hover */
+}
+
+/* YouTube Video Links Section */
+.video-links-section {
+    width: 100%;                              /* Full width for the section */
+    background: white;                        /* White background */
+    padding: 20px;                            /* Padding inside the section */
+    border-radius: 8px;                        /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.video-links-section h2 {
+    font-size: 20px;                          /* Font size for title */
+    color: #1a1aff;                            /* Blue color for title */
+}
+
+.video-links-section .video-item {
+    display: flex;                              /* Use flexbox for layout */
+    justify-content: space-between;             /* Space between items */
+    align-items: center;                        /* Align items vertically */
+    margin-bottom: 10px;                        /* Space between video items */
+}
+
+.video-links-section .remove-video-btn {
+    background-color: #dc3545;                  /* Red background for remove button */
+    color: white;                               /* White text color */
+    padding: 5px 10px;                          /* Padding inside the button */
+    border: none;                              /* Remove border */
+    border-radius: 5px;                         /* Round corners */
+    cursor: pointer;                             /* Pointer cursor on hover */
+}
+
+.video-links-section .remove-video-btn:hover {
+    background-color: #c82333;                   /* Darker red on hover */
+}
+
+/* Scenario Section */
+.scenario-section {
+    width: 100%;                               /* Full width for the section */
+    background: white;
+    padding: 20px;                              /* Padding inside the section */
+    border-radius: 8px;                          /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);   /* Light shadow for depth */
+    box-sizing: border-box;
+    overflow: hidden;                              /* Ensure content doesn't overflow */
+}
+
+.scenario-section h2 {
+    font-size: 20px;                            /* Font size for title */
+    color: #1a1aff;                             /* Blue color for title */
+}
+
+/* Form Section for Adding Scenarios */
+.scenario-section #scenario-form {
+    display: flex;                                 /* Use flexbox for layout */
+    flex-direction: column;                        /* Ensures fields stack vertically */
+    gap: 15px;                                     /* Space between form fields */
+}
+
+.scenario-section #scenario-form label {
+    font-weight: bold;                             /* Make labels bold */
+    color: #1a1aff;                                /* Blue color for labels */
+}
+
+.scenario-section #scenario-form input,
+.scenario-section #scenario-form textarea {
+    padding: 10px;                                   /* Add padding inside input fields */
+    border: 1px solid #ccc;                          /* Light gray border */
+    border-radius: 5px;                               /* Round corners */
+    width: calc(100% - 22px);                        /* Full width minus padding/border */
+    box-sizing: border-box;                          /* Include padding/border in width calculation */
+}
+
+/* Reduced Button Length for Scenario Section */
+.scenario-section #scenario-form button {
+    background: #17a2b8;
+    color: white;
+    padding: 8px 16px;                                /* Control button padding */
+    width: auto;                                     /* Ensure the width is determined by content */
+    max-width: 200px;                                /* Set a max-width to control the button's length */
+    border: none;                                    /* Remove border */
+    border-radius: 5px;                              /* Round corners */
+    cursor: pointer;                                   /* Pointer cursor on hover */
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;                                  /* Adjust font size if needed */
+    margin: 5px 0;                                    /* Space between buttons */
+}
+
+.scenario-section #scenario-form button:hover {
+    background: #138496;                              /* Darker shade on hover */
+}
+
+.scenario-section #scenario-form .btn-danger {
+    background: #dc3545;                               /* Red background for danger buttons */
+}
+
+.scenario-section #scenario-form .btn-danger:hover {
+    background: #c82333;                                /* Darker red on hover */
+}
+
+/* Manage YouTube Video Links Section */
+.video-links-section {
+    width: 100%;
+    background-color: #4A16BD;      /* Background color for the box */
+    padding: 20px;                  /* Padding inside the box */
+    border-radius: 8px;             /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: shadow for 3D effect */
+    text-align: center;             /* Center content inside the section */
+    margin-top: 20px;               /* Optional: space above the section */
+}
+
+/* Title Styling for YouTube Video Links Section */
+.video-links-section h2 {
+    font-size: 20px;
+    color: #fff;                    /* White text color for contrast */
+    margin-bottom: 15px;             /* Space below the title */
+}
+
+/* Form Styling */
+.video-links-section form {
+    margin-bottom: 15px;            /* Space below the form */
+}
+
+.video-links-section input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+    margin-bottom: 10px;            /* Space between input fields */
+}
+
+/* Button Styling */
+.video-links-section button {
+    background-color: #17a2b8;      /* Button color */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.video-links-section button:hover {
+    background-color: #138496;      /* Button hover color */
+}
+
+/* Video Item Styling */
+.video-links-section .video-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;         /* White background for individual video items */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for a raised effect */
+}
+
+/* Remove Video Button Styling */
+.video-links-section .remove-video-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.video-links-section .remove-video-btn:hover {
+    background-color: #c82333;
+}

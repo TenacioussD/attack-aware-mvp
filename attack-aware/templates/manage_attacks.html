@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Cyber Attacks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/manage_attacks.css') }}">
+    <script src="{{ url_for('static', filename='js/manage_attacks.js') }}"></script>
+</head>
+<body>
+    <div class="manage-container">
+        <div class="header-section">
+            <h1>Manage Cyber Attacks</h1>
+        </div>
+
+        <div class="image-section">
+            <img src="{{ url_for('static', filename='img/img/computer.png') }}" alt="Computer Image" class="top-image">
+        </div>
+
+        <!-- Add Attack Form -->
+        <div class="form-section">
+            <form method="POST">
+                <label for="new_attack">New Attack Name:</label>
+                <input type="text" id="new_attack" name="new_attack" required>
+
+                <label for="description">Description of the Attack:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+
+                <label for="prevention">How to Prevent the Attack Type?</label>
+                <textarea id="prevention" name="prevention" rows="4" required></textarea>
+
+                <label for="warning_message">Warning Message:</label>
+                <input type="text" id="warning_message" name="warning_message">
+
+                <label for="template_name">Template Name (e.g., ransomware.html):</label>
+                <input type="text" id="template_name" name="template_name" required>
+
+                <button type="submit">Add Attack</button>
+            </form>
+        </div>
+
+        <!-- YouTube Video Links Section -->
+        <div class="video-links-section">
+            <h2>Add or Remove YouTube Video Links</h2>
+            <form class="form-section">
+                <label for="video-link">YouTube Video URL</label>
+                <input type="url" id="video-link" name="video-link" placeholder="Enter YouTube video URL">
+                <button type="button" id="add-video-btn">Add Video</button>
+            </form>
+
+            <div id="video-list" class="video-list">
+                <!-- Added YouTube links will appear here -->
+            </div>
+        </div>
+
+        <!-- Scenario Creation Section -->
+        <div class="scenario-section">
+            <h2>Let's Create a Practice Scenario</h2>
+
+            <form class="form-section">
+                <label for="scenario-type">Scenario Type</label>
+                <input type="text" id="scenario-type" name="scenario-type" placeholder="Enter scenario type">
+
+                <label for="correct-answer">Correct Answer</label>
+                <input type="text" id="correct-answer" name="correct-answer" placeholder="Enter the correct answer">
+
+                <label for="incorrect-answer">Incorrect Answer</label>
+                <input type="text" id="incorrect-answer" name="incorrect-answer" placeholder="Enter an incorrect answer">
+
+                <label for="extra-notes">Any Extra Notes</label>
+                <textarea id="extra-notes" name="extra-notes" rows="4" placeholder="Enter any extra notes"></textarea>
+
+                <button type="submit">Add New</button>
+            </form>
+
+            <h3>Existing Scenarios</h3>
+            <div id="scenario-list">
+                <!-- Existing scenarios will appear here -->
+            </div>
+        </div>
+
+        <!-- Existing Attacks Section -->
+        <div class="attacks-section">
+            <h2>Existing Attacks</h2>
+            <ul>
+                {% for attack in attacks %}
+                    <li>
+                        <strong>{{ attack.name }}</strong>
+                        {% if attack.image_path %}
+                            <img src="{{ url_for('static', filename=attack.image_path) }}" alt="Image" style="width: 100px;">
+                        {% endif %}
+                        <a href="{{ url_for('attack', attack_id=attack.id) }}">View</a>
+                        <form method="POST" action="{{ url_for('remove_attack', attack_id=attack.id) }}" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">Remove Attack</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
