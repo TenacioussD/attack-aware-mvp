@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<!-- Header/Navigation Section -->
+<!-- Header/Navigation section -->
 <header class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
         <a href="/" class="navbar-brand d-flex align-items-center logo-container">
@@ -76,35 +76,55 @@
 <!-- Footer content -->
 <footer class="footer-container">
     <div class="footer-content">
+        <!-- Logo section -->
         <div class="logo-text">
             <img src="{{ url_for('static', filename='img/logos/purple-logo.png') }}" alt="Logo" class="footer-logo">
-            <p class="company-text">AttackAware equips you with essential cybersecurity knowledge. Users are encouraged to stay informed
-                and take proactive measures to protect themselves and their loved ones from potential threats.</p>
-            </p>
+            <p class="company-text">AttackAware equips you with essential cybersecurity knowledge. 
+                Users are encouraged to stay informed and take proactive measures to protect themselves 
+                and their loved ones from potential threats.</p>
         </div>
+
+        <!-- Vertical divider -->
+        <hr class="vertical-divider">
+
+        <!-- Links -->
         <nav class="footer-links">
-            <h4>Links</h4>
+            <h5>Links</h5>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Learning Modules</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">About us</a></li>
+                <li><a href="/">Home</a></li> 
+                <li><a href="/threats">Threats</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/courses">Courses</a></li>  <!-- Can change to an about page if needed -->
             </ul>
         </nav>
+
+        <!-- Vertical divider -->
+        <hr class="vertical-divider">
+
+        <!-- Contact info -->
         <div class="contact-info">
-            <h4>Contact Us</h4>
+            <h5>Contact Us</h5>
             <p><i class="fa-solid fa-phone"></i>+629 555 1020</p>
             <p><i class="fa-solid fa-envelope"></i>contact@attack-aware.com</p>
             <p><i class="fa-solid fa-location-dot"></i>7485 West Street, Massachusetts 02156 United States</p>
         </div>
+        
+        <!-- Social media icons-->
         <div class="social-media">
             <a href="#"><i class="fa-brands fa-facebook"></i></a>
             <a href="#"><i class="fa-brands fa-linkedin"></i></a>
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
           </div>
-        </div><hr class="footer-divider"><div class="copyright">
+        </div>
+
+        <!-- Divider -->
+        <hr class="footer-divider">
+        
+        <!-- Copyright -->
+        <div class="copyright">
           <p>&copy; 2024 AttackAware. All rights reserved.</p>
         </div>
+    </div>
 </footer>
 
 

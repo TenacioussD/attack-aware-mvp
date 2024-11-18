@@ -23,6 +23,9 @@
 /* Body */
 body {
     font-family: 'Arial', sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 main {
@@ -34,10 +37,10 @@ header .navbar {
     background-color: #ffffff !important;
     border-bottom: 1px solid #ddd;
     padding: 10px 20px;
+    margin-bottom: 40px; /* Space between header and main content */
 }
 
 /* Logo */
-
 header .logo-image {
     width: 110px;
     height: auto;
@@ -46,13 +49,13 @@ header .logo-image {
 
 @media (max-width: 768px) {
     header .logo-image {
-        width: 50px; /* Resize for medium screens */
+        width: 50px; /* medium screens */
     }
 }
 
 @media (max-width: 576px) {
     header .logo-image {
-        width: 40px; /* Resize for small screens */
+        width: 40px; /* small screens */
     }
 }
 
@@ -60,7 +63,7 @@ header .logo-image {
 header .navbar-nav .nav-item .nav-link {
     color: #333;
     font-size: 18px;
-    margin: 0 30px;
+    margin: 0 20px;
 }
 
 header .navbar-nav .nav-item .nav-link:hover {
@@ -72,12 +75,13 @@ header .vertical-divider {
     border-left: 2.5px dashed #504EC1;
     height: 70px;
     margin: 0 15px;
+    padding-left: 5px;
 }
 
 /* Login and Signup Buttons */
 header.navbar .auth-buttons .btn-outline-primary, header .auth-buttons .btn-primary {
-    border-radius: 25px; 
-    padding: 10px 20px; 
+    border-radius: 10px; 
+    padding: 10px 10px; 
     font-weight: 500;
     font-size: 14px;
     transition: all 0.3s ease;
@@ -88,6 +92,7 @@ header.navbar .auth-buttons .btn-outline-primary {
     border-color: #2AAA94;
     color: #2AAA94;
     margin-left: 25px;
+    margin-right: 20px;
     padding-left: 30px;
     padding-right: 30px;
 }
@@ -110,74 +115,164 @@ header.navbar .auth-buttons .btn-outline-primary {
 }
 */
 
-/* Footer Content */
-
-.footer-container {
-    background-color: #341F9D; /* Dark purple */
-    padding: 20px 40px;
+/* Footer */
+footer .footer-container {
+    background: linear-gradient(135deg, #341F9D, #7352E6);
     color: white;
-    margin-top: 20px;  /* Adds space between main content and footer */
+    margin-top: 20px;
+    padding: 60px 80px 10px 80px;
 }
 
-.footer-content {
+footer .footer-content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
-.logo-text {
-    display: flex;
-    align-items: center;
+/* Logo */
+footer .footer-logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 30px;
 }
 
-.company-name {
+footer .logo-text {
+    max-width: 400px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* Footer links */
+footer .footer-links {
+    text-align: left;
+}
+
+footer .footer-links h5 {
+    font-size: 19px;
+    position: relative;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+footer .footer-links h5::after {
+    content: "";
+    display: block;
+    width: 100%; /* Matches the text width */
+    height: 2px;
+    background-color: white;
+    margin-top: 5px;
+}
+
+footer .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .footer-links ul li {
+    margin-bottom: 12px;
+}
+
+footer .footer-links ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+footer .footer-links ul li a:hover {
+    color: #2AAA94;
+}
+
+/* Contact info */
+footer .contact-info h5 {
+    font-size: 19px;
+    position: relative;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+footer .contact-info h5::after {
+    content: "";
+    display: block;
+    width: 100%; /* Matches the text width */
+    height: 2px;
+    background-color: white;
+    margin-top: 5px;
+}
+
+footer .contact-info p {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+footer .contact-info i {
+    margin-right: 10px;
+}
+
+/* Social media icons */
+footer .social-media {
+    text-align: right;
+    margin: 20px 0 0 0;
+}
+
+footer .social-media a {
     margin-left: 10px;
 }
 
-.footer-links ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.footer-links li {
+footer .social-media i {
     display: inline-block;
-    margin-right: 15px;
-}
-
-.footer-links a {
+    font-size: 18px;
     color: white;
-    text-decoration: none;
-}
-
-.contact-info h4 {
-    margin-bottom: 10px;
-}
-
-.social-media i {
-    margin-right: 10px;
-    color: white;
-}
-
-.copyright {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
-    margin-top: 30px;
+    background: #5c23d6;
+    border-radius: 50%;
+    transition: background 0.3s;
 }
 
-/* Responsive adjustments for small screens */
-@media (max-width: 992px) {
-    header .nav-item {
-        margin-bottom: 10px;
-    }
-    header .nav-item .nav-link {
-        font-size: 14px;
-    }
-    header .vertical-divider {
-        display: none;
-    }
+footer .social-media i:hover {
+    background: #2AAA94;
 }
 
+/* Divider and Copyright */
+footer .footer-divider {
+    margin: 20px 0;
+    border-top: 1px solid #ccc;
+}
+
+footer .copyright {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Responsive Styles */
 @media screen and (max-width: 768px) {
-    .footer-content {
+    footer .footer-content {
         flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer .footer-links ul {
+        text-align: left;
+        padding: 0;
+    }
+
+    footer .social-media {
+        text-align: center;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 1364px) {
+    footer .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 }
