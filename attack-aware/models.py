@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)  # Email, must be unique and required
     password = db.Column(db.String, nullable=False)  # Password, required for every user
     birthday = db.Column(db.DateTime, nullable=True) 
+    profilePic = db.Column(db.String(255), nullable=True)  # Store the file path as a string
     is_admin = db.Column(db.Boolean, default=False)  # Mark if user is admin
 
     # Define how to represent a User object when printed or logged

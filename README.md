@@ -21,6 +21,9 @@
 2. pip install flask-login
 3. pip install flask-sqlalchemypip install --upgrade pip
 4. pip install flask flask-admin flask-sqlalchemy
+5. pip install flask-wtf
+6. pip install wtforms
+
 
 # Admin Login is
 Emain Address: admin@admin.com

@@ -7,7 +7,10 @@ from signup import Signup
 from flask_login import current_user, LoginManager, login_required, logout_user
 from login import Login
 from admin import Admin
-from create_admin import create_initial_admin  # Import the function
+from create_admin import create_initial_admin 
+from profile import ProfileForm, handleProfileUpdate
+from werkzeug.utils import secure_filename
+import os
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -15,6 +18,9 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_profile.db'  # The database that will be created
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'your-secret-key'
+    app.config['UPLOAD_FOLDER'] = 'static/uploads'
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit to files to avoid overloads
+
 
     # Initialize the database
     db.init_app(app)
@@ -30,7 +36,7 @@ def create_app():
 app = create_app()
 
 # Initialize the database and login manager
-login_manager = LoginManager(app)
+login_manager = LoginManager()
 
 # Define the login view (this is the page users will be redirected to if they need to log in)
 login_manager.login_view = 'login'
@@ -42,6 +48,14 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+# Define ALLOWED_EXTENSIONS globally
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+# Check if the file extension is allowed
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -97,9 +111,11 @@ def IoT():
 def phishing_scams():
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile():
-    return render_template('profile.html')
+    
+    return render_template('profile.html', user=current_user)
 
 # Route to render the contact-us page
 @app.route('/contact-us')
@@ -112,6 +128,14 @@ def logout():
     logout_user()
     flash('You have logged out.', 'login') #let flash pop-up on home login form
     return redirect(url_for('home'))
+
+@login_manager.user_loader
+def load_user(user_id):
+    user = User.query.get(int(user_id))
+    if user is None:
+        print("User not found")
+    return user
+
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made

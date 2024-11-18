@@ -42,6 +42,7 @@
 
 /* For the plus image */
 .plus {
+    cursor: pointer;
     position: absolute;
     display: block;
     max-width: 39px;
@@ -50,6 +51,11 @@
     margin-top: 120px;
     left: 190px;
 }
+
+.file-input {
+    display: none;
+}
+
 .headerTwo {
     font-weight: bold;
 }
