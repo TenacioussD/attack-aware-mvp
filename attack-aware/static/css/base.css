@@ -23,12 +23,15 @@
 /* Body */
 body {
     font-family: 'Arial', sans-serif;
+}
+
+main {
     background-color: #f8f9fa;
 }
 
 /* Header */
 header .navbar {
-    background-color: #ffffff;
+    background-color: #ffffff !important;
     border-bottom: 1px solid #ddd;
     padding: 10px 20px;
 }
@@ -53,22 +56,21 @@ header .logo-image {
     }
 }
 
-
 /* Navigation Links */
 header .navbar-nav .nav-item .nav-link {
     color: #333;
     font-size: 18px;
-    margin: 0 15px;
+    margin: 0 30px;
 }
 
 header .navbar-nav .nav-item .nav-link:hover {
-    color: #39b1a6 !important;
+    color: #39b1a6;
 }
 
 /* Vertical Divider */
 header .vertical-divider {
-    border-left: 2.5px dashed #8a2be2;
-    height: 60px;
+    border-left: 2.5px dashed #504EC1;
+    height: 70px;
     margin: 0 15px;
 }
 
@@ -85,13 +87,18 @@ header.navbar .auth-buttons .btn-outline-primary, header .auth-buttons .btn-prim
 header.navbar .auth-buttons .btn-outline-primary {
     border-color: #2AAA94;
     color: #2AAA94;
+    margin-left: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .navbar .auth-buttons .btn-outline-primary:hover {
-    background-color: #492bcf;
-    border-color: #492bcf;
+    background-color: #504EC1;
+    border-color: #2AAA94;
     color: #fff;
 }
+
+/*  Extra button that has been removed. 
 .navbar .auth-buttons .btn-primary {
     background-color: #2AAA94;
     border-color: #2AAA94;
@@ -100,6 +107,60 @@ header.navbar .auth-buttons .btn-outline-primary {
 .navbar .auth-buttons .btn-primary:hover {
     background-color: #492bcf;
     border-color: #492bcf;
+}
+*/
+
+/* Footer Content */
+
+.footer-container {
+    background-color: #341F9D; /* Dark purple */
+    padding: 20px 40px;
+    color: white;
+    margin-top: 20px;  /* Adds space between main content and footer */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-text {
+    display: flex;
+    align-items: center;
+}
+
+.company-name {
+    margin-left: 10px;
+}
+
+.footer-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-links li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.contact-info h4 {
+    margin-bottom: 10px;
+}
+
+.social-media i {
+    margin-right: 10px;
+    color: white;
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 30px;
 }
 
 /* Responsive adjustments for small screens */
@@ -112,5 +173,11 @@ header.navbar .auth-buttons .btn-outline-primary {
     }
     header .vertical-divider {
         display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
     }
 }
