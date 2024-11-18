@@ -34,10 +34,13 @@
 }
 
 .defualtProfilePic {
-    max-width: 200px;
-    min-width: 100px;
-    height: auto;
-    margin-top: 0; /* Remove top margin */
+    width: 200px; /* Ensure this matches the height */
+    height: 200px; /* Equal width and height for a circle */
+    border-radius: 50%; /* Makes the image round */
+    object-fit: cover; /* Ensures the image fills the circle without distortion */
+    max-width: 200px; /* Consistent maximum width */
+    max-height: 200px; /* Consistent maximum height */
+    margin-top: 0;
 }
 
 /* For the plus image */
@@ -48,8 +51,8 @@
     max-width: 39px;
     min-width: 39px;
     height: auto;
-    margin-top: 120px;
-    left: 190px;
+    margin-top: 60px;
+    left: 170px;
 }
 
 .file-input {
