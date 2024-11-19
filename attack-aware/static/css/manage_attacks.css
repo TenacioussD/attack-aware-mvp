@@ -19,19 +19,25 @@ body {
 /* Header Section */
 .header-section h1 {
     font-size: 28px;                                  /* Setting font size */
-    color: #1a1aff;                                   /* Blue color for text */
+    color: #04016C;                                   /* Dark blue color for text */
     text-align: center;                               /* Center align of text */
     margin-bottom: 10px;                              /* Space below the header */
 }
 
 /* Image Section */
 .image-section img {
-    width: 100%;                                      /* Making image responsive */
-    height: 450px;                                    /* Setting the fixed height */
-    object-fit: cover;                                /* Making sure the image covers the space */
-    display: block;                                   /* Removing space below image */
-    margin: 0 auto;                                   /* Center the image */
+    width: 100%;                                     /* Make the image take up the full width of its container */
+    height: auto;                                    /* Maintain aspect ratio */
+    object-fit: cover;                              /* Ensure the image covers the container neatly */
+    display: flex;                                  /* Remove space below the image */
 }
+
+.image-section {
+    width: 100%;                             /* Let the section take the full width of the page */
+    margin: 0;                               /* Remove any margins that might restrict the section */
+    padding: 0;                              /* Remove unnecessary padding */
+}
+
 
 /* Form Section */
 .form-section {
@@ -45,22 +51,23 @@ body {
 }
 
 .form-section form {
-    display: flex;                                    /* Using flexbox for layout */
+
     flex-direction: column;                           /* Stacking fields vertically */
     gap: 15px;                                        /* Space between fields */
 }
 
 .form-section label {
     font-weight: bold;                                /* Making the labels bold */
-    color: #1a1aff;                                   /* Blue label color */
+    color: #323232;                                   /* Label color */
 }
 
 .form-section input,
 .form-section textarea {
-    padding: 10px;                                  /* Adding some padding inside the fields */
-    border: 1px solid #ccc;                         /* Light grey border */
-    border-radius: 5px;                             /* Rounded corners */
-    width: calc(100% - 22px);                 /* Adjust width considering padding and border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 25px; /* Add extra spacing below each field */
+    width: calc(100% - 22px);
     box-sizing: border-box;
 }
 
@@ -101,7 +108,7 @@ body {
 
 .attacks-section h2 {
     font-size: 20px;                          /* Font size for section title */
-    color: #1a1aff;                            /* Blue color for title */
+    color: #323232;                            /* Color for title */
 }
 
 .attacks-section ul {
@@ -123,39 +130,6 @@ body {
     text-decoration: underline;                /* Underline links on hover */
 }
 
-/* YouTube Video Links Section */
-.video-links-section {
-    width: 100%;                              /* Full width for the section */
-    background: white;                        /* White background */
-    padding: 20px;                            /* Padding inside the section */
-    border-radius: 8px;                        /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-}
-
-.video-links-section h2 {
-    font-size: 20px;                          /* Font size for title */
-    color: #1a1aff;                            /* Blue color for title */
-}
-
-.video-links-section .video-item {
-    display: flex;                              /* Use flexbox for layout */
-    justify-content: space-between;             /* Space between items */
-    align-items: center;                        /* Align items vertically */
-    margin-bottom: 10px;                        /* Space between video items */
-}
-
-.video-links-section .remove-video-btn {
-    background-color: #dc3545;                  /* Red background for remove button */
-    color: white;                               /* White text color */
-    padding: 5px 10px;                          /* Padding inside the button */
-    border: none;                              /* Remove border */
-    border-radius: 5px;                         /* Round corners */
-    cursor: pointer;                             /* Pointer cursor on hover */
-}
-
-.video-links-section .remove-video-btn:hover {
-    background-color: #c82333;                   /* Darker red on hover */
-}
 
 /* Scenario Section */
 .scenario-section {
@@ -170,7 +144,7 @@ body {
 
 .scenario-section h2 {
     font-size: 20px;                            /* Font size for title */
-    color: #1a1aff;                             /* Blue color for title */
+    color: #2AAA94;                             /* Color for title */
 }
 
 /* Form Section for Adding Scenarios */
@@ -182,7 +156,7 @@ body {
 
 .scenario-section #scenario-form label {
     font-weight: bold;                             /* Make labels bold */
-    color: #1a1aff;                                /* Blue color for labels */
+    color: #1a1aff;                                /* Color for labels */
 }
 
 .scenario-section #scenario-form input,
@@ -194,7 +168,7 @@ body {
     box-sizing: border-box;                          /* Include padding/border in width calculation */
 }
 
-/* Reduced Button Length for Scenario Section */
+/*  Button Length for Scenario Section */
 .scenario-section #scenario-form button {
     background: #17a2b8;
     color: white;
@@ -249,22 +223,8 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 80%;
+    width: 50%;
     margin-bottom: 10px;            /* Space between input fields */
-}
-
-/* Button Styling */
-.video-links-section button {
-    background-color: #17a2b8;      /* Button color */
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.video-links-section button:hover {
-    background-color: #138496;      /* Button hover color */
 }
 
 /* Video Item Styling */
@@ -274,13 +234,13 @@ body {
     align-items: center;
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #fff;         /* White background for individual video items */
+    background-color: #fff;                    /* White background for individual video items */
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for a raised effect */
 }
 
-/* Remove Video Button Styling */
-.video-links-section .remove-video-btn {
+//* Remove Video Button Styling */
+.video-links-section #remove-video-btn { /* Changed to ID selector */
     background-color: #dc3545;
     color: white;
     padding: 5px 10px;
@@ -289,6 +249,7 @@ body {
     cursor: pointer;
 }
 
-.video-links-section .remove-video-btn:hover {
-    background-color: #c82333;
+.video-links-section #remove-video-btn:hover { /* Changed to ID selector */
+    background-color: #dc3545;
 }
+

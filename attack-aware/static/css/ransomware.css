@@ -40,7 +40,7 @@ body {
                                     /* Full-width image styling */
 .image-section img {
     width: 100%;                   /* Makes the image span the entire width of the page */
-    height: 450px;                 /* Adjusts the height of the image */
+    height: auto;              /* Maintain aspect ratio */
     object-fit: cover;             /* Ensures the image covers the specified height */
     display: block;                /* Ensures the image is treated as a block element */
     margin: 0 auto;                /* Centers the image horizontally */

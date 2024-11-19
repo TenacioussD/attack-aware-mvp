@@ -37,20 +37,22 @@ body {
     color: #2AAA94;                 /* Green color for the highlighted text */
 }
 
-                                    /* Full-width image styling */
+/* Full-width image styling */
 .image-section {
     width: 100%;                   /* Full-width container */
     display: flex;
     justify-content: center;       /* Centers the image horizontally */
     overflow: hidden;              /* Hides any overflow to prevent cut-off issues */
+    height: 450px;                 /* Set a fixed height for the container */
 }
 
 .image-section img {
-    width: 1250px;                  /* Set a fixed width */
-    height: 450px;                 /* Set a fixed height */
-    object-fit: cover;             /* Ensures the image fills the specified dimensions without distortion */
-    display: block;
+    width: 100%;                   /* Make the image responsive and fill its container's width */
+    height: 100%;                  /* Fill the container's height */
+    object-fit: cover;             /* Ensures the image fills its container neatly without distortion */
+    display: block;                /* Removes space below the image */
 }
+
 
 .warning {                          /* Styling for warning box */
     background-color: #f8d7da;
