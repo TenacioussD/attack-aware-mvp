@@ -45,24 +45,24 @@ alt="User Profile Image">
     </h1>
 
     <br>
-    <div class="profInfoFields">
+   <div class="profInfoFields">
       <label for="firstName">First Name: </label>
-      <input type="text" class="firstName" name="firstName" value="{{ user.firstName }}" required>
+      <input type="text" class="changeFirstName" name="firstName" value="{{ user.firstName }}" required>
       
       <label for="lastName">Last Name:</label>
-      <input type="text" class="lastName" name="lastName" value="{{ user.lastName }}" required>
+      <input type="text" class="changeLastName" name="lastName" value="{{ user.lastName }}" required>
       
       <label for="email">Email:</label>
-      <input type="text" class="email" name="email" value="{{ user.email }}" required>
+      <input type="text" class="changeEmail" name="email" value="{{ user.email }}" required>
       
       <label for="email">Date of Birth:</label>
-      <input type="date" class="birthday" name="birthday" value="{{ user.birthday.strftime('%Y-%m-%d') }}" required>
+      <input type="date" class="changeBirthday" name="birthday" value="{{ user.birthday.strftime('%Y-%m-%d') }}" required>
       
-
+   <div class="flexButtons">
       <input class="button" name="" type="button" value="Change Password">
       <input class="confirmButton" name="action" type="submit" value="Confirm">
-
-    </div>
+   </div>
+   </div>
 
    </form>
 

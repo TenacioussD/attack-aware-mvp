@@ -55,6 +55,22 @@
     left: 170px;
 }
 
+label[for="firstName"],
+label[for="lastName"],
+label[for="email"]
+ {
+    color: black;
+    display: block; /* Ensures that labels are on their own line */
+    margin-bottom: 10px; /* Adds spacing below labels */
+}
+
+.changeFirstName, .changeLastName, .changeEmail, .changeBirthday {
+    width: 100%; /* Make input fields take up full width of container */
+    padding: 10px;
+    margin-bottom: 10px; /* Add spacing between form items */
+    max-width: 400px;
+}
+
 .file-input {
     display: none;
 }
@@ -68,3 +84,32 @@
     margin-top: 200px; /* Push the profile info down */
     z-index: 1;
 }
+
+.profInfoFields {
+    width: 400px;
+    margin: left; /* Align from items to the left */
+
+}
+
+.flexButtons {
+    display: flex; /* This will line the buttons up horizontally */
+    width: 100%; /* Ensure it takes the full width of its container */
+    max-width: 400px; /* You can adjust this value if you want a specific max width */
+    gap: 10px; /* Adds some space between the buttons */
+    align-items: center; /* Ensure both buttons are aligned vertically */
+}
+
+.button, .confirmButton {
+    flex: 1; /* Ensures both buttons take up equal space */
+    padding: 10px; /* Adds some padding to the buttons */
+    text-align: center; /* Ensures text is centered inside the button */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    margin: 0; /* Remove any default margin that may affect alignment */
+}
+
+.confirmButton {
+    background-color: #5AB48E !important;
+    color: white;
+    border: none;
+}
+

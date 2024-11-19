@@ -97,6 +97,7 @@ input {
     position: relative;
     z-index: 100;
     max-width: 500px;
+    border: none;
 }
 
 
