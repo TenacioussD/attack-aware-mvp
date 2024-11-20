@@ -18,7 +18,12 @@
 <img class="profileBg" src="{{ url_for('static', filename='img/img/profileImg.jpg') }}" alt="Picture of laptop with darker background">
 </div>
 
-<form action="{{ url_for('profile') }}" method="post">
+<form action="{{ url_for('profile') }}" method="post" enctype="multipart/form-data">
+
+   {{ profile_form.hidden_tag() }}  <!-- CSRF token will be rendered here -->
+                                    <!-- This will work with the WFT forms, WTF Form can
+                                    protect our site from Cross-Site Request Forgery 
+                                    (CSRF) attacks -->
 
 <!--Create default profile-->
 <div class="userProf">

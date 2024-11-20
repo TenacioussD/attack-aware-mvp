@@ -7,7 +7,7 @@
 from datetime import datetime
 from flask import flash, redirect, url_for
 
-def convertBirthday(birthday_str, flash_category='signup'):
+def convertBirthday(birthday_str, flash_category='signup' or 'login'):
     """Converts birthday string to a date object. Returns None if conversion fails."""
     try:
         return datetime.strptime(birthday_str, '%Y-%m-%d').date()

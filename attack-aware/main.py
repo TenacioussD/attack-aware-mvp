@@ -3,15 +3,16 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
-from signup import Signup
+from signup import Signup, SignupForm
 from flask_login import current_user, LoginManager, login_required, logout_user
-from login import Login
+from login import Login, LoginForm
 from admin import Admin
 from create_admin import create_initial_admin 
-from profile import ProfileForm, handleProfileUpdate
+from profile import ProfileForm
 from werkzeug.utils import secure_filename
+from flask_wtf.csrf import CSRFProtect
 import os
-from profile import UpdateProfile
+from profile import UpdateProfile, handleProfileUpdate
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -21,6 +22,7 @@ def create_app():
     app.config['SECRET_KEY'] = 'your-secret-key'
     app.config['UPLOAD_FOLDER'] = 'static/uploads'
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit to files to avoid overloads
+    app.config['WTF_CSRF_TIME_LIMIT'] = 3600  # Set the expiration time to 1 hour (in seconds)
 
 
     # Initialize the database
@@ -36,19 +38,17 @@ def create_app():
 #create the app by calling the function
 app = create_app()
 
+# Initialize CSRF protection
+csrf = CSRFProtect(app)
+
 # Initialize the database and login manager
 login_manager = LoginManager()
 
-# Define the login view (this is the page users will be redirected to if they need to log in)
-login_manager.login_view = 'login'
+#  # Redirect to the home route for login
+login_manager.login_view = 'home'
 
 # Initialize the login manager with the app
 login_manager.init_app(app)
-
-#user loader function for Flask-login
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 # Define ALLOWED_EXTENSIONS globally
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -60,19 +60,39 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    if request.method == 'POST':
-        action = request.form.get('action')
+    login_form = LoginForm()
+    signup_form = SignupForm()
 
-        if action == 'signup':
-            signup_instance = Signup()  # Create an instance of Signup
-            return signup_instance.post()  # Call the post method on the instance
-        
-        elif action == 'login':
-            login_instance = Login()  # Create an instance of Login
-            return login_instance.post()  # Call the post method on the instance
+    # Handle the signup form
+    if signup_form.validate_on_submit():
+        signup_instance = Signup()  # Create an instance of Signup
+        return signup_instance.post()
 
-    return render_template('home.html')  # Render the home page template
-# Route to render the threats page
+    # Handle the login form
+    if login_form.validate_on_submit():
+        login_instance = Login()  # Create an instance of Login
+        return login_instance.post()
+
+    # Render both forms in the home template
+    return render_template('home.html', login_form=login_form, signup_form=signup_form)
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+
+    profile_form = ProfileForm()
+    if profile_form.validate_on_submit():
+        # Handle form submission logic here (e.g., save the data)
+        pass
+
+    # Handle form submission
+        handleProfileUpdate(current_user)
+        flash('Profile updated successfully!', 'update')
+        return redirect(url_for('profile'))
+    
+    return render_template('profile.html', form=profile_form)  # Pass form to template
+
 
 @app.route('/make_admin/<int:user_id>', methods=['POST'])
 @login_required
@@ -117,17 +137,7 @@ def phishing_scams():
 def contact():
     return render_template('contact-us.html')
 
-@app.route('/profile', methods=['GET', 'POST'])
-@login_required
-def profile():
-    if request.method == 'POST':
-        action = request.form.get('action')
 
-        if action == 'Confirm':
-            updateProfile_instance = UpdateProfile() #create an instance of UpdateProfile
-            return updateProfile_instance.post() #call method
-
-    return render_template('profile.html', user=current_user)
 
 @app.route('/logout')
 @login_required
