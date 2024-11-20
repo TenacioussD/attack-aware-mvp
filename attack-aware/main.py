@@ -12,7 +12,7 @@ from profile import ProfileForm
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import CSRFProtect
 import os
-from profile import UpdateProfile, handleProfileUpdate
+from profile import UpdateProfile, handleProfileUpdate, ProfileForm
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -81,17 +81,14 @@ def home():
 @login_required
 def profile():
 
-    profile_form = ProfileForm()
-    if profile_form.validate_on_submit():
-        # Handle form submission logic here (e.g., save the data)
-        pass
+    user=current_user
 
-    # Handle form submission
-        handleProfileUpdate(current_user)
-        flash('Profile updated successfully!', 'update')
-        return redirect(url_for('profile'))
+    form = ProfileForm()
+    if form.validate_on_submit():
+        updateProfile_instance = UpdateProfile()
+        return updateProfile_instance.post()
     
-    return render_template('profile.html', form=profile_form)  # Pass form to template
+    return render_template('profile.html', form=form, user=user)  # Pass form to template
 
 
 @app.route('/make_admin/<int:user_id>', methods=['POST'])

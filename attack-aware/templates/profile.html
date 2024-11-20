@@ -20,7 +20,7 @@
 
 <form action="{{ url_for('profile') }}" method="post" enctype="multipart/form-data">
 
-   {{ profile_form.hidden_tag() }}  <!-- CSRF token will be rendered here -->
+   {{ form.hidden_tag() }}  <!-- CSRF token will be rendered here -->
                                     <!-- This will work with the WFT forms, WTF Form can
                                     protect our site from Cross-Site Request Forgery 
                                     (CSRF) attacks -->
