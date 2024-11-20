@@ -14,7 +14,7 @@ class ProfileForm(FlaskForm):
     lastName = StringField('Last Name')
     email = StringField('Email')
     birthday = DateField('Birthday', format='%Y-%m-%d')
-    profile_pic = FileField('Upload Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+    profilePic = FileField('Upload Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Save')
 
     
@@ -43,32 +43,49 @@ def allowed_file(filename):
 
 class UpdateProfile:
     def post(self):
-        #grab data from Profile form
-        firstName = request.form["firstName"]
-        lastName = request.form["lastName"]
-        email = request.form["email"]
-        birthday_str = request.form["birthday"]
+        form = ProfileForm()  # Initialize the form instance
 
-        # Convert the birthday string to a date object
-        birthday = convertBirthday(birthday_str, flash_category='update') #call function from utils.py
-        if not birthday:
-            return redirect(url_for('profile'))  # If conversion failed, redirect to the home page
-        
-        # Retrieve the current user from the database
-        user = User.query.get(current_user.id)
-        if not user:
-            flash("User not found.", 'update')
+        if form.validate_on_submit():  # Check if the form is valid
+            # Grab data from Profile form
+            firstName = form.firstName.data
+            lastName = form.lastName.data
+            email = form.email.data
+            birthday_str = form.birthday.data
+
+            # Convert the birthday string to a date object
+            birthday = convertBirthday(birthday_str, flash_category='update')
+            if not birthday:
+                flash("Invalid birthday", 'update')
+                return redirect(url_for('profile'))  # Redirect if conversion failed
+            
+            # Retrieve the current user from the database
+            user = User.query.get(current_user.id)
+            if not user:
+                flash("User not found.", 'update')
+                return redirect(url_for('profile'))
+
+            # Update the user details
+            user.firstName = firstName
+            user.lastName = lastName
+            user.email = email
+            user.birthday = birthday
+
+            # Handle profile picture update (if any)
+            if form.profilePic.data:  # Check if a new file is uploaded
+                file = form.profilePic.data
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                    file.save(filepath)
+
+                    user.profilePic = filename  # Save the filename in the user model
+
+            # Commit changes to the database
+            db.session.commit()
+
+            flash("Account updated successfully!", 'update')
             return redirect(url_for('profile'))
-        
-        # Update the user details
-        user.firstName = firstName
-        user.lastName = lastName
-        user.email = email
-        user.birthday = birthday
 
-        # Handle profile picture update (if any)
-        handleProfileUpdate(user)
-        
-        db.session.commit()
-        flash("Account updated successfully!", 'update')  # Flash message for success
+        # If the form was not valid, return back to the profile page
+        flash("There was an error in your form.", 'update')
         return redirect(url_for('profile'))

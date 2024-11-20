@@ -30,7 +30,7 @@ def create_app():
     with app.app_context():
         db.create_all()  # Creates the tables if they don't exist
         create_initial_admin()  # Call the function to create the admin
-
+        
     return app
 
 #create the app by calling the function

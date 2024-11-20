@@ -18,6 +18,8 @@
 <img class="profileBg" src="{{ url_for('static', filename='img/img/profileImg.jpg') }}" alt="Picture of laptop with darker background">
 </div>
 
+<form action="{{ url_for('profile') }}" method="post">
+
 <!--Create default profile-->
 <div class="userProf">
    <img id="defaultProfilePic" class="defualtProfilePic" 
@@ -32,14 +34,17 @@ alt="User Profile Image">
   </label>
 
   <!-- Hidden file input -->
-  <input id="profile-picture-upload" class="file-input" type="file" accept="image/*" onchange="previewImage(event);">
+  <input id="profile-picture-upload" class="file-input" 
+  type="file" name="profilePic" accept="image/*" 
+  onchange="previewImage(event);">
+
     
 </div>
 
 </div>
 
 <div class="userProfInfo">
-   <form action=" {{ url_for('profile') }} " method="post"> 
+   
       <h1 class="headerTwo">
          <div class="headingBlack">User</div> <div class="headingTeal">Profile</div>
     </h1>

@@ -11,7 +11,7 @@ class Login():
 
         if user and user.check_password(password):  # Use the check_password method created in models.py
             login_user(user)
-            flash(f'Welcome {user.firstName}. You logged in successfully', 'threats') #spesify which form the flash message should show up on ('threats')
+            flash(f'Welcome {user.firstName}. You logged in successfully', 'update') #spesify which form the flash message should show up on ('threats')
        
             if user.is_admin:
                 flash('Welcome Admin', 'threats')
