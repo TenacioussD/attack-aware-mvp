@@ -23,6 +23,8 @@
 4. pip install flask flask-admin flask-sqlalchemy
 5. pip install flask-wtf
 6. pip install wtforms
+7. pip install email-validator
+
 
 
 # Admin Login is
