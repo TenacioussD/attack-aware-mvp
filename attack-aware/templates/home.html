@@ -46,20 +46,16 @@
 
 <div class="inputContainer"> <!-- New container for inputs and button -->
   <div class="emailDiv">
-    <!-- <label for="emailAddress">Email Address: </label>-->
+
     {{ login_form.email.label }} {{ login_form.email }}
-   <!-- <input type="text" class="emailInput" name="email" required>-->
   </div>
 
   <div class="passwordDiv">
-   <!--  <label for="password">Password:</label>  -->
-    {{ login_form.password.label }} {{ login_form.password }}
-   <!--  <input type="password" class="passwordInput" name="password" required> -->
+   {{ login_form.password.label }} {{ login_form.password }}
   </div>
 
   <div class="loginDiv" >
-        <!--  <input class="button" name="action" type="submit" value="login">
-     -->
+
         {{ login_form.submit }}
   </div>
 
@@ -116,20 +112,12 @@
                
       <br>
     <div class="nameInputs">
-      <!--
-      <input type="text" class="firstName" name="firstName" placeholder="First Name"required>
-      <input type="text" class="lastName" name="lastName" placeholder="Last Name" required>
-      -->
+
       {{ signup_form.firstName }}
       {{ signup_form.lastName }}
 
     </div>
-    <!--
-      <input type="text" class="email" name="email" placeholder="Email Address"  required>
-      <input type="text" class="newPassword" name="newPassword" placeholder="New Password" required>
-      <input type="date" class="birthday" name="birthday">
-      <input class="button" type="submit" name="action" value="signup">
-    -->
+
       {{ signup_form.email }}
       {{ signup_form.newPassword }}
       {{ signup_form.birthday }}

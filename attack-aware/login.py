@@ -22,7 +22,7 @@ class Login():
             flash(f'Welcome {user.firstName}. You logged in successfully', 'update')
        
             if user.is_admin:
-                flash('Welcome Admin', 'profile')
+                flash('Welcome Admin', 'update')
 
             return redirect(url_for('profile'))  # Redirect to the home page or dashboard
         else:

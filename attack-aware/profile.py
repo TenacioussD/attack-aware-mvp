@@ -30,14 +30,12 @@ def handleProfileUpdate(current_user):
             filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
             try:
                 file.save(filepath)
-                print(f"File saved to: {filepath}")  # Debug line to check the path
                 current_user.profilePic = filename
                 db.session.commit()
                 flash('Profile picture updated successfully!', 'update')
                 return True
             except Exception as e:
-                flash(f"Error saving file: {str(e)}", 'error')
-                print(f"Error saving file: {str(e)}")  # Log error
+                flash(f"Error saving file: {str(e)}", 'update')
     return False
 
 
@@ -104,7 +102,5 @@ class UpdateProfile:
 
         else:
             # Log the form errors to the console for debugging
-            print("Form validation failed")
-            print(form.errors)  # Log the validation errors
             flash(f"Form validation failed: {form.errors}", 'update')
             return redirect(url_for('profile'))

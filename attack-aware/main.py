@@ -26,6 +26,10 @@ def create_app():
     app.config['WTF_CSRF_TIME_LIMIT'] = 3600  # Set the expiration time to 1 hour (in seconds)
     app.config['WTF_CSRF_SECRET_KEY'] = 'another-random-key'
 
+    # Check if the uploads folder exists, create it if it does not
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
+
     # Initialize the database
     db.init_app(app)
 
@@ -119,8 +123,6 @@ def phishing_scams():
 @app.route('/contact-us')
 def contact():
     return render_template('contact-us.html')
-
-
 
 @app.route('/logout')
 @login_required
