@@ -27,9 +27,19 @@
 
 <!--Create default profile-->
 <div class="userProf">
+   {% if user.profilePic %}
+
    <img id="defaultProfilePic" class="defualtProfilePic" 
-src="{{ url_for('static', filename='img/icons/user.png') }}"
-alt="User Profile Image">
+     src="{{ url_for('uploadedFile', filename=user.profilePic) }}" 
+     alt="User Profile Image">
+
+   {% else %}
+
+   <img id="defaultProfilePic" class="defualtProfilePic" 
+    src="{{ url_for('static', filename='img/icons/user.png') }}"
+    alt="User Profile Image">
+
+    {% endif %}
 
    <!-- Custom button with plus icon that triggers the hidden file input -->
    <label for="profile-picture-upload">
@@ -42,7 +52,6 @@ alt="User Profile Image">
   <input id="profile-picture-upload" class="file-input" 
   type="file" name="profilePic" accept="image/*" 
   onchange="previewImage(event);">
-
     
 </div>
 
@@ -72,21 +81,16 @@ alt="User Profile Image">
 
     <br>
    <div class="profInfoFields">
-      <label for="firstName">First Name: </label>
-      <input type="text" class="changeFirstName" name="firstName" value="{{ user.firstName }}" required>
-      
-      <label for="lastName">Last Name:</label>
-      <input type="text" class="changeLastName" name="lastName" value="{{ user.lastName }}" required>
-      
-      <label for="email">Email:</label>
-      <input type="text" class="changeEmail" name="email" value="{{ user.email }}" required>
-      
-      <label for="email">Date of Birth:</label>
-      <input type="date" class="changeBirthday" name="birthday" value="{{ user.birthday.strftime('%Y-%m-%d') }}" required>
-      
+
+   {{ form.firstName.label }} {{ form.firstName(value=user.firstName) }}
+   {{ form.lastName.label }} {{ form.lastName(value=user.lastName) }}
+   {{ form.email.label }} {{ form.email(value=user.email) }}
+   {{ form.birthday.label }} {{ form.birthday(value=user.birthday.strftime('%Y-%m-%d') if user.birthday else '') }}
+
+
    <div class="flexButtons">
       <input class="button" name="" type="button" value="Change Password">
-      <input class="confirmButton" name="action" type="submit" value="Confirm">
+      {{ form.submit }}
    </div>
    </div>
 

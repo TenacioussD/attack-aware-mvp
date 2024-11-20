@@ -9,15 +9,16 @@ from models import db, User
 from datetime import datetime
 from flask_login import current_user
 from utils import convertBirthday
+from wtforms.validators import DataRequired, Email, Length
 
 
 class ProfileForm(FlaskForm):
-    firstName = StringField('First Name')
-    lastName = StringField('Last Name')
-    email = StringField('Email')
-    birthday = DateField('Birthday', format='%Y-%m-%d')
+    firstName = StringField('First Name', validators=[DataRequired()], render_kw={"placeholder": "First Name", "class": "firstName custom-input"})
+    lastName = StringField('Last Name', validators=[DataRequired()], render_kw={"placeholder": "Last Name", "class": "lastName custom-input"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Email Address", "class": "email custom-input"})
+    birthday = DateField('Birthday', format='%Y-%m-%d', validators=[DataRequired()], render_kw={"placeholder": "YYYY-MM-DD", "class": "birthday custom-input"}) 
     profilePic = FileField('Upload Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
-    submit = SubmitField('Save')
+    submit = SubmitField('Confirm', render_kw={"class": "confirmButton"})
 
     
 
@@ -54,14 +55,20 @@ class UpdateProfile:
             firstName = form.firstName.data
             lastName = form.lastName.data
             email = form.email.data
-            birthday_str = form.birthday.data
+            birthday = form.birthday.data
+            profilePic = form.profilePic.data
+
+            if isinstance(birthday, datetime):
+                birthday_str = birthday.strftime('%Y-%m-%d')
+            else:
+                birthday_str = str(birthday)
 
             # Convert the birthday string to a date object
             birthday = convertBirthday(birthday_str, flash_category='update')
             if not birthday:
                 flash("Invalid birthday", 'update')
                 return redirect(url_for('profile'))  # Redirect if conversion failed
-            
+
             # Retrieve the current user from the database
             user = User.query.get(current_user.id)
             if not user:
@@ -87,8 +94,7 @@ class UpdateProfile:
                     # Define the full file path (including the folder path)
                     filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], unique_filename)
                     file.save(filepath)
-
-                    user.profilePic = filepath  # Save the filename in the user model
+                    user.profilePic = unique_filename  # Save the filename in the user model
 
             # Commit changes to the database
             db.session.commit()

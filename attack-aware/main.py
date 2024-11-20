@@ -1,6 +1,6 @@
 # Main Flask application file
 
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, current_app
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
 from signup import Signup, SignupForm
@@ -12,7 +12,8 @@ from profile import ProfileForm
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import CSRFProtect
 import os
-from profile import UpdateProfile, handleProfileUpdate, ProfileForm
+from profile import UpdateProfile, ProfileForm
+from flask import send_from_directory
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -23,7 +24,7 @@ def create_app():
     app.config['UPLOAD_FOLDER'] = 'static/uploads'
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit to files to avoid overloads
     app.config['WTF_CSRF_TIME_LIMIT'] = 3600  # Set the expiration time to 1 hour (in seconds)
-
+    app.config['WTF_CSRF_SECRET_KEY'] = 'another-random-key'
 
     # Initialize the database
     db.init_app(app)
@@ -75,21 +76,6 @@ def home():
 
     # Render both forms in the home template
     return render_template('home.html', login_form=login_form, signup_form=signup_form)
-
-
-@app.route('/profile', methods=['GET', 'POST'])
-@login_required
-def profile():
-
-    user=current_user
-
-    form = ProfileForm()
-    if form.validate_on_submit():
-        updateProfile_instance = UpdateProfile()
-        return updateProfile_instance.post()
-    
-    return render_template('profile.html', form=form, user=user)  # Pass form to template
-
 
 @app.route('/make_admin/<int:user_id>', methods=['POST'])
 @login_required
@@ -149,6 +135,24 @@ def load_user(user_id):
     if user is None:
         print("User not found")
     return user
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+
+    user=current_user
+
+    form = ProfileForm()
+    if form.validate_on_submit():
+        updateProfile_instance = UpdateProfile()
+        return updateProfile_instance.post()
+    
+    return render_template('profile.html', form=form, user=user)  # Pass form to template
+
+@app.route('/uploads/<filename>')
+def uploadedFile(filename):
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
 
 
 if __name__ == "__main__":

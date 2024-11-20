@@ -13,12 +13,8 @@ class SignupForm(FlaskForm):
     lastName = StringField('Last Name', validators=[DataRequired()], render_kw={"placeholder": "Last Name", "class": "lastName custom-input"})
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Email Address", "class": "email custom-input"})
     newPassword = PasswordField('Password', validators=[DataRequired(), Length(min=6)], render_kw={"placeholder": "New Password", "class": "newPassword custom-input"})
-    birthday = DateField('Birthday', format='%Y-%m-%d', validators=[DataRequired()], render_kw={"placeholder": "YYYY-MM-DD", "class": "birthday custom-input"})  # Updated to DateField
+    birthday = DateField('Birthday', format='%Y-%m-%d', validators=[DataRequired()], render_kw={"placeholder": "YYYY-MM-DD", "class": "birthday custom-input"})  
     submit = SubmitField('Signup', render_kw={"class": "button"})
-
-
-from datetime import datetime
-from utils import convertBirthday
 
 class Signup:
     def post(self):
