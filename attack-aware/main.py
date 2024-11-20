@@ -11,6 +11,7 @@ from create_admin import create_initial_admin
 from profile import ProfileForm, handleProfileUpdate
 from werkzeug.utils import secure_filename
 import os
+from profile import UpdateProfile
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -111,16 +112,22 @@ def IoT():
 def phishing_scams():
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
-@app.route('/profile', methods=['GET', 'POST'])
-@login_required
-def profile():
-    
-    return render_template('profile.html', user=current_user)
-
 # Route to render the contact-us page
 @app.route('/contact-us')
 def contact():
     return render_template('contact-us.html')
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    if request.method == 'POST':
+        action = request.form.get('action')
+
+        if action == 'Confirm':
+            updateProfile_instance = UpdateProfile() #create an instance of UpdateProfile
+            return updateProfile_instance.post() #call method
+
+    return render_template('profile.html', user=current_user)
 
 @app.route('/logout')
 @login_required

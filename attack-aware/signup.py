@@ -3,6 +3,7 @@ from flask_login import login_user
 from werkzeug.security import generate_password_hash  # Ensure password is hashed before storing it
 from models import db, User
 from datetime import datetime
+from utils import convertBirthday
 
 
 class Signup:
@@ -15,12 +16,9 @@ class Signup:
         birthday_str = request.form["birthday"]
 
         # Convert the birthday string to a date object
-        try:
-          birthday = datetime.strptime(birthday_str, '%Y-%m-%d').date()
-        except ValueError:
-          flash("Invalid birthday format. Please use YYYY-MM-DD", 'signup')
-          return redirect(url_for('home'))
-
+        birthday = convertBirthday(birthday_str, flash_category='signup') #call function from utils.py
+        if not birthday:
+            return redirect(url_for('home'))  # If conversion failed, redirect to the home page
 
         # Check if the user already exists
         existing_user = User.query.filter_by(email=email).first()

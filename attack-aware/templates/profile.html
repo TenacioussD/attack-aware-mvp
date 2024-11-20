@@ -39,10 +39,26 @@ alt="User Profile Image">
 </div>
 
 <div class="userProfInfo">
-   <form action="" method="post" action="{{ url_for('profile') }}"> 
+   <form action=" {{ url_for('profile') }} " method="post"> 
       <h1 class="headerTwo">
          <div class="headingBlack">User</div> <div class="headingTeal">Profile</div>
     </h1>
+
+           {% with messages = get_flashed_messages(category_filter='update') %} 
+             <!-- category_filter='update' is 
+             the part that lets the flash message
+             only show up for this form -->
+           {% if messages %}
+           <ul class="flashes contactUL">
+           {% for message in messages %}
+           <li class="flashItem contactLI">
+           <img class="iconSpesification" src="{{ url_for('static', filename='/img/icons/warning.png') }}" alt="Warning Icon"> 
+           <span class="flashMessage">{{ message }}</span>
+           </li>
+           {% endfor %}
+           </ul>
+           {% endif %}
+           {% endwith %}
 
     <br>
    <div class="profInfoFields">
