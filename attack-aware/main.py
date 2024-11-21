@@ -46,7 +46,7 @@ def subscribe():
     # Add code here to save the email or process the subscription (e.g., save to a database)
     # just flash a message and redirect back to the homepage currently
     flash("Thank you for subscribing!", "success")
-    return redirect(url_for('home'))  # Redirect to the login page
+    return redirect(url_for('home'))  # Redirect to the home page
 
 # Route to render the threats page
 @app.route('/threats')
@@ -74,11 +74,17 @@ def manage_attacks():
         db.session.add(new_attack)
         db.session.commit()
         flash(f"Attack '{name}' added successfully!", "success")
-        return redirect(url_for('manage_attacks'))
+
+        # Redirect with the attack_created flag
+        return redirect(url_for('manage_attacks', attack_created=True))
 
     # Get all attacks from the database
     attacks = CyberAttack.query.all()
-    return render_template('manage_attacks.html', attacks=attacks)
+
+    # Pass attack_created flag to the template if present
+    attack_created = request.args.get('attack_created', False)
+    return render_template('manage_attacks.html', attacks=attacks, attack_created=attack_created)
+
 
 @app.route('/attack/<int:attack_id>')
 def attack(attack_id):

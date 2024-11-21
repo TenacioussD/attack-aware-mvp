@@ -184,6 +184,39 @@ body {
     margin: 5px 0;                                    /* Space between buttons */
 }
 
+/* Styling for Remove Attack Button */
+.remove-attack-btn {
+    background-color: #dc3545;                          /* Bootstrap red background */
+    color: #fff;
+    padding: 10px 16px;                                 /* To adjust the padding */
+    font-size: 14px;                                    /* Adjust font size */
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;                                  /* To make button more rounded */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transitions */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);                    /* Add a shadow effect */
+}
+
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #28a745; /* Green background */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    z-index: 1000;
+}
+
+
+.remove-attack-btn:hover {
+    background-color: #c82333;                                   /* Darker red on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);                   /* Slightly deeper shadow */
+}
+
 .scenario-section #scenario-form button:hover {
     background: #138496;                              /* Darker shade on hover */
 }
@@ -252,4 +285,6 @@ body {
 .video-links-section #remove-video-btn:hover { /* Changed to ID selector */
     background-color: #dc3545;
 }
+
+
 
