@@ -58,6 +58,9 @@ login_manager.init_app(app)
 # Define ALLOWED_EXTENSIONS globally
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
+#customisable domain list for email in signup form
+allowed_domains = os.getenv('ALLOWED_DOMAINS', 'gmail.com,yahoo.com,outlook.com').split(',')
+
 # Check if the file extension is allowed
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

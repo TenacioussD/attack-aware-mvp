@@ -11,7 +11,7 @@ from wtforms.validators import DataRequired, Email, Length
 class SignupForm(FlaskForm):
     firstName = StringField('First Name', validators=[DataRequired()], render_kw={"placeholder": "First Name", "class": "firstName custom-input"})
     lastName = StringField('Last Name', validators=[DataRequired()], render_kw={"placeholder": "Last Name", "class": "lastName custom-input"})
-    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Email Address", "class": "email custom-input"})
+    emailSignup = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Email Address", "class": "email custom-input"})
     newPassword = PasswordField('Password', validators=[DataRequired(), Length(min=6)], render_kw={"placeholder": "New Password", "class": "newPassword custom-input"})
     birthday = DateField('Birthday', format='%Y-%m-%d', validators=[DataRequired()], render_kw={"placeholder": "YYYY-MM-DD", "class": "birthday custom-input"})  
     submit = SubmitField('Signup', render_kw={"class": "button"})
@@ -21,7 +21,7 @@ class Signup:
         # Get data from signup form
         firstName = request.form["firstName"]
         lastName = request.form["lastName"]
-        email = request.form["email"]
+        emailSignup = request.form["email"]
         newPassword = request.form["newPassword"]
         birthday_str = request.form["birthday"]
 
@@ -30,9 +30,16 @@ class Signup:
         if not birthday:
             flash("Invalid birthday format. Please enter in YYYY-MM-DD format.", 'signup')
             return redirect(url_for('home'))  # Redirect if conversion fails
+        
+        # Check if the email domain is allowed (optional step)
+        allowed_domains = ['gmail.com', 'yahoo.com', 'outlook.com']
+        email_domain = emailSignup.split('@')[-1]
+        if email_domain not in allowed_domains:
+            flash("Please use an email with a valid email domain ending with gmail.com, yahoo.com or outlook.com", 'signup')
+            return redirect(url_for('home'))
 
         # Check if the user already exists
-        existing_user = User.query.filter_by(email=email).first()
+        existing_user = User.query.filter_by(email=emailSignup).first()
         if existing_user:
             flash("An account with this email already exists.", 'signup')
             return redirect(url_for('home'))
@@ -41,7 +48,7 @@ class Signup:
         user = User(
             firstName=firstName,
             lastName=lastName,
-            email=email,
+            email=emailSignup,
             password=generate_password_hash(newPassword),  # Secure password storage
             birthday=birthday
         )
