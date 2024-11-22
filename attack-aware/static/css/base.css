@@ -117,7 +117,7 @@ header.navbar .auth-buttons .btn-outline-primary {
 
 /* Footer */
 footer .footer-container {
-    background: linear-gradient(135deg, #341F9D, #7352E6);
+    background: linear-gradient(100deg, #341F9D, #7352E6);
     color: white;
     margin-top: 20px;
     padding: 60px 80px 10px 80px;
@@ -126,7 +126,14 @@ footer .footer-container {
 footer .footer-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+}
+
+/* Vertical divider */
+footer .vertical-divider {
+    width: 1px; 
+    height: 100px; 
+    border: 1px solid white;
+    flex: 0 0 auto; /* Prevents the divider from growing or shrinking */
 }
 
 /* Logo */
@@ -147,6 +154,9 @@ footer .logo-text {
 /* Footer links */
 footer .footer-links {
     text-align: left;
+    display: flex;                 /* Align horizontally */
+    flex-wrap: wrap; 
+    gap: 20px;
 }
 
 footer .footer-links h5 {
@@ -156,6 +166,7 @@ footer .footer-links h5 {
     display: inline-block;
 }
 
+/* Underline */
 footer .footer-links h5::after {
     content: "";
     display: block;
@@ -163,16 +174,19 @@ footer .footer-links h5::after {
     height: 2px;
     background-color: white;
     margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 footer .footer-links ul {
+    display: flex;        /* Make links in each group horizontal */
+    gap: 15px;            /* space between links */
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
 footer .footer-links ul li {
-    margin-bottom: 12px;
+    margin: 0;
 }
 
 footer .footer-links ul li a {
@@ -193,13 +207,15 @@ footer .contact-info h5 {
     display: inline-block;
 }
 
+/* Underline */
 footer .contact-info h5::after {
     content: "";
     display: block;
-    width: 100%; /* Matches the text width */
+    width: 100%; 
     height: 2px;
     background-color: white;
     margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 footer .contact-info p {
@@ -208,7 +224,7 @@ footer .contact-info p {
 }
 
 footer .contact-info i {
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 /* Social media icons */
@@ -258,9 +274,9 @@ footer .copyright {
         text-align: center;
     }
 
-    footer .footer-links ul {
-        text-align: left;
-        padding: 0;
+    footer .footer-links {
+        flex-direction: column;
+        align-items: center;
     }
 
     footer .social-media {
