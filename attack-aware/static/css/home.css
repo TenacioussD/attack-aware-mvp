@@ -82,7 +82,7 @@ main .firstName, main .lastName {
     max-width: 240px;
 }
 
-.email, .newPassword, .birthday {
+main .email, main .newPassword, main .birthday {
     max-width: 500px; /* max width of out input fields */
     width: 100%; /* allows for scaling down */
     display: block; /* Want to trreat it as a block */
@@ -100,7 +100,7 @@ main .button, main .button {
     border: none;
 }
 
-.line {
+main .line {
     height: 10px;
     width: auto;
     background-image: linear-gradient(to bottom, #084FC7 0%, white 100%); /* Fades from blue to while (vertically) */ 
@@ -156,7 +156,7 @@ main .loginForm {
     gap: 5px; /* Adds space between form elements */
 }
 
-.inputContainer {
+main .inputContainer {
     display: flex; /* Align all inputs and button horizontally */
     align-items: center; /* Center vertically */
     flex-wrap: wrap;
@@ -179,7 +179,7 @@ main .loginDiv {
 }
 
 
-input[type="text"], input[type="submit"], input[type="date"] {
+main input[type="text"], input[type="submit"], input[type="date"] {
     margin-top: 5px; /* Space between label and input */
 }
 

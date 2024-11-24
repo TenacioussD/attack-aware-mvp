@@ -19,7 +19,7 @@
 <!-- Header/Navigation section -->
 <header class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <a href="/" class="navbar-brand d-flex align-items-center logo-container">
+        <a href="{{ url_for('home') }}" class="navbar-brand d-flex align-items-center logo-container">
             <img src="{{ url_for('static', filename='img/logos/white-logo.png') }}" alt="Logo" class="logo-image">
         </a>
 
@@ -32,16 +32,16 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>  <!-- Link for home -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/profile">Profile</a>
+                    <a class="nav-link active" href="{{ url_for('profile') }}">Profile</a>  <!-- Link for profile -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Modules</a>
+                    <a class="nav-link active" href="{{ url_for('threats') }}">Threats</a>  <!-- Link for threats -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/contact-us">Contact Us</a>
+                    <a class="nav-link active" href="{{ url_for('contact') }}">Contact Us</a>  <!-- Link for contact -->
                 </li>
             </ul>
 
@@ -94,14 +94,14 @@
             <!-- First link row -->
             <div class="links-container">
                 <ul>
-                    <li><a href="/">Home</a></li> 
-                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>        
+                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
                 </ul>
 
                 <!-- Second link row -->
                 <ul>
-                    <li><a href="/threats">Threats</a></li>
-                    <li><a href="/courses">Courses</a></li>  <!-- Can change to an about page if needed -->
+                    <li><a href="{{ url_for('threats') }}">Threats</a></li>
+                    <li><a href="/">Courses</a></li>  <!-- Can change to an about page if needed -->    
                 </ul>
             </div>
         </div>
