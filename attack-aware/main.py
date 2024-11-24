@@ -1,98 +1,104 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+# Main Flask application file
+
+from flask import Flask, render_template, request, redirect, url_for, flash, current_app
 from flask_sqlalchemy import SQLAlchemy
+from models import db, User
+from signup import Signup, SignupForm
+from flask_login import current_user, LoginManager, login_required, logout_user
+from login import Login, LoginForm
+from admin import Admin
+from create_admin import create_initial_admin 
+from profile import ProfileForm
+from werkzeug.utils import secure_filename
+from flask_wtf.csrf import CSRFProtect
+import os
+from profile import UpdateProfile, ProfileForm
+from flask import send_from_directory
 
-# Flask app setup
-app = Flask(__name__)  # Initializes the application
-app.secret_key = 'attackaware'  # Needed for flashing messages
+def create_app():
+    app = Flask(__name__)  # Initializes the application
+    app.secret_key = 'attackaware'  # Needed for flashing messages
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_profile.db'  # The database that will be created
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = 'your-secret-key'
+    app.config['UPLOAD_FOLDER'] = 'static/uploads'
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit to files to avoid overloads
+    app.config['WTF_CSRF_TIME_LIMIT'] = 3600  # Set the expiration time to 1 hour (in seconds)
+    app.config['WTF_CSRF_SECRET_KEY'] = 'another-random-key'
 
-# SQLite Database Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///attacks.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # Check if the uploads folder exists, create it if it does not
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
 
-# Initialize SQLAlchemy
-db = SQLAlchemy(app)
+    # Initialize the database
+    db.init_app(app)
 
-# Database model for cyberattacks
-class CyberAttack(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    prevention = db.Column(db.Text, nullable=False)
-    warning_message = db.Column(db.String(255), nullable=True)
-    template_name = db.Column(db.String(100), nullable=False)  # e.g., "ransomware.html"
+    # Create database tables
+    with app.app_context():
+        db.create_all()  # Creates the tables if they don't exist
+        create_initial_admin()  # Call the function to create the admin
+        
+    return app
 
-# Database model for videos
-class Video(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    link = db.Column(db.String(255), nullable=False)
+#create the app by calling the function
+app = create_app()
 
-    def __repr__(self):
-        return f'<Video {self.link}>'
+# Initialize CSRF protection
+csrf = CSRFProtect(app)
 
-# Routes
+# Initialize the database and login manager
+login_manager = LoginManager()
 
-@app.route('/')  # Route for home page URL decorator
+#  # Redirect to the home route for login
+login_manager.login_view = 'home'
+
+# Initialize the login manager with the app
+login_manager.init_app(app)
+
+# Define ALLOWED_EXTENSIONS globally
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+# Check if the file extension is allowed
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')  # Renders the HTML file from templates
+    login_form = LoginForm()
+    signup_form = SignupForm()
 
-@app.route('/subscribe', methods=['POST'])
-def subscribe():
-    email = request.form.get('email')  # Get the email from the form data
+    # Handle the signup form
+    if signup_form.validate_on_submit():
+        signup_instance = Signup()  # Create an instance of Signup
+        return signup_instance.post()
 
-    if not email or "@" not in email:  # Error message if email is entered incorrectly
-        flash("Please enter a valid email address.", "error")
+    # Handle the login form
+    if login_form.validate_on_submit():
+        login_instance = Login()  # Create an instance of Login
+        return login_instance.post()
+
+    # Render both forms in the home template
+    return render_template('home.html', login_form=login_form, signup_form=signup_form)
+
+@app.route('/make_admin/<int:user_id>', methods=['POST'])
+@login_required
+def make_admin(user_id):
+    if not current_user.is_admin:
+        flash("You do not have permission to perform this action.", 'admin')
         return redirect(url_for('home'))
+    
+    result = Admin.promore_to_admin(user_id)
+    flash(result)
+    return redirect(url_for('home'))
 
-    # Add code here to save the email or process the subscription (e.g., save to a database)
-    # just flash a message and redirect back to the homepage currently
-    flash("Thank you for subscribing!", "success")
-    return redirect(url_for('home'))  # Redirect to the home page
-
-# Route to render the threats page
 @app.route('/threats')
 def threats():
-    return render_template('threats.html')  # This renders HTML file from the templates
+    user = current_user
 
-# Dynamic route for cyberattacks
-@app.route('/admin/attacks', methods=['GET', 'POST'])
-def manage_attacks():
-    if request.method == 'POST':
-        name = request.form['new_attack']
-        description = request.form['description']
-        prevention = request.form['prevention']
-        warning_message = request.form.get('warning_message', '')
-        template_name = request.form['template_name']
-
-        # Create a new attack object
-        new_attack = CyberAttack(
-            name=name,
-            description=description,
-            prevention=prevention,
-            warning_message=warning_message,
-            template_name=template_name
-        )
-        db.session.add(new_attack)
-        db.session.commit()
-        flash(f"Attack '{name}' added successfully!", "success")
-
-        # Redirect with the attack_created flag
-        return redirect(url_for('manage_attacks', attack_created=True))
-
-    # Get all attacks from the database
-    attacks = CyberAttack.query.all()
-
-    # Pass attack_created flag to the template if present
-    attack_created = request.args.get('attack_created', False)
-    return render_template('manage_attacks.html', attacks=attacks, attack_created=attack_created)
-
-
-@app.route('/attack/<int:attack_id>')
-def attack(attack_id):
-    # Get a single attack by ID
-    attack = CyberAttack.query.get_or_404(attack_id)
-    return render_template(attack.template_name, attack=attack)
-
-# Routes for individual threats
+    return render_template('threats.html', user=user.id)  # This renders HTML file from the templates
+   
+# Route to render the ransomware page
 @app.route('/ransomware')
 def ransomware():
     return render_template('ransomware.html')  # Renders ransomware HTML file from templates
@@ -111,54 +117,46 @@ def IoT():
 
 @app.route('/phishing_scams')
 def phishing_scams():
-    return render_template('phishing_scams.html')  # Renders phishing scams HTML file from templates
+    return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
-@app.route('/contact_us')
-def contact_us():
-    return render_template('contact_us.html')  # Renders contact us HTML file from templates
+# Route to render the contact-us page
+@app.route('/contact-us')
+def contact():
+    return render_template('contact-us.html')
 
-@app.route('/remove_attack/<int:attack_id>', methods=['POST'])
-def remove_attack(attack_id):
-    attack = CyberAttack.query.get(attack_id)
-    if attack:
-        db.session.delete(attack)
-        db.session.commit()
-        flash(f'Attack "{attack.name}" removed successfully.', "success")
-    else:
-        flash("Attack not found.", "error")
-    return redirect(url_for('manage_attacks'))
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have logged out.', 'login') #let flash pop-up on home login form
+    return redirect(url_for('home'))
 
-# Video management routes
-@app.route('/manage_videos', methods=['GET', 'POST'])
-def manage_videos():
-    if request.method == 'POST':
-        video_link = request.form['video_link']
+@login_manager.user_loader
+def load_user(user_id):
+    user = User.query.get(int(user_id))
+    if user is None:
+        print("User not found")
+    return user
 
-        # Create a new video entry
-        new_video = Video(link=video_link)
-        db.session.add(new_video)
-        db.session.commit()
-        flash(f"Video '{video_link}' added successfully!", "success")
-        return redirect(url_for('manage_videos'))  # Reload the page to show the new video
 
-    # Get all videos from the database
-    videos = Video.query.all()
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
 
-    return render_template('manage_videos.html', videos=videos)
+    user=current_user
 
-@app.route('/remove_video/<int:video_id>', methods=['POST'])
-def remove_video(video_id):
-    video = Video.query.get(video_id)
-    if video:
-        db.session.delete(video)
-        db.session.commit()
-        flash(f"Video '{video.link}' removed successfully.", "success")
-    else:
-        flash("Video not found.", "error")
-    return redirect(url_for('manage_videos'))  # Reload the page to show the updated list
+    form = ProfileForm()
+    if form.validate_on_submit():
+        updateProfile_instance = UpdateProfile()
+        return updateProfile_instance.post()
+    
+    return render_template('profile.html', form=form, user=user)  # Pass form to template
 
-# Initialize database and run app
+@app.route('/uploads/<filename>')
+def uploadedFile(filename):
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
+
+
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()  # Creates the database tables if they don't exist
-    app.run(debug=True)  # Enables debug mode
+    app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
+

@@ -2,3 +2,6 @@ __pycache__/
 .venv/
 .idea/     
 flask_session/
+.env/
+instance/
+uploads/
