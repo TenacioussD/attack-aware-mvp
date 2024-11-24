@@ -95,9 +95,12 @@ def make_admin(user_id):
 @app.route('/threats')
 def threats():
     user = current_user
+    if user.is_authenticated:
+        return render_template('threats.html', user=user.id)  # Render with user ID if authenticated
+    else:
+        flash("You need to log in to view this page.", "warning")
+        return redirect(url_for('home'))  # Redirect to the home page if not logged in
 
-    return render_template('threats.html', user=user.id)  # This renders HTML file from the templates
-   
 # Route to render the ransomware page
 @app.route('/ransomware')
 def ransomware():
@@ -120,9 +123,11 @@ def phishing_scams():
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
 # Route to render the contact-us page
-@app.route('/contact-us')
-def contact():
-    return render_template('contact-us.html')
+
+@app.route('/contact_us')
+def contact_us():
+    return render_template('contact_us.html')  # Renders contact us HTML file from templates
+
 
 @app.route('/logout')
 @login_required
