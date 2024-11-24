@@ -20,3 +20,15 @@
 1. pip install flask
 2. pip install flask-login
 3. pip install flask-sqlalchemypip install --upgrade pip
+4. pip install flask flask-admin flask-sqlalchemy
+5. pip install flask-wtf
+6. pip install wtforms
+7. pip install email-validator
+
+
+
+# Admin Login is
+Emain Address: admin@admin.com
+Password: admin
+Admin will be promt to make updates to their profile and at initial login.
+

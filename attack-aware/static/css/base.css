@@ -1,0 +1,287 @@
+/* FLASH MESSAGES */
+
+.flash-messages {
+    margin: 10px 0;
+}
+
+.flash {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.flash.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Body */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    background-color: #f8f9fa;
+}
+
+/* Header */
+header .navbar {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+    margin-bottom: 40px; /* Space between header and main content */
+}
+
+/* Logo */
+header .logo-image {
+    width: 110px;
+    height: auto;
+    transition: width 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    header .logo-image {
+        width: 50px; /* medium screens */
+    }
+}
+
+@media (max-width: 576px) {
+    header .logo-image {
+        width: 40px; /* small screens */
+    }
+}
+
+/* Navigation Links */
+header .navbar-nav .nav-item .nav-link {
+    color: #333;
+    font-size: 18px;
+    margin: 0 20px;
+}
+
+header .navbar-nav .nav-item .nav-link:hover {
+    color: #39b1a6;
+}
+
+/* Vertical Divider */
+header .vertical-divider {
+    border-left: 2.5px dashed #504EC1;
+    height: 70px;
+    margin: 0 15px;
+    padding-left: 5px;
+}
+
+/* Login and Signup Buttons */
+header.navbar .auth-buttons .btn-outline-primary, header .auth-buttons .btn-primary {
+    border-radius: 10px; 
+    padding: 10px 10px; 
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    margin-right: 20px;
+}
+
+header.navbar .auth-buttons .btn-outline-primary {
+    border-color: #2AAA94;
+    color: #2AAA94;
+    margin-left: 25px;
+    margin-right: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.navbar .auth-buttons .btn-outline-primary:hover {
+    background-color: #504EC1;
+    border-color: #2AAA94;
+    color: #fff;
+}
+
+/*  Extra button that has been removed. 
+.navbar .auth-buttons .btn-primary {
+    background-color: #2AAA94;
+    border-color: #2AAA94;
+}
+
+.navbar .auth-buttons .btn-primary:hover {
+    background-color: #492bcf;
+    border-color: #492bcf;
+}
+*/
+
+/* Footer */
+
+/* Vertical divider
+footer .vertical-divider {
+    width: 1px; 
+    height: 100px; 
+    border: 1px solid white;
+    flex: 0 0 auto; /* Prevents the divider from growing or shrinking 
+}*/
+
+
+/* Footer */
+footer .footer-container {
+    background: linear-gradient(100deg, #341F9D, #7352E6);
+    color: white;
+    margin-top: 20px;
+    padding: 70px 120px 10px 120px;    /* Footer margins */
+}
+
+/* Columns */
+footer .footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;  /* Column gap */
+}
+  
+/* Logo */
+footer .logo-text {
+    max-width: 500px;
+    font-size: 14px;
+    color: white;
+}
+  
+footer .footer-logo {
+    width: 110px;
+    margin-bottom: 20px;
+}
+  
+/* Links */
+footer .footer-links {
+    text-align: left;
+}
+  
+footer .footer-links h5 {
+    font-size: 19px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    position: relative;
+}
+  
+/* Underline for headings */
+footer .footer-links h5::after,
+footer .contact-info h5::after {
+    content: "";
+    display: block;
+    width: calc(100% + 0.5em);      /* Underline width to text length */
+    height: 2px;
+    max-width: 20%;
+    background-color: white;
+    margin-top: 5px;
+    margin-bottom: 20px;    /* Space between underline and column content */
+}
+
+footer .links-container {
+    display: flex;
+    gap: 30px; /* gap between links */
+}
+
+footer .links-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer .links-container ul li {
+    margin-bottom: 10px;
+}
+
+footer .links-container ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+footer .links-container ul li a:hover {
+    color: #2AAA94;
+}
+  
+/* Contact info */
+footer .contact-info {
+    text-align: left;
+}
+
+footer .contact-info h5 {
+    font-size: 19px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    position: relative;
+}
+  
+footer .contact-info p {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+  
+footer .contact-info i {
+    margin-right: 20px;
+}
+
+/* Social media icons */
+footer .social-media {
+    text-align: right;   /* Aligns icons to the right */
+    margin: 20px 0;
+}
+  
+footer .social-media a {
+    margin: 0 10px;
+    text-decoration: none;
+}
+  
+footer .social-media i {
+    display: inline-block;
+    font-size: 18px;
+    color: white;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #5c23d6;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+footer .social-media i:hover {
+    background: #2AAA94;   /* Hover colour */
+}
+
+/* Divider and copyright */
+footer .footer-divider {
+    margin: 20px 0;
+    border-top: 1px solid white;
+}
+  
+footer .copyright {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+  
+/* Responsive */
+@media screen and (max-width: 1364px) {
+    footer .footer-content,
+    footer .contact-info,
+    footer .footer-links {
+      flex-direction: column;
+      align-items: center; 
+      text-align: center;       /* Centers the social media icons */
+      padding-top: -15px;
+    }
+
+    footer .footer-links h5::after,
+    footer .contact-info h5::after {
+        margin-left: auto;
+        margin-right: auto;     /* Centers the underline */
+    }
+
+    footer .social-media {
+        padding-top: 30px;    /* Spacing for icons */
+        text-align: center;
+    }
+}

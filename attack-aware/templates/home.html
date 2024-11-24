@@ -2,66 +2,176 @@
 
 {% extends 'base.html' %}           <!-- Inherits code from the base.html file -->
 
-{% block title %} Attack Aware - Protect Yourself {% endblock %}  <!-- Custom header -->
+{% block title %} Home {% endblock %}  <!-- Custom header -->
+
+{% block head %}
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
+{% endblock %}
 
 {% block content %}
 
-<section class="hero">
-    <h1>Stay Safe Online with Attack Aware</h1>
-    <p>Your trusted guide to understanding cybersecurity risks and protecting your digital identity.</p>
-    <a href="{{ url_for('static', filename='/about.html') }}" class="btn-primary">Learn More</a>    <!-- Learn more button -->
-</section>
+<hr class="line"/>  <!-- Adding horizontal lines -->
 
-<section class="key-sections">
-    <h2>What You Will Learn</h2>
-    <div class="section-grid">
-        <div class="section-item">
-            <h3>Common Threats</h3>
-            <p>Understand the types of cyber threats you may face, from phishing to ransomware.</p>
-            <a href="{{ url_for('static', filename='/threats.html') }}">Explore Threats</a>
-        </div>
-        <div class="section-item">
-            <h3>Protection Tips</h3>
-            <p>Get tips and tricks to safeguard your personal information and devices.</p>
-            <a href="{{ url_for('static', filename='/tips.html') }}">View Tips</a>
-        </div>
-        <div class="section-item">
-            <h3>Latest News</h3>
-            <p>Stay up-to-date with recent cybersecurity news and incidents.</p>
-            <a href="{{ url_for('static', filename='/news.html') }}">Read News</a>
-        </div>
+<div class="home-container">
+  <div class="imgAndFormDiv"> <!-- Creating div to align img & form with each other -->
+  <div class="logoTwoDiv"> 
+    <img class="logoTwo" src="{{ url_for('static', filename='/img/logos/blue-logo.png') }}" alt="Attack Aware Logo Dark Blue"> 
+
+</div>
+
+<div class="loginForm">
+
+<!--For Flash messages when required-->
+
+  {% with messages = get_flashed_messages(category_filter='login') %} <!-- category_filter='login' is the part that lets the flash message
+                                                                            only show up for this form -->
+  {% if messages %}
+      <ul class="flashes contactUL">
+          {% for message in messages %}
+              <li class="flashItem contactLI">
+                  <img class="iconSpesification" src="{{ url_for('static', filename='/img/icons/warning.png') }}" alt="Warning Icon"> 
+                  <span class="flashMessage">{{ message }}</span>
+              </li>
+          {% endfor %}
+      </ul>
+  {% endif %}
+{% endwith %}
+
+
+<form action=" {{ url_for('home') }} " method="post"> 
+
+  {{ login_form.hidden_tag() }}  <!--CSFR tag protects against 
+                                  Cross-Site Request Forgery (CSRF) 
+                                 attacks-->
+
+<div class="inputContainer"> <!-- New container for inputs and button -->
+  <div class="emailDiv">
+    {{ login_form.email.label }} {{ login_form.email }}
+  </div>
+
+  <div class="passwordDiv">
+   {{ login_form.password.label }} {{ login_form.password }}
+  </div>
+
+  <div class="loginDiv" >
+
+        {{ login_form.submit }}
+  </div>
+
+  <div class="archContainer">
+    <img class="largeArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+    <img class="medArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+    <img class="smallArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
     </div>
-</section>
+</div>
 
-<section class="quick-tips">
-    <h2>Quick Security Tips</h2>
-    <ul>
-        <li>Enable two-factor authentication on all accounts.</li>
-        <li>Avoid using the same password for multiple accounts.</li>
-        <li>Be cautious of suspicious emails or links.</li>
-        <li>Keep your software and antivirus updated.</li>
-    </ul>
-</section>
+</form>
 
-<section class="testimonials">
-    <h2>Success Stories</h2>
-    <blockquote>
-        <p>"Thanks to Attack Aware, I learned how to recognize phishing emails and secure my accounts!"</p>
-        <footer>- Jane D.</footer>
-    </blockquote>
-    <blockquote>
-        <p>"A great resource for anyone looking to protect themselves online."</p>
-        <footer>- Mike R.</footer>
-    </blockquote>
-</section>
+</div>
 
-<section class="subscribe">
-    <h2>Want to Stay Updated?</h2>
-    <p>Sign up for our newsletter to get the latest cybersecurity tips directly in your inbox.</p>
-    <form action="{{ url_for('subscribe') }}" method="post">
-        <input type="email" name="email" placeholder="Enter your email">
-        <button type="submit" class="btn-primary">Subscribe</button>
-    </form>
+</div>
+
+</div>
+
+<hr class="line"/>
+
+<div class="welcomeContainer">
+  <div class="welcomeGraph">
+    <h1><div class="headingBlack">Welcome</div> <div class="headingTeal">Message</div></h1>
+    <p>Welcome to AttackAware! Start your journey to better cybersecurity. Sign in or create an account to begin protecting your digital world....</p>
+</div>
+
+<img class="decorCircle" src="{{ url_for('static', filename='img/icons/circle.png') }}">
+
+<div class="signUpForm">
+
+<form action="{{ url_for('home') }}" method="post">    
+  
+  {{ signup_form.hidden_tag() }}
+
+      <h1>Sign Up</h1>
+      <p>Create an Account</p>
+      <br>
+    
+      {% with messages = get_flashed_messages(category_filter='signup') %} <!-- category_filter='signup' is the part that lets the flash message
+                                                                                 only show up for this form -->
+      {% if messages %}
+          <ul class="flashes contactUL">
+              {% for message in messages %}
+                  <li class="flashItem contactLI">
+                      <img class="iconSpesification" src="{{ url_for('static', filename='/img/icons/warning.png') }}" alt="Warning Icon"> 
+                      <span class="flashMessage">{{ message }}</span>
+                  </li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+  {% endwith %}
+  
+               
+      <br>
+    <div class="nameInputs">
+
+      {{ signup_form.firstName }}
+      {{ signup_form.lastName }}
+
+    </div>
+
+      {{ signup_form.email }}
+      {{ signup_form.newPassword }}
+      {{ signup_form.birthday }}
+      {{ signup_form.submit }}
+
+</form>
+
+</div>
+
+</div>
+
+<hr class="thickLine">
+
+<div class="featuredGraph">
+
+<h1>  <div class="headingBlack">Featured </div> 
+  <div class="headingTeal">Courses</div>  
+</h1>
+
+<p>
+  Explore our top cybersecurity guides, including step-by-step 
+  advice on handling the most common threats like ransomware 
+  and phishing. Dive into interactive scenarios to 
+  test your skills and improve your response to real-world cyber attacks.
+</p>
+
+</div>
+
+<section class="tilesContainer">
+     <div class="tile"> 
+      <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/puzzel.jpg') }}">
+      Interactive Cyber Threat Simulations 
+    </div>
+     <div class="tile">
+     <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/fiveStars.png') }}">
+     Latest Threat Alerts
+    </div>
+    <div class="tile"> 
+      <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/play.png') }}">
+      Stay Updated on the Top 5 Cyber Risks
+    </div>
+     <div class="tile"> 
+      <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/bullsEye.png') }}">
+      Step-by-Step Security Guides
+    </div>
+      <div class="tile"> 
+        <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/profile.png') }}">
+        Manage your own Account
+      </div>
+     <div class="tile">
+      <img class="tileImg" alt="Puzzel Pieces" src="{{ url_for('static', filename='img/img/questMark.png') }}">
+      Knowledge Quizzes 
+    </div>
 </section>
 
 {% endblock %}
