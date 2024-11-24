@@ -117,7 +117,6 @@ header.navbar .auth-buttons .btn-outline-primary {
 
 /* Footer */
 
-
 /* Vertical divider
 footer .vertical-divider {
     width: 1px; 
@@ -132,18 +131,19 @@ footer .footer-container {
     background: linear-gradient(100deg, #341F9D, #7352E6);
     color: white;
     margin-top: 20px;
-    padding: 90px 120px 10px 120px;    /* Footer margins */
+    padding: 70px 120px 10px 120px;    /* Footer margins */
 }
-  
+
+/* Columns */
 footer .footer-content {
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    gap: 20px;  /* Column gap */
 }
   
-/* Logo Section */
+/* Logo */
 footer .logo-text {
-    max-width: 400px;
+    max-width: 500px;
     font-size: 14px;
     color: white;
 }
@@ -151,10 +151,9 @@ footer .logo-text {
 footer .footer-logo {
     width: 110px;
     margin-bottom: 20px;
-    position: center;
 }
   
-/* Links Section */
+/* Links */
 footer .footer-links {
     text-align: left;
 }
@@ -162,61 +161,57 @@ footer .footer-links {
 footer .footer-links h5 {
     font-size: 19px;
     margin-bottom: 10px;
+    margin-top: 30px;
     position: relative;
 }
   
-  /* Underline */
-  footer .footer-links h5::after {
+/* Underline for headings */
+footer .footer-links h5::after,
+footer .contact-info h5::after {
     content: "";
     display: block;
-    width: 50%;
+    width: calc(100% + 0.5em);      /* Underline width to text length */
     height: 2px;
+    max-width: 20%;
     background-color: white;
     margin-top: 5px;
+    margin-bottom: 20px;    /* Space between underline and column content */
 }
 
-footer .footer-links ul li a:hover {
-    color: #2AAA94;
-}
-  
 footer .links-container {
     display: flex;
-    gap: 40px;
+    gap: 30px; /* gap between links */
 }
-  
+
 footer .links-container ul {
     list-style: none;
     padding: 0;
 }
-  
+
 footer .links-container ul li {
     margin-bottom: 10px;
 }
-  
+
 footer .links-container ul li a {
     text-decoration: none;
     color: white;
     font-size: 14px;
 }
-  
+
 footer .links-container ul li a:hover {
     color: #2AAA94;
 }
   
-/* Contact */
+/* Contact info */
+footer .contact-info {
+    text-align: left;
+}
+
 footer .contact-info h5 {
     font-size: 19px;
     margin-bottom: 10px;
+    margin-top: 30px;
     position: relative;
-}
-  
-footer .contact-info h5::after {
-    content: "";
-    display: block;
-    width: 50%;
-    height: 2px;
-    background-color: white;
-    margin-top: 5px;
 }
   
 footer .contact-info p {
@@ -230,13 +225,13 @@ footer .contact-info i {
 
 /* Social media icons */
 footer .social-media {
-    text-align: center;
+    text-align: right;   /* Aligns icons to the right */
     margin: 20px 0;
 }
   
 footer .social-media a {
-margin: 0 10px;
-text-decoration: none;
+    margin: 0 10px;
+    text-decoration: none;
 }
   
 footer .social-media i {
@@ -253,7 +248,7 @@ footer .social-media i {
 }
 
 footer .social-media i:hover {
-    background: #2AAA94;
+    background: #2AAA94;   /* Hover colour */
 }
 
 /* Divider and copyright */
@@ -269,23 +264,24 @@ footer .copyright {
 }
   
 /* Responsive */
-@media screen and (max-width: 768px) {
-    footer .footer-content {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-}
-  
-    footer .footer-links,
-    footer .contact-info {
-      margin-bottom: 20px;
-    }
-}
-
 @media screen and (max-width: 1364px) {
-    footer .footer-content {
-        flex-direction: column;
-        align-items: center;
+    footer .footer-content,
+    footer .contact-info,
+    footer .footer-links {
+      flex-direction: column;
+      align-items: center; 
+      text-align: center;       /* Centers the social media icons */
+      padding-top: -15px;
+    }
+
+    footer .footer-links h5::after,
+    footer .contact-info h5::after {
+        margin-left: auto;
+        margin-right: auto;     /* Centers the underline */
+    }
+
+    footer .social-media {
+        padding-top: 30px;    /* Spacing for icons */
         text-align: center;
     }
 }
