@@ -5,7 +5,10 @@
 {% block title %} Home {% endblock %}  <!-- Custom header -->
 
 {% block head %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}"> 
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
 {% endblock %}
 
 {% block content %}
@@ -38,21 +41,24 @@
 {% endwith %}
 
 
-<form action=" {{ url_for('home') }} " method="post"> <!-- Action still needs to be called -->
+<form action=" {{ url_for('home') }} " method="post"> 
+
+  {{ login_form.hidden_tag() }}  <!--CSFR tag protects against 
+                                  Cross-Site Request Forgery (CSRF) 
+                                 attacks-->
 
 <div class="inputContainer"> <!-- New container for inputs and button -->
   <div class="emailDiv">
-    <label for="emailAddress">Email Address: </label>
-    <input type="text" class="emailInput" name="email" required> 
+    {{ login_form.email.label }} {{ login_form.email }}
   </div>
 
   <div class="passwordDiv">
-    <label for="password">Password:</label>
-    <input type="password" class="passwordInput" name="password" required>
+   {{ login_form.password.label }} {{ login_form.password }}
   </div>
 
-  <div class="loginDiv">
-    <input class="button" name="action" type="submit" value="login">
+  <div class="loginDiv" >
+
+        {{ login_form.submit }}
   </div>
 
   <div class="archContainer">
@@ -81,8 +87,12 @@
 <img class="decorCircle" src="{{ url_for('static', filename='img/icons/circle.png') }}">
 
 <div class="signUpForm">
-<form action="{{ url_for('home') }}" method="post">         <!-- Action still needs to be called -->
-      <h1><div class="headingBlack">Sign Up</h1>
+
+<form action="{{ url_for('home') }}" method="post">    
+  
+  {{ signup_form.hidden_tag() }}
+
+      <h1>Sign Up</h1>
       <p>Create an Account</p>
       <br>
     
@@ -103,13 +113,16 @@
                
       <br>
     <div class="nameInputs">
-      <input type="text" class="firstName" name="firstName" placeholder="First Name"required>
-      <input type="text" class="lastName" name="lastName" placeholder="Last Name" required>
-    </div>
-      <input type="text" class="email" name="email" placeholder="Email Address"  required>
-      <input type="text" class="newPassword" name="newPassword" placeholder="New Password" required>
 
-      <input class="button" type="submit" name="action" value="signup"> 
+      {{ signup_form.firstName }}
+      {{ signup_form.lastName }}
+
+    </div>
+
+      {{ signup_form.email }}
+      {{ signup_form.newPassword }}
+      {{ signup_form.birthday }}
+      {{ signup_form.submit }}
 
 </form>
 

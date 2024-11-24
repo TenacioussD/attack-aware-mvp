@@ -1,6 +1,14 @@
 from flask import request, session, flash, url_for, redirect
 from models import db, User
 from flask_login import login_user, UserMixin
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login', render_kw={"class": "button"}) #call the .button class in CSS to pass through spesification
 
 class Login():
     def post(self):
@@ -11,11 +19,12 @@ class Login():
 
         if user and user.check_password(password):  # Use the check_password method created in models.py
             login_user(user)
-            flash(f'Welcome {user.firstName}. You logged in successfully', 'threats') #spesify which form the flash message should show up on ('threats')
-            return redirect(url_for('threats'))
-        if user.is_admin:
-                flash('Welcome Admin', 'threats')
-                return redirect(url_for('threats'))  # Redirect to the home page or dashboard
+            flash(f'Welcome {user.firstName}. You logged in successfully', 'update')
+       
+            if user.is_admin:
+                flash('Welcome Admin', 'update')
+
+            return redirect(url_for('profile'))  # Redirect to the home page or dashboard
         else:
             flash('Invalid email or password', 'login') #spesify which form the flash message should show up on ('login')
             return redirect(url_for('home'))

@@ -1,12 +1,19 @@
 # Main Flask application file
 
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, current_app
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
-from signup import Signup
+from signup import Signup, SignupForm
 from flask_login import current_user, LoginManager, login_required, logout_user
-from login import Login
+from login import Login, LoginForm
 from admin import Admin
+from create_admin import create_initial_admin 
+from profile import ProfileForm
+from werkzeug.utils import secure_filename
+from flask_wtf.csrf import CSRFProtect
+import os
+from profile import UpdateProfile, ProfileForm
+from flask import send_from_directory
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -14,6 +21,14 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_profile.db'  # The database that will be created
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'your-secret-key'
+    app.config['UPLOAD_FOLDER'] = 'static/uploads'
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit to files to avoid overloads
+    app.config['WTF_CSRF_TIME_LIMIT'] = 3600  # Set the expiration time to 1 hour (in seconds)
+    app.config['WTF_CSRF_SECRET_KEY'] = 'another-random-key'
+
+    # Check if the uploads folder exists, create it if it does not
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
 
     # Initialize the database
     db.init_app(app)
@@ -21,41 +36,50 @@ def create_app():
     # Create database tables
     with app.app_context():
         db.create_all()  # Creates the tables if they don't exist
-
+        create_initial_admin()  # Call the function to create the admin
+        
     return app
 
 #create the app by calling the function
 app = create_app()
 
-# Initialize the database and login manager
-login_manager = LoginManager(app)
+# Initialize CSRF protection
+csrf = CSRFProtect(app)
 
-# Define the login view (this is the page users will be redirected to if they need to log in)
-login_manager.login_view = 'login'
+# Initialize the database and login manager
+login_manager = LoginManager()
+
+#  # Redirect to the home route for login
+login_manager.login_view = 'home'
 
 # Initialize the login manager with the app
 login_manager.init_app(app)
 
-#user loader function for Flask-login
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+# Define ALLOWED_EXTENSIONS globally
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+# Check if the file extension is allowed
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    if request.method == 'POST':
-        action = request.form.get('action')
+    login_form = LoginForm()
+    signup_form = SignupForm()
 
-        if action == 'signup':
-            signup_instance = Signup()  # Create an instance of Signup
-            return signup_instance.post()  # Call the post method on the instance
-        
-        elif action == 'login':
-            login_instance = Login()  # Create an instance of Login
-            return login_instance.post()  # Call the post method on the instance
+    # Handle the signup form
+    if signup_form.validate_on_submit():
+        signup_instance = Signup()  # Create an instance of Signup
+        return signup_instance.post()
 
-    return render_template('home.html')  # Render the home page template
-# Route to render the threats page
+    # Handle the login form
+    if login_form.validate_on_submit():
+        login_instance = Login()  # Create an instance of Login
+        return login_instance.post()
+
+    # Render both forms in the home template
+    return render_template('home.html', login_form=login_form, signup_form=signup_form)
 
 @app.route('/make_admin/<int:user_id>', methods=['POST'])
 @login_required
@@ -95,10 +119,6 @@ def IoT():
 def phishing_scams():
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
-
 # Route to render the contact-us page
 @app.route('/contact-us')
 def contact():
@@ -111,5 +131,32 @@ def logout():
     flash('You have logged out.', 'login') #let flash pop-up on home login form
     return redirect(url_for('home'))
 
+@login_manager.user_loader
+def load_user(user_id):
+    user = User.query.get(int(user_id))
+    if user is None:
+        print("User not found")
+    return user
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+
+    user=current_user
+
+    form = ProfileForm()
+    if form.validate_on_submit():
+        updateProfile_instance = UpdateProfile()
+        return updateProfile_instance.post()
+    
+    return render_template('profile.html', form=form, user=user)  # Pass form to template
+
+@app.route('/uploads/<filename>')
+def uploadedFile(filename):
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
+
+
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
+
