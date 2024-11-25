@@ -5,18 +5,21 @@
 {% block title %} Home {% endblock %}  <!-- Custom header -->
 
 {% block head %}
+
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
 {% endblock %}
 
 {% block content %}
 
-<hr class="line"/>  <!-- Addming horizontal lines -->
+<hr class="line"/>  <!-- Adding horizontal lines -->
 
-<div class="imgAndFormDiv"> <!-- Creating div to align img & form with each other -->
+<div class="home-container">
+  <div class="imgAndFormDiv"> <!-- Creating div to align img & form with each other -->
+  <div class="logoTwoDiv"> 
+    <img class="logoTwo" src="{{ url_for('static', filename='/img/logos/blue-logo.png') }}" alt="Attack Aware Logo Dark Blue"> 
 
-<div class="logoTwoDiv"> 
-<img class="logoTwo" src="{{ url_for('static', filename='/img/logos/blue-logo.png') }}" alt="Attack Aware Logo Dark Blue"> 
 </div>
 
 <div class="loginForm">
@@ -46,7 +49,6 @@
 
 <div class="inputContainer"> <!-- New container for inputs and button -->
   <div class="emailDiv">
-
     {{ login_form.email.label }} {{ login_form.email }}
   </div>
 
@@ -59,14 +61,17 @@
         {{ login_form.submit }}
   </div>
 
-</div>
-</form>
+  <div class="archContainer">
+    <img class="largeArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+    <img class="medArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+    <img class="smallArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+    </div>
 </div>
 
-<div class="archContainer">
-<img class="largeArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
-<img class="medArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
-<img class="smallArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
+</form>
+
+</div>
+
 </div>
 
 </div>
@@ -74,22 +79,18 @@
 <hr class="line"/>
 
 <div class="welcomeContainer">
-<div class="welcomeGraph">
-    <h1>
-         <div class="headingBlack">Welcome</div> <div class="headingTeal">Message</div>
-    </h1>
-    <p>
-       Welcome to AttackAware! Start your journey to better cybersecurity. Sign in or create an account to begin protecting your digital world....
-    </p>
+  <div class="welcomeGraph">
+    <h1><div class="headingBlack">Welcome</div> <div class="headingTeal">Message</div></h1>
+    <p>Welcome to AttackAware! Start your journey to better cybersecurity. Sign in or create an account to begin protecting your digital world....</p>
 </div>
 
 <img class="decorCircle" src="{{ url_for('static', filename='img/icons/circle.png') }}">
 
 <div class="signUpForm">
+
 <form action="{{ url_for('home') }}" method="post">    
   
   {{ signup_form.hidden_tag() }}
-
 
       <h1>Sign Up</h1>
       <p>Create an Account</p>
