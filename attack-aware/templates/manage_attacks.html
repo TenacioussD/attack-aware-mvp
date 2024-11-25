@@ -19,7 +19,7 @@
 
         <!-- Add Attack Form -->
         <div class="form-section">
-            <form method="POST">
+            <form method="POST" action="{{ url_for('manage_attacks') }}">
                 <label for="new_attack">New Attack Name:</label>
                 <input type="text" id="new_attack" name="new_attack" required>
 
@@ -73,43 +73,58 @@
             </div>
         </div>
 
-        <!-- Scenario Creation Section -->
+        <!-- Scenario Management Section -->
         <div class="scenario-section">
-            <h2>Let's Create a Practice Scenario</h2>
+            <h2>Create a Practice Scenario</h2>
+            <form method="POST">
+                <label for="scenario-type">Scenario Type:</label>
+                <input type="text" id="scenario-type" name="scenario-type" required>
 
-            <form class="form-section">
-                <label for="scenario-type">Scenario Type</label>
-                <input type="text" id="scenario-type" name="scenario-type" placeholder="Enter scenario type">
+                <label for="correct-answer">Correct Answer:</label>
+                <input type="text" id="correct-answer" name="correct-answer" required>
 
-                <label for="correct-answer">Correct Answer</label>
-                <input type="text" id="correct-answer" name="correct-answer" placeholder="Enter the correct answer">
+                <label for="incorrect-answer">Incorrect Answer:</label>
+                <input type="text" id="incorrect-answer" name="incorrect-answer">
 
-                <label for="incorrect-answer">Incorrect Answer</label>
-                <input type="text" id="incorrect-answer" name="incorrect-answer" placeholder="Enter an incorrect answer">
+                <label for="extra-notes">Extra Notes:</label>
+                <textarea id="extra-notes" name="extra-notes"></textarea>
 
-                <label for="extra-notes">Any Extra Notes</label>
-                <textarea id="extra-notes" name="extra-notes" rows="4" placeholder="Enter any extra notes"></textarea>
-
-                <button type="submit">Add New</button>
+                <button type="submit">Add Scenario</button>
             </form>
-
-            <h3>Existing Scenarios</h3>
-            <div id="scenario-list">
-                <!-- Existing scenarios will appear here -->
-            </div>
         </div>
+
+        <!-- Display Existing Scenarios -->
+        <div class="existing-scenarios">
+            <h3>Existing Scenarios</h3>
+            <ul>
+                {% for scenario in scenarios %}
+                    <li>
+                        <strong>{{ scenario.type }}</strong><br>
+                        Correct Answer: {{ scenario.correct_answer }}<br>
+                        Incorrect Answer: {{ scenario.incorrect_answer }}<br>
+                        Notes: {{ scenario.extra_notes }}<br>
+                        <form method="POST" action="{{ url_for('remove_scenario', scenario_id=scenario.id) }}" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Custom Alert Popup -->
+        <div id="custom-alert" class="{{ 'hidden' if not attack_created else '' }}">
+    <h2>Existing Scenarios</h2>
+    <p>Attack created successfully!</p>
+    <button id="close-alert-btn">OK</button>
+</div>
+
+        </div>
+
+        <!-- Overlay -->
+        <div id="overlay" class="overlay hidden"></div>
     </div>
 
     <!-- External JavaScript Files -->
-    <script src="{{ url_for('static', filename='js/alerts.js') }}"></script>
-
-    <!-- Display alert if attack was created -->
-    <script>
-        // Use {{ attack_created|tojson }} to render it as a proper boolean value in JavaScript
-        const attackCreated = {{ attack_created|tojson }};
-        if (attackCreated) {
-            alert("Attack created successfully!");
-        }
-    </script>
+    <script src="{{ url_for('static', filename='js/manage_attacks.js') }}"></script>
 </body>
 </html>

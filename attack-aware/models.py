@@ -29,3 +29,18 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+class CyberAttack(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    prevention = db.Column(db.Text, nullable=False)
+    warning_message = db.Column(db.String(255), default='')
+    template_name = db.Column(db.String(100), nullable=False)
+
+class Scenario(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(100), nullable=False)  # Scenario type
+    correct_answer = db.Column(db.String(255), nullable=False)  # Correct answer
+    incorrect_answer = db.Column(db.String(255), nullable=True)  # Optional incorrect answer
+    extra_notes = db.Column(db.Text, nullable=True)  # Additional notes
