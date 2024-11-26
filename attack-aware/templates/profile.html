@@ -89,7 +89,33 @@
 
 
    <div class="flexButtons">
-      <input class="button" name="" type="button" value="Change Password">
+      <input class="button" type="button" value="Change Password" onclick="showPasswordModal()">
+ 
+           <!-- Password Modal -->
+            <div id="passwordModal" class="modal">
+               <div class="modal-content">
+                  <span class="close" onclick="closePasswordModal()">
+                      &times;
+                  </span>
+                  <h2>Change Password</h2>
+                <form id="changePasswordForm" method="POST" 
+                      action="{{ url_for('profile') }}">
+
+                         <label for="oldPassword">Old Password:</label>
+                         <input type="password" id="oldPassword" 
+                           name="oldPassword" required>
+
+                         <label for="newPassword">New Password:</label>
+                         <input type="password" id="newPassword" 
+                          name="newPassword" required>
+
+                         <button type="submit" class="button">
+                           Update Password
+                        </button>
+                </form>
+              </div>
+            </div>
+
       {{ form.submit }}
    </div>
    </div>

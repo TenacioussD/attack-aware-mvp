@@ -1,6 +1,6 @@
 from flask import request, flash, redirect, url_for
 from flask_login import login_user
-from werkzeug.security import generate_password_hash  # Ensure password is hashed before storing it
+from werkzeug.security import generate_password_hash 
 from models import db, User
 from datetime import datetime
 from utils import convertBirthday

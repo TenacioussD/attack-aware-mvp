@@ -10,6 +10,7 @@ from datetime import datetime
 from flask_login import current_user
 from utils import convertBirthday
 from wtforms.validators import DataRequired, Email, Length
+from werkzeug.security import generate_password_hash 
 
 
 class ProfileForm(FlaskForm):
@@ -104,3 +105,21 @@ class UpdateProfile:
             # Log the form errors to the console for debugging
             flash(f"Form validation failed: {form.errors}", 'update')
             return redirect(url_for('profile'))
+        
+def changePassword():
+    oldPassword = request.form.get('oldPassword')
+    newPassword = request.form.get('newPassword')
+
+    user = current_user
+
+    #check if old password matches
+    if not user.check_password_hash(user.password, oldPassword):
+        flash("You're password is incorrect", "update")
+        return redirect(url_for('profile'))
+    
+    #update user password
+    user.password = generate_password_hash(newPassword)
+    db.session.commit()
+
+    flash("Password udated successfully!", "update")
+    return redirect(url_for('profile'))
