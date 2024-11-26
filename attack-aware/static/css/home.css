@@ -87,6 +87,7 @@ main .email, main .newPassword, main .birthday {
     width: 100%; /* allows for scaling down */
     display: block; /* Want to trreat it as a block */
     min-width: 250px; /* Minimum allowed width */
+    margin-top: 5px;
 }
 
 main .button, main .button {

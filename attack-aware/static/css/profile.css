@@ -70,10 +70,16 @@ label[for="email"]
     padding: 10px;
     margin-bottom: 10px; /* Add spacing between form items */
     max-width: 400px;
+    
 }
 
 .file-input {
     display: none;
+}
+
+input {
+    padding-left: 5px; /* adds some padding to the left of data 
+                          inside all input fields on page */
 }
 
 .headerTwo {
