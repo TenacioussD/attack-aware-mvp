@@ -1,4 +1,5 @@
-body {
+/* General body styles */
+body.contact_us-page {
     font-family: Arial, sans-serif;
     color: #333;
     margin: 0;
@@ -6,157 +7,163 @@ body {
     background-color: #F1F7FF;
 }
 
-/* Styles for the header section */
-.header {
+/* Global styles for header */
+body.contact_us-page .header {
     background-color: #5989DB;
     padding: 20px 0;
     text-align: center;
     color: #000000;
     width: 100%;
+    margin-bottom: 40px; /* Space between headers */
 }
 
-.header h1 {
+body.contact_us-page .header h1 {
     margin: 0;
     font-size: 36px;
 }
 
-/* Header's subtitle or additional information */
-.header p {
+body.contact_us-page .header p {
     margin: 5px 0 0;
     font-size: 16px;
     color: #f0f4ff;
 }
 
-.content {
+/* Specific styles for the contact_us-page */
+body.contact_us-page .content {
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.content-form h2 {
-    color: #1A73E8;
+body.contact_us-page .contact-form {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
 }
 
-.contact-form input[type="text"],
-.contact-form textarea {
+body.contact_us-page .contact-form h2 {
+    color: #04016C;
+    margin-bottom: 20px;
+}
+
+body.contact_us-page .contact-form input,
+body.contact_us-page .contact-form textarea {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: none;
-    border-radius: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
-.contact-form textarea {
+body.contact_us-page .contact-form textarea {
     height: 100px;
     resize: none;
 }
 
-/* Submit button in the contact form */
-.contact-form button {
+body.contact_us-page .contact-form button {
     background-color: #7453E7;
     color: white;
-    padding: 10px 70px;
+    padding: 12px 30px;
     border: none;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 8px;
+    margin-top: 20px;
 }
 
-/* Hover effect for the submit button */
-.contact-form button:hover {
-    background-color: #357ABD;
+body.contact_us-page .contact-form button:hover {
+    background-color: #5b3ec8;
 }
 
-/* Container for contact information and map */
-.contact-container {
+/* Contact container for contact info and map */
+body.contact_us-page .contact-container {
     display: flex;
-    gap: 90px; /* Increased gap for more separation */
-    justify-content: flex-start; /* Align items to the start */
-    margin-top: 120px;
-    width: 100%;
+    gap: 40px;
+    width: 110%;
     max-width: 1100px;
+    margin-top: 40px;
+     justify-content: flex-start; /* Align items to the left */
 }
 
-/* Styles for the contact information box */
-.contact-info-container {
+body.contact_us-page .contact-info-container {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1;
+   flex: 1;
 }
 
-.contact-info-container h3 {
+body.contact_us-page .contact-info-container h3 {
     margin-top: 0;
 }
 
-.contact-info-container p {
+body.contact_us-page .contact-info-container p {
     margin: 10px 0;
 }
 
-.map-container {
+body.contact_us-page .map-container {
     flex: 2;
 }
 
-/* Styles for the embedded map */
-.map-container iframe {
-    width: 100%;
+body.contact_us-page .map-container iframe {
+    width: 120%;
     height: 400px;
     border-radius: 8px;
     border: 0;
 }
 
 /* Styles for the thank you popup */
-.thank-you-popup {
+body.contact_us-page .thank-you-popup {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(89, 137, 219, 0.3); /* More translucent background */
-    padding: 40px; /* Maintain the padding for a comfortable look */
-    border-radius: 12px; /* Slightly more rounded corners */
+    background-color: rgba(89, 137, 219, 0.3);
+    padding: 40px;
+    border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    width: 500px; /* Fixed width */
-    max-width: 100%; /* Ensures it doesn't exceed screen width */
-    height: 600px; /* Fixed height */
-    max-height: 100%; /* Ensures it doesn't exceed screen height */
+    width: 500px;
+    max-width: 100%;
+    height: 600px;
+    max-height: 100%;
     text-align: center;
-    font-size: 18px; /* Slightly larger text */
+    font-size: 18px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Vertically centers the text */
-    align-items: center; /* Centers the text horizontally */
+    justify-content: center;
+    align-items: center;
 }
 
-.thank-you-popup p {
-    margin: 0; /* Removes margin around paragraph */
-    padding-bottom: 20px; /* Adds space below paragraph */
-    font-size: 18px; /* Slightly larger text */
+body.contact_us-page .thank-you-popup p {
+    margin: 0;
+    padding-bottom: 20px;
+    font-size: 18px;
     color: #333;
 }
 
-.thank-you-popup button {
+body.contact_us-page .thank-you-popup button {
     background-color: #7453E7;
     color: #fff;
-    padding: 12px 30px; /* Larger button */
+    padding: 12px 30px;
     border: none;
-    border-radius: 8px; /* Slightly more rounded corners */
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 16px; /* Larger text on button */
+    font-size: 16px;
 }
 
-.thank-you-popup button:hover {
-    background-color: #5989DB;
+body.contact_us-page .thank-you-popup button:hover {
+    background-color: #5b3ec8;
 }
 
-/* Optional: Overlay to dim background */
-.overlay {
+body.contact_us-page .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* More opaque overlay for a darker background */
+    background: rgba(0, 0, 0, 0.7);
     z-index: 999;
 }
