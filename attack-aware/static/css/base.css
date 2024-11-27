@@ -1,52 +1,58 @@
 /* FLASH MESSAGES */
 
 .flash-messages {
-    margin: 10px 0;
+    margin: 10px 0; /* Adds spacing arount the messages */
 }
 
-.flash {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+.flash {  
+    padding: 10px;         /* Padding inside */
+    margin-bottom: 10px;   /* Spacing between messages */
+    border-radius: 5px;    /* Rounded corners */
 }
 
+/* Success styling */
 .flash.success {
-    background-color: #d4edda;
+    background-color: #d4edda;  /* Green background */
     color: #155724;
 }
 
+/*  Error styling */
 .flash.error {
-    background-color: #f8d7da;
+    background-color: #f8d7da;  /* Red backgound */ 
     color: #721c24;
 }
 
-/* Body */
+/* BODY - General styling for website */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0 auto;
-    padding: 0;
-    box-sizing: border-box;
+    font-family: 'Arial', sans-serif; /* Website font */
+    margin: 0 auto;       /* Centres content */
+    padding: 0;          
+    box-sizing: border-box; 
 }
 
+/* MAIN */
 main {
-    background-color: #f8f9fa;
+    background-color: #f8f9fa;  /* Light grey background styling for each page inheriting from base */
 }
 
-/* Header */
+/* HEADER */
+
+/* Navbar inside header */
 header .navbar {
-    background-color: #ffffff !important;
-    border-bottom: 1px solid #ddd;
+    background-color: #ffffff !important; /* white background */
+    border-bottom: 1px solid #ddd;   /* Grey border below navbar */
     padding: 10px 20px;
     margin-bottom: 40px; /* Space between header and main content */
 }
 
-/* Logo */
+/* HEADER LOGO */
 header .logo-image {
     width: 110px;
-    height: auto;
-    transition: width 0.3s ease;
+    height: auto;   /* Keeps the correct ratio for the image height */
+    transition: width 0.3s ease; /* Hover effect */
 }
 
+/* Responsive logo sizes */
 @media (max-width: 768px) {
     header .logo-image {
         width: 50px; /* medium screens */
@@ -59,13 +65,16 @@ header .logo-image {
     }
 }
 
-/* Navigation Links */
+/* NAVIGATION LINKS */
+
+/* Colour, font size, and margins for links */
 header .navbar-nav .nav-item .nav-link {
     color: #333;
     font-size: 18px;
     margin: 0 20px;
 }
 
+/* Hover for nav links */
 header .navbar-nav .nav-item .nav-link:hover {
     color: #39b1a6;
 }
@@ -78,7 +87,7 @@ header .vertical-divider {
     padding-left: 5px;
 }
 
-/* Removes the vertical divider from the dropdown menu */
+/* Hides the vertical divider from the dropdown menu */
 @media screen and (max-width: 994px) {
     .vertical-divider {
     display: none;
@@ -87,14 +96,15 @@ header .vertical-divider {
 
 /* Login and Signup Buttons */
 header.navbar .auth-buttons .btn-outline-primary, header .auth-buttons .btn-primary {
-    border-radius: 10px; 
+    border-radius: 10px; /* Rounded corners */
     padding: 10px 10px; 
     font-weight: 500;
     font-size: 14px;
-    transition: all 0.3s ease;
-    margin-right: 20px;
+    transition: all 0.3s ease; /* Hover effect */
+    margin-right: 20px; /* Adds space to the right of the button */
 }
 
+/* Outline styling for login button */
 header.navbar .auth-buttons .btn-outline-primary {
     border-color: #2AAA94;
     color: #2AAA94;
@@ -104,15 +114,24 @@ header.navbar .auth-buttons .btn-outline-primary {
     padding-right: 30px;
 }
 
+/* Hover effect for outline */
 .navbar .auth-buttons .btn-outline-primary:hover {
     background-color: #504EC1;
     border-color: #2AAA94;
     color: #fff;
 }
 
-/* Footer */
+/* FOOTER */
 
-/* Vertical divider
+/* Footer Container */
+footer .footer-container {
+    background: linear-gradient(100deg, #341F9D, #7352E6); /* Graident background */
+    color: white;
+    margin-top: 20px; /* Space above footer - breaks up the main content */
+    padding: 70px 120px 10px 120px;    /* Footer padding inside */
+}
+
+/* Footer Vertical divider - Can be edited in later
 footer .vertical-divider {
     width: 1px; 
     height: 100px; 
@@ -120,55 +139,48 @@ footer .vertical-divider {
     flex: 0 0 auto; /* Prevents the divider from growing or shrinking 
 }*/
 
-
-/* Footer */
-footer .footer-container {
-    background: linear-gradient(100deg, #341F9D, #7352E6);
-    color: white;
-    margin-top: 20px;
-    padding: 70px 120px 10px 120px;    /* Footer margins */
-}
-
 /* Columns */
 footer .footer-content {
-    display: flex;
-    justify-content: space-between;
+    display: flex;   /* Flexbox layout */
+    justify-content: space-between;    /* Columns with space between */
     gap: 20px;  /* Column gap */
 }
-  
-/* Logo */
+
+/* FOOTER LOGO */
+footer .footer-logo {
+    width: 110px;
+    margin-bottom: 20px;
+}
+
+/* Text under logo */
 footer .logo-text {
     max-width: 500px;
     font-size: 14px;
     color: white;
 }
   
-footer .footer-logo {
-    width: 110px;
-    margin-bottom: 20px;
-}
-  
-/* Links */
+/* FOOTER LINKS */
 footer .footer-links {
     text-align: left;
 }
-  
+
+/* Main Headings */
 footer .footer-links h5 {
     font-size: 19px;
-    margin-bottom: 10px;
-    margin-top: 30px;
-    position: relative;
+    margin-bottom: 10px;  /* Space below headings */
+    margin-top: 30px;     /* Space above headings */
+    position: relative;  /* For use of ::after */
 }
   
-/* Underline for headings */
+/* Underline styling for headings */
 footer .footer-links h5::after,
 footer .contact-info h5::after {
-    content: "";
+    content: "";     /* Empty content */
     display: block;
-    width: calc(100% + 0.5em);      /* Underline width to text length */
-    height: 2px;
-    max-width: 20%;
-    background-color: white;
+    width: calc(100% + 0.5em);       /* Underline width to text length */
+    height: 2px;                    /* Line height */
+    max-width: 20%;                /* Max width */
+    background-color: white;   /* Colour of underline */
     margin-top: 5px;
     margin-bottom: 20px;    /* Space between underline and column content */
 }
