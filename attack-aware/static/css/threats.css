@@ -11,48 +11,6 @@ body {
     color: #333;                     /* Dark gray text color for readability */
 }
 
-/* Navbar styles */
-nav {
-    display: flex;                     /* Flex layout for horizontal alignment */
-    justify-content: space-between;   /* Space elements apart */
-    align-items: center;             /* Center items vertically */
-    background-color: #20232a;       /* Dark background for contrast */
-    padding: 10px 20px;             /* Padding for spacing inside the navbar */
-    color: white;                   /* White text for readability on dark background */
-}
-
-nav ul {
-    display: flex;                  /* Horizontal layout for navbar links */
-    list-style: none;               /* Remove default list bullets */
-}
-
-nav ul li {
-    margin-left: 20px;              /* Space between list items */
-}
-
-nav ul li a {
-    color: white;                   /* White text for navbar links */
-    text-decoration: none;           /* Remove underline from links */
-}
-
-nav input[type="text"] {
-    padding: 5px;                    /* Space inside the input */
-    border-radius: 5px;              /* Rounded corners */
-    border: 1px solid #ccc;          /* Light gray border */
-    margin-left: 20px;               /* Space from other elements */
-}
-
-/* Log Out Button */
-nav button {
-    margin-left: 20px;                   /* Space from other elements */
-    padding: 5px 10px;                   /* Button padding */
-    background-color: #f44336;           /* Red background for emphasis */
-    color: white;                        /* White text color */
-    border: none;                        /* Remove default button border */
-    border-radius: 5px;                  /* Rounded corners for button */
-    cursor: pointer;                     /* Change cursor to pointer on hover */
-}
-
 /* Main content container */
 main {
     max-width: 1200px;                  /* Limit width for readability */
@@ -70,11 +28,17 @@ main {
 
 /* Decorative blue line under the main heading */
 .blue-line {
-    width: 100%;                       /* Full width of the page */
-    height: 4px;                       /* Adjust thickness */
-    background-color: #1a73e8;         /* Blue color matching the h1 color */
-    margin: 20px 0 40px 0;             /* Optional: spacing around the line */
+    width: 100vw;                       /* Full width of the viewport */
+    height: 4px;                        /* Adjust thickness */
+    background-color: #1a73e8;          /* Blue color matching the h1 color */
+    margin: 20px 0 40px 0;              /* Optional: spacing around the line */
+    position: relative;
+    left: 50%;                          /* Adjust for centering */
+    right: 50%;                         /* Adjust for centering */
+    margin-left: -50vw;                 /* Extend to the full width */
+    margin-right: -50vw;                /* Extend to the full width */
 }
+
 
 /* Sections for main content areas */
 .top-risks, .other-threats {
@@ -109,26 +73,26 @@ main {
     display: flex;                           /* Flex layout for risk cards */
     flex-wrap: wrap;                         /* Wrap cards to new rows if needed */
     justify-content: center;                 /* Center the cards */
-    gap: 50px;                               /* Reduced space between the cards */
+    gap: 55px;                               /* Space between the cards remains the same */
     margin-top: 40px;                        /* Adjust top margin */
 }
 
 /* Risk card styles */
 .risk-card {
-    width: 300px;                            /* Fixed width */
+    width: 330px;                            /* Increased width of the cards */
     text-align: center;
-    margin-bottom: 20px;                      /* Space below the cards */
+    margin-bottom: 20px;                     /* Space below the cards */
 }
-
 
 .risk-card img {
-    width: 100%;                                /* Full width of the card */
-    height: 200px;                              /* Fixed height for consistency */
-    object-fit: cover;                          /* Scale image to cover dimensions */
-    border-radius: 12px;                        /* Slightly rounded corners */
+    width: 100%;                             /* Full width of the card */
+    height: 310px;                           /* Increased height of the images */
+    object-fit: cover;                       /* Ensure the image covers the space without distortion */
+    border-radius: 12px;                     /* Slightly rounded corners */
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); /* Increased shadow for better depth */
-    transition: transform 0.3s;                  /* Smooth transition for hover effect */
+    transition: transform 0.3s ease;          /* Smooth transition for hover effect */
 }
+
 
 .risk-card img:hover {
     transform: translateY(-10px);                /* Lift the image on hover */

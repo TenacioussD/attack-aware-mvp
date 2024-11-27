@@ -1,3 +1,5 @@
+
+manage_attacks.js
 // JavaScript for handling YouTube video links
 document.getElementById('add-video-btn').addEventListener('click', function() {
     var videoLink = document.getElementById('video-link').value;

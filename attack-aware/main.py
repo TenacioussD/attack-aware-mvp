@@ -7,13 +7,15 @@ from signup import Signup, SignupForm
 from flask_login import current_user, LoginManager, login_required, logout_user
 from login import Login, LoginForm
 from admin import Admin
-from create_admin import create_initial_admin 
+from create_admin import create_initial_admin
+from models import db, User, CyberAttack, Scenario
 from profile import ProfileForm
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import CSRFProtect
 import os
 from profile import UpdateProfile, ProfileForm
 from flask import send_from_directory
+
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -37,7 +39,7 @@ def create_app():
     with app.app_context():
         db.create_all()  # Creates the tables if they don't exist
         create_initial_admin()  # Call the function to create the admin
-        
+
     return app
 
 #create the app by calling the function
@@ -90,17 +92,15 @@ def make_admin(user_id):
     if not current_user.is_admin:
         flash("You do not have permission to perform this action.", 'admin')
         return redirect(url_for('home'))
-    
+
     result = Admin.promore_to_admin(user_id)
     flash(result)
     return redirect(url_for('home'))
 
 @app.route('/threats')
 def threats():
-    user = current_user
+    return render_template('threats.html')  # Always render the threats page without authentication check
 
-    return render_template('threats.html', user=user.id)  # This renders HTML file from the templates
-   
 # Route to render the ransomware page
 @app.route('/ransomware')
 def ransomware():
@@ -123,9 +123,104 @@ def phishing_scams():
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
 # Route to render the contact-us page
-@app.route('/contact-us')
-def contact():
-    return render_template('contact-us.html')
+
+@app.route('/contact_us')
+def contact_us():
+    return render_template('contact_us.html')  # Renders contact us HTML file from templates
+
+
+from flask import session
+
+@app.route('/admin/attacks', methods=['GET', 'POST'])
+def manage_attacks():
+    if request.method == 'POST':
+        if 'new_attack' in request.form:
+            # Add a new attack
+            name = request.form['new_attack']
+            description = request.form['description']
+            prevention = request.form['prevention']
+            warning_message = request.form.get('warning_message', '')
+            template_name = request.form['template_name']
+
+            # Create and add the new attack to the database
+            new_attack = CyberAttack(
+                name=name,
+                description=description,
+                prevention=prevention,
+                warning_message=warning_message,
+                template_name=template_name
+            )
+            db.session.add(new_attack)
+            db.session.commit()
+
+            flash(f"Attack '{name}' added successfully!", "success")
+            session['attack_created'] = True  # Store flag in session
+
+        elif 'scenario-type' in request.form:
+            # Add a new scenario
+            scenario_type = request.form['scenario-type']
+            correct_answer = request.form['correct-answer']
+            incorrect_answer = request.form.get('incorrect-answer', '')
+            extra_notes = request.form.get('extra-notes', '')
+
+            # Create and add the new scenario to the database
+            new_scenario = Scenario(
+                type=scenario_type,
+                correct_answer=correct_answer,
+                incorrect_answer=incorrect_answer,
+                extra_notes=extra_notes
+            )
+            db.session.add(new_scenario)
+            db.session.commit()
+
+            flash(f"Scenario '{scenario_type}' added successfully!", "success")
+            session['scenario_created'] = True  # Store flag in session
+
+        return redirect(url_for('manage_attacks'))
+
+    # Get all attacks and scenarios from the database
+    attacks = CyberAttack.query.all()
+    scenarios = Scenario.query.all()
+
+    # Retrieve flags from session and clear them after use
+    attack_created = session.pop('attack_created', False)
+    scenario_created = session.pop('scenario_created', False)
+
+    # Render the template and pass the flags
+    return render_template(
+        'manage_attacks.html',
+        attacks=attacks,
+        scenarios=scenarios,
+        attack_created=attack_created,
+        scenario_created=scenario_created
+    )
+
+
+@app.route('/attack/<int:attack_id>')
+def attack(attack_id):
+    attack = CyberAttack.query.get_or_404(attack_id)
+    return render_template('attack.html', attack=attack)
+
+@app.route('/admin/remove_attack/<int:attack_id>', methods=['POST'])
+def remove_attack(attack_id):
+    attack = CyberAttack.query.get_or_404(attack_id)  # Fetch the attack by ID
+    db.session.delete(attack)  # Delete the attack from the database
+    db.session.commit()  # Commit the changes to the database
+
+    flash(f"Attack '{attack.name}' removed successfully!", "success")  # Flash success message
+    return redirect(url_for('manage_attacks'))  # Redirect back to the manage attacks page
+
+@app.route('/remove_scenario/<int:scenario_id>', methods=['POST'])
+def remove_scenario(scenario_id):
+    scenario = Scenario.query.get(scenario_id)
+    if scenario:
+        db.session.delete(scenario)
+        db.session.commit()
+        flash(f"Scenario '{scenario.type}' removed successfully.", "success")
+    else:
+        flash("Scenario not found.", "error")
+    return redirect(url_for('manage_attacks'))
+
 
 @app.route('/logout')
 @login_required
@@ -152,7 +247,7 @@ def profile():
     if form.validate_on_submit():
         updateProfile_instance = UpdateProfile()
         return updateProfile_instance.post()
-    
+
     return render_template('profile.html', form=form, user=user)  # Pass form to template
 
 @app.route('/uploads/<filename>')

@@ -80,8 +80,8 @@ header .vertical-divider {
 
 /* Login and Signup Buttons */
 header.navbar .auth-buttons .btn-outline-primary, header .auth-buttons .btn-primary {
-    border-radius: 10px; 
-    padding: 10px 10px; 
+    border-radius: 10px;
+    padding: 10px 10px;
     font-weight: 500;
     font-size: 14px;
     transition: all 0.3s ease;
@@ -103,7 +103,7 @@ header.navbar .auth-buttons .btn-outline-primary {
     color: #fff;
 }
 
-/*  Extra button that has been removed. 
+/*  Extra button that has been removed.
 .navbar .auth-buttons .btn-primary {
     background-color: #2AAA94;
     border-color: #2AAA94;
@@ -119,10 +119,10 @@ header.navbar .auth-buttons .btn-outline-primary {
 
 /* Vertical divider
 footer .vertical-divider {
-    width: 1px; 
-    height: 100px; 
+    width: 1px;
+    height: 100px;
     border: 1px solid white;
-    flex: 0 0 auto; /* Prevents the divider from growing or shrinking 
+    flex: 0 0 auto; /* Prevents the divider from growing or shrinking
 }*/
 
 
@@ -140,31 +140,31 @@ footer .footer-content {
     justify-content: space-between;
     gap: 20px;  /* Column gap */
 }
-  
+
 /* Logo */
 footer .logo-text {
     max-width: 500px;
     font-size: 14px;
     color: white;
 }
-  
+
 footer .footer-logo {
     width: 110px;
     margin-bottom: 20px;
 }
-  
+
 /* Links */
 footer .footer-links {
     text-align: left;
 }
-  
+
 footer .footer-links h5 {
     font-size: 19px;
     margin-bottom: 10px;
     margin-top: 30px;
     position: relative;
 }
-  
+
 /* Underline for headings */
 footer .footer-links h5::after,
 footer .contact-info h5::after {
@@ -201,7 +201,7 @@ footer .links-container ul li a {
 footer .links-container ul li a:hover {
     color: #2AAA94;
 }
-  
+
 /* Contact info */
 footer .contact-info {
     text-align: left;
@@ -213,12 +213,12 @@ footer .contact-info h5 {
     margin-top: 30px;
     position: relative;
 }
-  
+
 footer .contact-info p {
     font-size: 14px;
     margin-bottom: 8px;
 }
-  
+
 footer .contact-info i {
     margin-right: 20px;
 }
@@ -228,12 +228,12 @@ footer .social-media {
     text-align: right;   /* Aligns icons to the right */
     margin: 20px 0;
 }
-  
+
 footer .social-media a {
     margin: 0 10px;
     text-decoration: none;
 }
-  
+
 footer .social-media i {
     display: inline-block;
     font-size: 18px;
@@ -256,20 +256,20 @@ footer .footer-divider {
     margin: 20px 0;
     border-top: 1px solid white;
 }
-  
+
 footer .copyright {
     text-align: center;
     font-size: 14px;
     margin-top: 10px;
 }
-  
+
 /* Responsive */
 @media screen and (max-width: 1364px) {
     footer .footer-content,
     footer .contact-info,
     footer .footer-links {
       flex-direction: column;
-      align-items: center; 
+      align-items: center;
       text-align: center;       /* Centers the social media icons */
       padding-top: -15px;
     }
