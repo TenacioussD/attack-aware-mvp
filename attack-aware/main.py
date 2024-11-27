@@ -126,13 +126,11 @@ def contact_us():
     return render_template('contact_us.html')  # Renders contact us HTML file from templates
 
 
+from flask import session
+
 @app.route('/admin/attacks', methods=['GET', 'POST'])
 def manage_attacks():
-    attack_created = False  # Default value for attack creation status
-    scenario_created = False  # Default value for scenario creation status
-
     if request.method == 'POST':
-        # Check the type of form submitted (attack or scenario)
         if 'new_attack' in request.form:
             # Add a new attack
             name = request.form['new_attack']
@@ -153,7 +151,8 @@ def manage_attacks():
             db.session.commit()
 
             flash(f"Attack '{name}' added successfully!", "success")
-            attack_created = True  # Set to True after creating an attack
+            session['attack_created'] = True  # Store flag in session
+
         elif 'scenario-type' in request.form:
             # Add a new scenario
             scenario_type = request.form['scenario-type']
@@ -172,7 +171,7 @@ def manage_attacks():
             db.session.commit()
 
             flash(f"Scenario '{scenario_type}' added successfully!", "success")
-            scenario_created = True  # Set to True after creating a scenario
+            session['scenario_created'] = True  # Store flag in session
 
         return redirect(url_for('manage_attacks'))
 
@@ -180,7 +179,11 @@ def manage_attacks():
     attacks = CyberAttack.query.all()
     scenarios = Scenario.query.all()
 
-    # Render the template and pass the attack_created and scenario_created flags
+    # Retrieve flags from session and clear them after use
+    attack_created = session.pop('attack_created', False)
+    scenario_created = session.pop('scenario_created', False)
+
+    # Render the template and pass the flags
     return render_template(
         'manage_attacks.html',
         attacks=attacks,
@@ -190,6 +193,19 @@ def manage_attacks():
     )
 
 
+@app.route('/attack/<int:attack_id>')
+def attack(attack_id):
+    attack = CyberAttack.query.get_or_404(attack_id)
+    return render_template('attack.html', attack=attack)
+
+@app.route('/admin/remove_attack/<int:attack_id>', methods=['POST'])
+def remove_attack(attack_id):
+    attack = CyberAttack.query.get_or_404(attack_id)  # Fetch the attack by ID
+    db.session.delete(attack)  # Delete the attack from the database
+    db.session.commit()  # Commit the changes to the database
+
+    flash(f"Attack '{attack.name}' removed successfully!", "success")  # Flash success message
+    return redirect(url_for('manage_attacks'))  # Redirect back to the manage attacks page
 
 @app.route('/remove_scenario/<int:scenario_id>', methods=['POST'])
 def remove_scenario(scenario_id):
