@@ -20,9 +20,6 @@ class Login():
         if user and user.check_password(password):  # Use the check_password method created in models.py
             login_user(user)
             flash(f'Welcome {user.firstName}. You logged in successfully', 'update')
-       
-            if user.is_admin:
-                flash('Welcome Admin', 'update')
 
             return redirect(url_for('profile'))  # Redirect to the home page or dashboard
         else:

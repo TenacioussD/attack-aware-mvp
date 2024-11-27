@@ -40,7 +40,7 @@ body {
                                     /* Full-width image styling */
 .image-section img {
     width: 100%;                   /* Makes the image span the entire width of the page */
-    height: 450px;                 /* Adjusts the height of the image */
+    height: auto;              /* Maintain aspect ratio */
     object-fit: cover;             /* Ensures the image covers the specified height */
     display: block;                /* Ensures the image is treated as a block element */
     margin: 0 auto;                /* Centers the image horizontally */
@@ -108,5 +108,12 @@ body {
 
 .highlight-text {
     color: #4BE5CA;                 /* Teal color for "watch this" */
+}
+
+.video-block {
+    background-color: #4A16BD;      /* Color block around video */
+    padding: 20px;                  /* Padding inside the color block */
+    border-radius: 8px;             /* Optional: rounded corners */
+    position: relative;             /* Make it the reference for absolute positioning */
 }
 

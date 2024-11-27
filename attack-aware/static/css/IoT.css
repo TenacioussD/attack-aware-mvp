@@ -39,7 +39,7 @@ body {
 
                                     /* Full-width image styling */
 .image-section {
-    width: 100%;                   /* Full-width container */
+    width: 100%;                     /* Full-width container for alignment */
     display: flex;
     justify-content: center;       /* Centers the image horizontally */
     overflow: hidden;              /* Hides any overflow to prevent cut-off issues */
@@ -49,7 +49,7 @@ body {
     width: 1250px;                  /* Set a fixed width */
     height: 450px;                 /* Set a fixed height */
     object-fit: cover;             /* Ensures the image fills the specified dimensions without distortion */
-    display: block;
+    display: flex;
     margin: 20px auto;             /* Centers the image and adds margin */
 }
 

@@ -87,6 +87,7 @@ main .email, main .newPassword, main .birthday {
     width: 100%; /* allows for scaling down */
     display: block; /* Want to trreat it as a block */
     min-width: 250px; /* Minimum allowed width */
+    margin-top: 5px;
 }
 
 main .button, main .button {
@@ -206,21 +207,21 @@ main .largeArchImg {
     width: 500px;
     height: 500px;
     right: -205px;
-    margin-top: -120px;
+    margin-top: -260px;
 }
 
 main .medArchImg {
     width: 420px;
     height: 470px;
     right: -170px;
-    margin-top: -105px;
+    margin-top: -245px;
 }
 
 main .smallArchImg {
     width: 350px;
     height: 440px;
     right: -140px;
-    margin-top: -90px;
+    margin-top: -230px;
 }
 
 main .decorCircle {
