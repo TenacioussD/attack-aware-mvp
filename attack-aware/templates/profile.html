@@ -87,11 +87,11 @@
    {{ form.email.label }} {{ form.email(value=user.email) }}
    {{ form.birthday.label }} {{ form.birthday(value=user.birthday.strftime('%Y-%m-%d') if user.birthday else '') }}
 
-
+<!-- 
    <div class="flexButtons">
       <input class="button" type="button" value="Change Password" onclick="showPasswordModal()">
  
-           <!-- Password Modal -->
+           Password Modal 
             <div id="passwordModal" class="modal">
                <div class="modal-content">
                   <span class="close" onclick="closePasswordModal()">
@@ -113,10 +113,12 @@
                            Update Password
                         </button>
                 </form>
+                
               </div>
-            </div>
+            </div>-->
+   {{ form.submit }}
+   
 
-      {{ form.submit }}
    </div>
    </div>
 

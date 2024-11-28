@@ -9,7 +9,7 @@ from models import db, User
 from datetime import datetime
 from flask_login import current_user
 from utils import convertBirthday
-from wtforms.validators import DataRequired, Email, Length
+from wtforms.validators import DataRequired, Email
 from werkzeug.security import generate_password_hash 
 
 
