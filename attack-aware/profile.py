@@ -9,8 +9,13 @@ from models import db, User
 from datetime import datetime
 from flask_login import current_user
 from utils import convertBirthday
+<<<<<<< HEAD
 from wtforms.validators import DataRequired, Email
 from werkzeug.security import generate_password_hash 
+=======
+from wtforms.validators import DataRequired, Email, Length
+from werkzeug.security import generate_password_hash, check_password_hash
+>>>>>>> 41232a6701b13947bff5f7da8949faccf0835055
 
 
 class ProfileForm(FlaskForm):
@@ -35,7 +40,7 @@ def handleProfileUpdate(current_user):
                 db.session.commit()
                 flash('Profile picture updated successfully!', 'update')
                 return True
-            except Exception as e:
+            except Exception as e: #debugging purposes
                 flash(f"Error saving file: {str(e)}", 'update')
     return False
 
@@ -98,7 +103,7 @@ class UpdateProfile:
             # Commit changes to the database
             db.session.commit()
 
-            flash("Account updated successfully!", 'update')
+            flash("Password updated successfully!", 'update')
             return redirect(url_for('profile'))
 
         else:
@@ -110,16 +115,23 @@ def changePassword():
     oldPassword = request.form.get('oldPassword')
     newPassword = request.form.get('newPassword')
 
-    user = current_user
-
-    #check if old password matches
-    if not user.check_password_hash(user.password, oldPassword):
-        flash("You're password is incorrect", "update")
+    if not oldPassword or not newPassword:
+        flash("Please provide both the current and new passwords.", "error")
         return redirect(url_for('profile'))
-    
-    #update user password
-    user.password = generate_password_hash(newPassword)
-    db.session.commit()
 
-    flash("Password udated successfully!", "update")
-    return redirect(url_for('profile'))
+    # Check if the old password matches the current password
+    if current_user.check_password(oldPassword):  # Assuming this method exists to check hashed password
+        if oldPassword == newPassword:  # Avoid reusing the same password
+            flash("The new password cannot be the same as the old password.", "error")
+            return redirect(url_for('profile'))
+
+        # Update the password
+        current_user.password = generate_password_hash(newPassword)
+        db.session.commit()
+
+        flash("Password updated successfully!", "success")
+        return redirect(url_for('profile'))
+    else:
+        flash("Incorrect current password.", "error")
+        return redirect(url_for('profile'))
+
