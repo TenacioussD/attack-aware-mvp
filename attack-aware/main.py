@@ -2,7 +2,6 @@
 
 from flask import Flask, render_template, request, redirect, url_for, flash, current_app
 from flask_sqlalchemy import SQLAlchemy
-from models import db, User
 from signup import Signup, SignupForm
 from flask_login import current_user, LoginManager, login_required, logout_user
 from login import Login, LoginForm
@@ -192,7 +191,6 @@ def manage_attacks():
         scenario_created=scenario_created
     )
 
-
 @app.route('/attack/<int:attack_id>')
 def attack(attack_id):
     attack = CyberAttack.query.get_or_404(attack_id)
@@ -218,7 +216,21 @@ def remove_scenario(scenario_id):
         flash("Scenario not found.", "error")
     return redirect(url_for('manage_attacks'))
 
+@app.route('/manage_videos', methods=['POST'])
+def manage_videos():
+    video_link = request.form.get('video_link')
+    if video_link:
+        new_video = Video(link=video_link)
+        db.session.add(new_video)
+        db.session.commit()
+    return redirect(url_for('manage_videos'))
 
+@app.route('/remove_video/<int:video_id>', methods=['POST'])
+def remove_video(video_id):
+    video_to_remove = Video.query.get_or_404(video_id)
+    db.session.delete(video_to_remove)
+    db.session.commit()
+    return redirect(url_for('manage_videos'))
 @app.route('/logout')
 @login_required
 def logout():
