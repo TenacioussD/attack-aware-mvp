@@ -9,13 +9,9 @@ from models import db, User
 from datetime import datetime
 from flask_login import current_user
 from utils import convertBirthday
-<<<<<<< HEAD
 from wtforms.validators import DataRequired, Email
 from werkzeug.security import generate_password_hash 
-=======
-from wtforms.validators import DataRequired, Email, Length
-from werkzeug.security import generate_password_hash, check_password_hash
->>>>>>> 41232a6701b13947bff5f7da8949faccf0835055
+
 
 
 class ProfileForm(FlaskForm):

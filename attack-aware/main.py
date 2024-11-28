@@ -248,15 +248,7 @@ def profile():
     if form.validate_on_submit():
         updateProfile_instance = UpdateProfile()
         return updateProfile_instance.post()
-<<<<<<< HEAD
 
-=======
-    
-    # Check for password change request (assumes a separate form or fields for password change)
-    if request.method == 'POST' and 'oldPassword' in request.form and 'newPassword' in request.form:
-       return changePassword()  # Call the changePassword function directly
-    
->>>>>>> 41232a6701b13947bff5f7da8949faccf0835055
     return render_template('profile.html', form=form, user=user)  # Pass form to template
 
 @app.route('/uploads/<filename>')
