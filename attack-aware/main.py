@@ -12,7 +12,7 @@ from profile import ProfileForm
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import CSRFProtect
 import os
-from profile import UpdateProfile, ProfileForm
+from profile import UpdateProfile, ProfileForm, changePassword
 from flask import send_from_directory
 
 def create_app():
@@ -149,9 +149,14 @@ def profile():
     user=current_user
 
     form = ProfileForm()
+    # Check if the form is submitted and validated
     if form.validate_on_submit():
         updateProfile_instance = UpdateProfile()
         return updateProfile_instance.post()
+    
+    # Check for password change request (assumes a separate form or fields for password change)
+    if request.method == 'POST' and 'oldPassword' in request.form and 'newPassword' in request.form:
+       return changePassword()  # Call the changePassword function directly
     
     return render_template('profile.html', form=form, user=user)  # Pass form to template
 

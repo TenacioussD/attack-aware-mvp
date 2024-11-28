@@ -89,6 +89,8 @@
 
 
    <div class="flexButtons">
+      {{ form.changePassword }}
+      
       <input class="button" type="button" value="Change Password" onclick="showPasswordModal()">
  
            <!-- Password Modal -->
@@ -109,9 +111,8 @@
                          <input type="password" id="newPassword" 
                           name="newPassword" required>
 
-                         <button type="submit" class="button">
-                           Update Password
-                        </button>
+                          <button type="submit" name="action" class="button">
+                           Change Password</button>
                 </form>
               </div>
             </div>
