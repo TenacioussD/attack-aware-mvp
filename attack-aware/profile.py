@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField, DateField
+from wtforms import SubmitField, StringField, DateField, PasswordField
 from flask_wtf.file import FileField, FileAllowed
 from flask import flash, redirect, url_for, request, current_app
 from werkzeug.utils import secure_filename, secure_filename
@@ -9,7 +9,7 @@ from models import db, User
 from datetime import datetime
 from flask_login import current_user
 from utils import convertBirthday
-from wtforms.validators import DataRequired, Email
+from wtforms.validators import DataRequired, Email, Length
 from werkzeug.security import generate_password_hash 
 
 
@@ -22,7 +22,10 @@ class ProfileForm(FlaskForm):
     profilePic = FileField('Upload Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Confirm', render_kw={"class": "confirmButton"})
 
-    
+class changePasswordForm(FlaskForm):
+     oldPassword = StringField('Old Password', validators=[DataRequired()], render_kw={"placeholder": "Old Password", "id": "oldPassword"})
+     newPassword = StringField('New Password', validators=[DataRequired(), Length(min=6)], render_kw={"placeholder": "New Password", "id":"newPassword"})
+     submit = SubmitField('Change Password', render_kw={"class": "button"})
 
 def handleProfileUpdate(current_user):
     if 'profilePic' in request.files:
@@ -107,7 +110,8 @@ class UpdateProfile:
             flash(f"Form validation failed: {form.errors}", 'update')
             return redirect(url_for('profile'))
         
-def changePassword():
+class changePassword():
+  def post(self):
     oldPassword = request.form.get('oldPassword')
     newPassword = request.form.get('newPassword')
 

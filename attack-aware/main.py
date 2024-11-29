@@ -9,11 +9,10 @@ from login import Login, LoginForm
 from admin import Admin
 from create_admin import create_initial_admin
 from models import db, User, CyberAttack, Scenario
-from profile import ProfileForm
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import CSRFProtect
 import os
-from profile import UpdateProfile, ProfileForm
+from profile import UpdateProfile, ProfileForm, changePasswordForm, changePassword
 from flask import send_from_directory
 from utils import commitUserInteraction
 
@@ -261,8 +260,14 @@ def profile():
     if form.validate_on_submit():
         updateProfile_instance = UpdateProfile()
         return updateProfile_instance.post()
+    
+    changePassword_form = changePasswordForm()
 
-    return render_template('profile.html', form=form, user=user)  # Pass form to template
+    if changePassword_form.validate_on_submit():
+        changePassword_instance = changePassword()
+        return changePassword_instance.post()
+    
+    return render_template('profile.html', form=form, changePassword_form=changePassword_form, user=user)  # Pass form to template
 
 @app.route('/uploads/<filename>')
 def uploadedFile(filename):
