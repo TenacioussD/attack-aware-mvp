@@ -1,6 +1,6 @@
 # Main Flask application file
 
-from flask import Flask, render_template, request, redirect, url_for, flash, current_app
+from flask import Flask, render_template, request, redirect, url_for, flash, current_app, session
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
 from signup import Signup, SignupForm
@@ -13,8 +13,9 @@ from profile import ProfileForm
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import CSRFProtect
 import os
-from profile import UpdateProfile, ProfileForm, changePassword
+from profile import UpdateProfile, ProfileForm
 from flask import send_from_directory
+from utils import commitUserInteraction
 
 
 def create_app():
@@ -104,22 +105,37 @@ def threats():
 # Route to render the ransomware page
 @app.route('/ransomware')
 def ransomware():
+
+    commitUserInteraction('ransomware') #call the function from utils.py with the topic
+
     return render_template('ransomware.html')  # Renders ransomware HTML file from templates
 
 @app.route('/social_engineering')
 def social_engineering():
+
+    commitUserInteraction('social_engineering') #call the function from utils.py with the topic
+
     return render_template('social_engineering.html')  # Renders social engineering HTML file from templates
 
 @app.route('/cyber_hygiene')
 def cyber_hygiene():
+
+    commitUserInteraction('cyber_hygiene')
+
     return render_template('cyber_hygiene.html')  # Renders cyber hygiene HTML file from templates
 
 @app.route('/IoT')
 def IoT():
+
+    commitUserInteraction('IoT')
+
     return render_template('IoT.html')  # Renders IoT HTML file from templates
 
 @app.route('/phishing_scams')
 def phishing_scams():
+
+    commitUserInteraction('phishing_scams')
+
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
 # Route to render the contact-us page
@@ -127,9 +143,6 @@ def phishing_scams():
 @app.route('/contact_us')
 def contact_us():
     return render_template('contact_us.html')  # Renders contact us HTML file from templates
-
-
-from flask import session
 
 @app.route('/admin/attacks', methods=['GET', 'POST'])
 def manage_attacks():
