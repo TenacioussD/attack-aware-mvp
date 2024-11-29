@@ -14,7 +14,7 @@ from flask_wtf.csrf import CSRFProtect
 import os
 from profile import UpdateProfile, ProfileForm, changePasswordForm, changePassword
 from flask import send_from_directory
-from utils import commitUserInteraction
+from utils import commitUserInteraction, get_total_topics
 
 
 def create_app():
@@ -273,6 +273,13 @@ def profile():
 def uploadedFile(filename):
     return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
 
+from utils import get_total_topics
+
+@app.route('/totalTopics')
+def totalTopics():
+    total_topics = get_total_topics()
+    # Do something with total_topics
+    return total_topics
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made

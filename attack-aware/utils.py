@@ -8,6 +8,7 @@ from datetime import datetime
 from flask import flash, redirect, url_for, session
 from models import user_interaction, db
 
+
 def convertBirthday(birthday_str, flash_category='signup' or 'login'):
     """Converts birthday string to a date object. Returns None if conversion fails."""
     try:
@@ -17,7 +18,7 @@ def convertBirthday(birthday_str, flash_category='signup' or 'login'):
         return None
 
 def commitUserInteraction(topic):
-        
+
         #Commits user interaction data for a specific topic to the database.
 
         userId = session.get('userId')  # Ensure user ID is stored in session
@@ -32,3 +33,8 @@ def commitUserInteraction(topic):
 
             #commit changes
            db.session.commit()
+
+def get_total_topics():
+    """Returns the total number of unique topics in the user_interaction table."""
+    total_topics = user_interaction.query.with_entities(user_interaction.topic).distinct().count()
+    return total_topics

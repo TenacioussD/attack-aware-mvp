@@ -61,5 +61,4 @@ class user_interaction(db.Model):
     user = db.relationship('User', backref='interactions',  lazy=True)  # Establish relationship with User
 
 
-
      

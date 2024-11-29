@@ -5,6 +5,9 @@
     align-items: center; /* Center items horizontally */
     justify-content: flex-start; /* Align items to the top */
     position: relative;
+    width: 100%; /* Ensure this takes up full width */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
 }
 
 
@@ -158,5 +161,38 @@ input {
   }
 
   /* CSS for popup window (Change Password) ends here */
+
+
+  .yourProgressContainer {
+    margin-top: 60px;
+    background-image: linear-gradient(to bottom, #1459CA 7%, #7AA1E3 91%);
+    padding-bottom: 15px;
+    width: 100%; /* Ensure the container spans full width */
+    margin-left: 0; /* Remove left margin */
+    margin-right: 0; /* Remove right margin */
+
+}
+
+
+  .yourProgressGraph, .yourProgressHeading {
+    color: white;
+  }
+
+  .yourProgressHeading {
+    margin-left: 20px;
+    font-size: 40px;
+    font-weight: bold;
+  }
+
+  .yourProgressGraph {
+    text-align: center;
+    margin-top: 10px;           /* Add space between the graph and the text */
+  }
   
+  .progressBar {
+    display: block;           /* Make the progress bar a block element */
+    margin: 20px auto;        /* Centers it horizontally and adds top/bottom space */
+    width: 80%;               /* Adjust the width if necessary */
+    padding-bottom: 20px;
+  }
 
