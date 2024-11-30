@@ -44,3 +44,6 @@ class Scenario(db.Model):
     correct_answer = db.Column(db.String(255), nullable=False)  # Correct answer
     incorrect_answer = db.Column(db.String(255), nullable=True)  # Optional incorrect answer
     extra_notes = db.Column(db.Text, nullable=True)  # Additional notes
+class Video(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    link = db.Column(db.String(255), nullable=False)  # Adjust max length as needed
