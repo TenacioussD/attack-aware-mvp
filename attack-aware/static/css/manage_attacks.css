@@ -197,6 +197,11 @@ body {
 /* Existing Scenarios Styling */
 .existing-scenarios {
     margin-top: 30px;                          /* Add space above the section */
+    max-width: 750px;                         /* Increased max width */
+    width: 100%;                               /* Ensure it takes full width */
+    margin-left: auto;                         /* Center align the container */
+    margin-right: auto;                        /* Center align the container */
+    padding: 20px;                             /* Add padding around the section */
 }
 
 .existing-scenarios h3 {
@@ -212,11 +217,12 @@ body {
 
 .existing-scenarios ul li {
     margin-bottom: 15px;                       /* Space between items */
-    padding: 10px;                             /* Add padding to each item */
+    padding: 15px;                             /* Increased padding to each item */
     border: 1px solid #ddd;                    /* Light gray border */
     border-radius: 5px;                        /* Rounded corners */
     background: #f9f9f9;                       /* Light gray background */
 }
+
 
 
 /* Styling for Remove Attack Button */

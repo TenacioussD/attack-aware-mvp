@@ -61,6 +61,8 @@
 <h1>Manage Videos</h1>
 
 <div class="manage-videos-container">
+    <h2>Manage Videos</h2>
+    <!-- Form to add a video -->
     <form action="{{ url_for('manage_videos') }}" method="POST">
         <!-- CSRF Token -->
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
@@ -69,21 +71,22 @@
         <button type="submit">Add Video</button>
     </form>
 
+    <h3>Existing Videos</h3>
+    <!-- Display existing videos  -->
     <ul>
         {% for video in videos %}
-            <li>
-                {{ video.link }}
-                <form action="{{ url_for('remove_video', video_id=video.id) }}" method="POST" style="display:inline;">
-                    <!-- CSRF Token for removing video -->
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <button type="submit">Remove</button>
-                </form>
-            </li>
+        <li>
+            <a href="{{ video.link }}" target="_blank">{{ video.link }}</a>
+            <!-- Form to remove a video -->
+            <form action="{{ url_for('remove_video', video_id=video.id) }}" method="POST" style="display:inline;">
+                <!-- CSRF Token -->
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit">Remove Video</button>
+            </form>
+        </li>
         {% endfor %}
     </ul>
 </div>
-
-
 
     <!-- Custom Alert Popup -->
     <div id="custom-alert" class="{{ 'hidden' if not (attack_created or scenario_created) else '' }}">

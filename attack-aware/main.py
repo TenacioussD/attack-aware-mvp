@@ -14,6 +14,7 @@ import os
 from profile import UpdateProfile, ProfileForm, changePasswordForm, changePassword
 from flask import send_from_directory
 from utils import commitUserInteraction, get_total_topics
+from models import db, User, CyberAttack, Scenario, Video  # Add Video here
 
 
 def create_app():
@@ -231,14 +232,21 @@ def remove_scenario(scenario_id):
         flash("Scenario not found.", "error")
     return redirect(url_for('manage_attacks'))
 
-@app.route('/manage_videos', methods=['POST'])
+@app.route('/manage_videos', methods=['GET', 'POST'])
 def manage_videos():
-    video_link = request.form.get('video_link')
-    if video_link:
-        new_video = Video(link=video_link)
-        db.session.add(new_video)
-        db.session.commit()
-    return redirect(url_for('manage_videos'))
+    if request.method == 'POST':
+        # Add a new video
+        video_link = request.form.get('video_link')
+        if video_link:
+            new_video = Video(link=video_link)
+            db.session.add(new_video)
+            db.session.commit()
+        return redirect(url_for('manage_videos'))
+
+    # For GET request, render the manage_attacks.html page with existing videos
+    videos = Video.query.all()  # Fetch all videos from the database
+    return render_template('manage_attacks.html', videos=videos)
+
 
 @app.route('/remove_video/<int:video_id>', methods=['POST'])
 def remove_video(video_id):
@@ -246,6 +254,7 @@ def remove_video(video_id):
     db.session.delete(video_to_remove)
     db.session.commit()
     return redirect(url_for('manage_videos'))
+
 @app.route('/logout')
 @login_required
 def logout():
