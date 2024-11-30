@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField, DateField
+from wtforms import SubmitField, StringField, DateField, PasswordField
 from flask_wtf.file import FileField, FileAllowed
 from flask import flash, redirect, url_for, request, current_app
 from werkzeug.utils import secure_filename, secure_filename
@@ -10,6 +10,8 @@ from datetime import datetime
 from flask_login import current_user
 from utils import convertBirthday
 from wtforms.validators import DataRequired, Email, Length
+from werkzeug.security import generate_password_hash 
+
 
 
 class ProfileForm(FlaskForm):
@@ -20,7 +22,10 @@ class ProfileForm(FlaskForm):
     profilePic = FileField('Upload Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Confirm', render_kw={"class": "confirmButton"})
 
-    
+class changePasswordForm(FlaskForm):
+     oldPassword = StringField('Old Password', validators=[DataRequired()], render_kw={"placeholder": "Old Password", "id": "oldPassword"})
+     newPassword = StringField('New Password', validators=[DataRequired(), Length(min=6)], render_kw={"placeholder": "New Password", "id":"newPassword"})
+     submit = SubmitField('Change Password', render_kw={"class": "button"})
 
 def handleProfileUpdate(current_user):
     if 'profilePic' in request.files:
@@ -34,7 +39,7 @@ def handleProfileUpdate(current_user):
                 db.session.commit()
                 flash('Profile picture updated successfully!', 'update')
                 return True
-            except Exception as e:
+            except Exception as e: #debugging purposes
                 flash(f"Error saving file: {str(e)}", 'update')
     return False
 
@@ -97,10 +102,36 @@ class UpdateProfile:
             # Commit changes to the database
             db.session.commit()
 
-            flash("Account updated successfully!", 'update')
+            flash("Password updated successfully!", 'update')
             return redirect(url_for('profile'))
 
         else:
             # Log the form errors to the console for debugging
             flash(f"Form validation failed: {form.errors}", 'update')
             return redirect(url_for('profile'))
+        
+class changePassword():
+  def post(self):
+    oldPassword = request.form.get('oldPassword')
+    newPassword = request.form.get('newPassword')
+
+    if not oldPassword or not newPassword:
+        flash("Please provide both the current and new passwords.", "error")
+        return redirect(url_for('profile'))
+
+    # Check if the old password matches the current password
+    if current_user.check_password(oldPassword):  # Assuming this method exists to check hashed password
+        if oldPassword == newPassword:  # Avoid reusing the same password
+            flash("The new password cannot be the same as the old password.", "error")
+            return redirect(url_for('profile'))
+
+        # Update the password
+        current_user.password = generate_password_hash(newPassword)
+        db.session.commit()
+
+        flash("Password updated successfully!", "success")
+        return redirect(url_for('profile'))
+    else:
+        flash("Incorrect current password.", "error")
+        return redirect(url_for('profile'))
+

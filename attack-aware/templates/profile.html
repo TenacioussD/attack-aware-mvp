@@ -86,18 +86,62 @@
    {{ form.lastName.label }} {{ form.lastName(value=user.lastName) }}
    {{ form.email.label }} {{ form.email(value=user.email) }}
    {{ form.birthday.label }} {{ form.birthday(value=user.birthday.strftime('%Y-%m-%d') if user.birthday else '') }}
-
-
+         
    <div class="flexButtons">
-      <input class="button" name="" type="button" value="Change Password">
+      <!-- Change Password Button -->
+      <input class="button" type="button" value="Change Password" onclick="showPasswordModal()">
+      
+
       {{ form.submit }}
-   </div>
+
    </div>
 
    </form>
+</div>
 
+
+         <div id="passwordModal" class="modal">
+
+            <div class="modal-content">
+               <span class="close" onclick="closePasswordModal()">
+                   &times;
+               </span>
+
+               <h2>Change Password</h2>
+
+             <form id="changePasswordForm" method="POST" 
+                   action="{{ url_for('profile') }}">
+
+                   {{ changePassword_form.hidden_tag() }} 
+
+                      {{ changePassword_form.oldPassword.label }}
+                      {{ changePassword_form.oldPassword }}                        
+
+                      {{ changePassword_form.newPassword.label }}
+                      {{ changePassword_form.newPassword }}                          
+
+                      {{ changePassword_form.submit }}      
+             </form>
+             
+           </div>
+              
+</div>
+
+<!--Create User Progress bar-->
+
+<div class="yourProgressContainer">
+
+<div class="yourProgressHeading">
+Your Progress
+</div>
+<p class="yourProgressGraph">
+   You still have some time to complete your latest training.....
+</p>
+
+<progress class="progressBar" value="{{ user.progress }}" max="100"> </progress>
 
 </div>
+
 
 <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 

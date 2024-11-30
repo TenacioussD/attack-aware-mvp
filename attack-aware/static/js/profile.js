@@ -22,3 +22,22 @@ function previewImage(event) {
         reader.readAsDataURL(file);
     }
 }
+
+function showPasswordModal() {
+    document.getElementById("passwordModal").style.display = "block";
+  }
+  
+  function closePasswordModal() {
+    document.getElementById("passwordModal").style.display = "none";
+  }
+  
+  // Close the modal when the user clicks anywhere outside of it
+  window.onclick = function(event) {
+    const modal = document.getElementById("passwordModal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  
+  

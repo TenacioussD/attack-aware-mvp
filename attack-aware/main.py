@@ -1,6 +1,6 @@
 # Main Flask application file
 
-from flask import Flask, render_template, request, redirect, url_for, flash, current_app
+from flask import Flask, render_template, request, redirect, url_for, flash, current_app, session
 from flask_sqlalchemy import SQLAlchemy
 from signup import Signup, SignupForm
 from flask_login import current_user, LoginManager, login_required, logout_user
@@ -8,12 +8,12 @@ from login import Login, LoginForm
 from admin import Admin
 from create_admin import create_initial_admin
 from models import db, User, CyberAttack, Scenario
-from profile import ProfileForm
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import CSRFProtect
 import os
-from profile import UpdateProfile, ProfileForm
+from profile import UpdateProfile, ProfileForm, changePasswordForm, changePassword
 from flask import send_from_directory
+from utils import commitUserInteraction, get_total_topics
 
 
 def create_app():
@@ -59,6 +59,9 @@ login_manager.init_app(app)
 # Define ALLOWED_EXTENSIONS globally
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
+#customisable domain list for email in signup form
+allowed_domains = os.getenv('ALLOWED_DOMAINS', 'gmail.com,yahoo.com,outlook.com').split(',')
+
 # Check if the file extension is allowed
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -100,22 +103,37 @@ def threats():
 # Route to render the ransomware page
 @app.route('/ransomware')
 def ransomware():
+
+    commitUserInteraction('ransomware') #call the function from utils.py with the topic
+
     return render_template('ransomware.html')  # Renders ransomware HTML file from templates
 
 @app.route('/social_engineering')
 def social_engineering():
+
+    commitUserInteraction('social_engineering') #call the function from utils.py with the topic
+
     return render_template('social_engineering.html')  # Renders social engineering HTML file from templates
 
 @app.route('/cyber_hygiene')
 def cyber_hygiene():
+
+    commitUserInteraction('cyber_hygiene')
+
     return render_template('cyber_hygiene.html')  # Renders cyber hygiene HTML file from templates
 
 @app.route('/IoT')
 def IoT():
+
+    commitUserInteraction('IoT')
+
     return render_template('IoT.html')  # Renders IoT HTML file from templates
 
 @app.route('/phishing_scams')
 def phishing_scams():
+
+    commitUserInteraction('phishing_scams')
+
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
 # Route to render the contact-us page
@@ -123,9 +141,6 @@ def phishing_scams():
 @app.route('/contact_us')
 def contact_us():
     return render_template('contact_us.html')  # Renders contact us HTML file from templates
-
-
-from flask import session
 
 @app.route('/admin/attacks', methods=['GET', 'POST'])
 def manage_attacks():
@@ -253,16 +268,30 @@ def profile():
     user=current_user
 
     form = ProfileForm()
+    # Check if the form is submitted and validated
     if form.validate_on_submit():
         updateProfile_instance = UpdateProfile()
         return updateProfile_instance.post()
+    
+    changePassword_form = changePasswordForm()
 
-    return render_template('profile.html', form=form, user=user)  # Pass form to template
+    if changePassword_form.validate_on_submit():
+        changePassword_instance = changePassword()
+        return changePassword_instance.post()
+    
+    return render_template('profile.html', form=form, changePassword_form=changePassword_form, user=user)  # Pass form to template
 
 @app.route('/uploads/<filename>')
 def uploadedFile(filename):
     return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
 
+from utils import get_total_topics
+
+@app.route('/totalTopics')
+def totalTopics():
+    total_topics = get_total_topics()
+    # Do something with total_topics
+    return total_topics
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
