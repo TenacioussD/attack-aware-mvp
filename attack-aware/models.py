@@ -10,7 +10,7 @@ db = SQLAlchemy()
 # Define the User class that maps to the 'User' table in the database
 class User(UserMixin, db.Model):
 
-    __tablename__ = 'user' #SQLAlchemy defualt table names to lowercase/ 
+    __tablename__ = 'user' #SQLAlchemy defualt table names to lowercase/
                            #Explicitly set the table name
 
     id = db.Column(db.Integer, primary_key=True)  # Unique ID for each user
@@ -49,6 +49,9 @@ class Scenario(db.Model):
     correct_answer = db.Column(db.String(255), nullable=False)  # Correct answer
     incorrect_answer = db.Column(db.String(255), nullable=True)  # Optional incorrect answer
     extra_notes = db.Column(db.Text, nullable=True)  # Additional notes
+class Video(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    link = db.Column(db.String(255), nullable=False)  # Adjust max length as needed
 
 #Create a class that wil save the interaction that the user has with the app
 class user_interaction(db.Model):
@@ -61,4 +64,3 @@ class user_interaction(db.Model):
     user = db.relationship('User', backref='interactions',  lazy=True)  # Establish relationship with User
 
 
-     
