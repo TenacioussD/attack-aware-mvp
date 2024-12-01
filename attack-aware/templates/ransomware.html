@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ransomware Awareness</title>
-    <!-- Use Flask's url_for to dynamically generate the path to your static CSS file -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/ransomware.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ransomware.css') }}"> 
+{% endblock %}
+
+{% block content %}
     <div class="header"> <!-- Header section -->
         <h1>Ransomware</h1>
         <div class="blue-line"></div> <!-- Blue line -->
@@ -15,10 +12,10 @@
 
     <div class="content"> <!-- Main Content of page -->
 
-      <!-- Full-width image section -->
-      <div class="image-section">
-         <img src="{{ url_for('static', filename='img/img/computer.png') }}" alt="Computer Image">
-      </div>
+        <!-- Full-width image section -->
+        <div class="image-section">
+            <img src="{{ url_for('static', filename='img/img/computer.png') }}" alt="Computer Image">
+        </div>
 
         <div class="section">
             <h2 class="ransomware-heading">What is <span class="highlight">Ransomware?</span></h2>
@@ -39,9 +36,9 @@
             <h2 class="ransomware-heading">What to Do If You’re Hit by <span class="highlight">Ransomware?</span></h2>
 
             <!-- Warning message styled as per the requirements -->
-           <div class="dangerous-action">
-          <span class="highlight">DO</span> <span class="bold">NOT</span> <span class="white">PAY THE RANSOM</span>
-          </div>
+            <div class="dangerous-action">
+                <span class="highlight">DO</span> <span class="bold">NOT</span> <span class="white">PAY THE RANSOM</span>
+            </div>
 
             <ol>
                 <li>Disconnect your device from the network immediately.</li>
@@ -55,16 +52,11 @@
         </div>
 
         <!-- Section: Informational Video -->
-          <div class="video-section">
-        <div class="video-block">
-          <h3><span class="info-text">For more Information</span>, <span class="highlight-text">watch this</span></h3>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/fc2tbHWZu4I" frameborder="0" allowfullscreen></iframe>
-
-        <!-- Embedded YouTube video providing additional information -->
+        <div class="video-section">
+            <div class="video-block">
+                <h3><span class="info-text">For more Information</span>, <span class="highlight-text">watch this</span></h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/fc2tbHWZu4I" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
-</div>
-
-
-</body>
-</html>
+{% endblock %}

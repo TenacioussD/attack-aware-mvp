@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Engineering</title>
-    <!-- Use Flask's url_for to dynamically generate the path to your static CSS file -->
+{% extends "base.html" %}
+
+{% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/social_engineering.css') }}">
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
     <div class="header"> <!-- Header section -->
         <h1>Social Engineering</h1>
         <div class="blue-line"></div> <!-- Blue line -->
@@ -15,39 +12,38 @@
 
     <div class="content"> <!-- Main Content of page -->
 
+        <!-- Full-width image section -->
+        <div class="image-section">
+            <img src="{{ url_for('static', filename='img/img/social_engineering.jpg') }}" alt="social_engineering Image">
+        </div>
 
-      <!-- Full-width image section -->
-      <div class="image-section">
-         <img src="{{ url_for('static', filename='img/img/social_engineering.jpg') }}" alt="social_engineering Image">
-      </div>
-
-          <!-- Section: Introduction to Social Engineering -->
+        <!-- Section: Introduction to Social Engineering -->
         <div class="section">
             <h2 class="social_engineering-heading">What is <span class="highlight">Social Engineering?</span></h2>
             <p>Social engineering attacks manipulate people into sharing information that they shouldn’t share, downloading software that they shouldn’t download, visiting websites they shouldn’t visit, sending money to criminals or making other mistakes that compromise their personal or organizational security.</p>
         </div>
 
-          <!-- Section: Prevention Tips -->
+        <!-- Section: Prevention Tips -->
         <div class="section">
             <h2 class="social_engineering-heading">How to Prevent <span class="highlight">Social Engineering?</span></h2>
             <ul>
                 <li>By gaining more knowledge such as online training, like following our Cyber Security Awareness training.</li>
                 <li>Be wary of unexpected urgent requests by financial institutions to disclose your important information.</li>
-                <li>Secure your devices, such as using up to date anti-malware and anti-virus software.</li>
+                <li>Secure your devices, such as using up-to-date anti-malware and anti-virus software.</li>
                 <li>Enable two-factor authentication where possible.</li>
             </ul>
         </div>
 
-         <!-- Section: Actions After a Social Engineering Attack -->
+        <!-- Section: Actions After a Social Engineering Attack -->
         <div class="section">
             <h2 class="ransomware-heading">What to Do If You’re a victim of a <span class="highlight">Social Engineering attack?</span></h2>
 
             <!-- Warning message styled as per the requirements -->
-           <div class="dangerous-action">
-          <span class="highlight">ALWAYS</span> <span class="bold">BE</span> <span class="white">VIGILANT</span>
-          </div>
+            <div class="dangerous-action">
+                <span class="highlight">ALWAYS</span> <span class="bold">BE</span> <span class="white">VIGILANT</span>
+            </div>
 
-             <!-- Ordered List of Steps to Take -->
+            <!-- Ordered List of Steps to Take -->
             <ol>
                 <li>Immediately Report the Incident: Notify your IT or security team right away. Prompt reporting can prevent further damage and help them assess the scope of the attack.</li>
                 <li>Monitor for Unusual Activity: Closely monitor your financial accounts, emails, and any other affected systems for unusual activity, unauthorized access, or fraudulent transactions.</li>
@@ -59,12 +55,11 @@
 
         <!-- Section: Informational Video -->
         <div class="video-section">
-     <div class="video-block">
-        <h3><span class="info-text">For more Information</span>, <span class="highlight-text">watch this</span></h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/erSVVGQw1TQ" frameborder="0" allowfullscreen></iframe>
-           <!-- Embedded YouTube video providing additional information -->
-           </div>
-      </div>
+            <div class="video-block">
+                <h3><span class="info-text">For more Information</span>, <span class="highlight-text">watch this</span></h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/erSVVGQw1TQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
 
-</body>
-</html>
+    </div>
+{% endblock %}
