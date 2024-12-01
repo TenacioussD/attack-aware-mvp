@@ -164,3 +164,12 @@ main {
     display: block;                          /* Ensures the image is treated as a block element */
     margin: 20px auto;                       /* Adds margin for spacing around the image */
 }
+
+.button {     /* Button spesifications of 'Add New Threat' */
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 100px;
+
+}

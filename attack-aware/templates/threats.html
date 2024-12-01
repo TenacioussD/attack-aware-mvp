@@ -2,6 +2,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/threats.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -68,5 +69,13 @@
             <p>While the spotlight often shines on the most notorious cyber threats, users must remain vigilant for other lurking dangers which might exploit vulnerabilities and compromise security.</p>
             <img src="{{ url_for('static', filename='img/img/other_threats.png') }}" alt="Other Threats">
         </section>
+
+        <!--Render 'Add New Threat' only if user is admin-->
+       {% if is_admin %}
+       <button class="button">
+        Add New Threat
+       </button>
+       {% endif %}
+
     </main>
 {% endblock %}
