@@ -56,6 +56,38 @@
     </div>
 </header>
 
+<!-- LOGIN POPUP FORM -->
+<div class="login-popup" id="loginPopup">       
+    <div class="close-btn" id="closePopup">
+        <i class="fa-solid fa-x"></i>
+    </div>
+    <div class="login-form login">
+        <div class="left-info">
+            <h2>Welcome Back</h2>
+            <p>Please login using your account information.</p>
+        </div>
+        <div class="form-content">
+            <h2>LOGIN</h2>
+            <form action="{{ url_for('login') }}" method="post">                      
+                <div class="input-field">
+                    <input type="text" name="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+                <button type="submit" name="action" value="login">Log In</button>
+            </form>
+            <div class="bottom-link">
+                Don't have an account?
+                <a href="#" id="signupLink">Signup</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Main inheritable content -->
 <main> 
 {% block content %}{% endblock %}     

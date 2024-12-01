@@ -302,6 +302,12 @@ def totalTopics():
     # Do something with total_topics
     return total_topics
 
+# Route to login
+@app.route('/login', methods=['POST'])
+def login():
+    login_instance = Login()
+    return login_instance.post()
+
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
 
