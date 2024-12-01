@@ -15,7 +15,6 @@ from profile import UpdateProfile, ProfileForm, changePasswordForm, changePasswo
 from flask import send_from_directory
 from utils import commitUserInteraction, get_total_topics
 from models import db, User, CyberAttack, Scenario, Video 
-from threats import AddThreat
 
 
 def create_app():

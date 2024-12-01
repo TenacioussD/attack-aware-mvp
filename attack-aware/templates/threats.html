@@ -72,9 +72,9 @@
 
         <!--Render 'Add New Threat' only if user is admin-->
        {% if is_admin %}
-       <button class="button">
-        Add New Threat
-       </button>
+             <button onclick=window.location.href='{{ url_for('manage_attacks') }}' class="button">
+                Add New Threat
+             </button>
        {% endif %}
 
     </main>

@@ -1,7 +1,9 @@
 from flask import redirect, url_for
-from flask_login import current_user
+from flask_login import current_user  
+
 
 class AddThreat:
   def post(self):
     if current_user.is_admin:
         return redirect(url_for('/admin/attacks'))
+    return "Unauthorized", 403  # Unauthorized users see a 403 error
