@@ -5,7 +5,7 @@
 
 
 from datetime import datetime
-from flask import flash, redirect, url_for, session
+from flask import flash, redirect, url_for, session, Flask
 from models import user_interaction, db
 
 
@@ -16,8 +16,15 @@ def convertBirthday(birthday_str, flash_category='signup' or 'login'):
     except ValueError:
         flash("Invalid birthday format. Please use YYYY-MM-DD", flash_category)
         return None
+    
+    #used to count how many times commitUserInteraction(topic) is used
+    #will determine topic amounts
+countUserInteractFunc = 0
 
 def commitUserInteraction(topic):
+        
+        global countUserInteractFunc
+        countUserInteractFunc += 1
 
         #Commits user interaction data for a specific topic to the database.
 
@@ -33,8 +40,17 @@ def commitUserInteraction(topic):
 
             #commit changes
            db.session.commit()
+        return countUserInteractFunc
+
+"""#global topic counter will help us count how much threat Topics we have
+#will help determine user progress for profilepage (progress bar)
+countThreatsTopics = 0
 
 def get_total_topics():
-    """Returns the total number of unique topics in the user_interaction table."""
-    total_topics = user_interaction.query.with_entities(user_interaction.topic).distinct().count()
-    return total_topics
+    #Returns the total number of threat topics
+    global countThreatsTopics
+    countThreatsTopics += 1
+    return countThreatsTopics"""
+
+    
+

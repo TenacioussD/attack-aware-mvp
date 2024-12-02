@@ -103,6 +103,7 @@ input {
 
 .flexButtons {
     display: flex; /* This will line the buttons up horizontally */
+    justify-content: space-between;
     width: 100%; /* Ensure it takes the full width of its container */
     max-width: 400px; /* You can adjust this value if you want a specific max width */
     gap: 10px; /* Adds some space between the buttons */
@@ -115,6 +116,7 @@ input {
     text-align: center; /* Ensures text is centered inside the button */
     cursor: pointer; /* Changes cursor to pointer on hover */
     margin: 0; /* Remove any default margin that may affect alignment */
+
 }
 
 /* CSS for popup window (Change Password) starts here */

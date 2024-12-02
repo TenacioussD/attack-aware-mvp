@@ -92,7 +92,7 @@
       <input class="button" type="button" value="Change Password" onclick="showPasswordModal()">
       
 
-      {{ form.submit }}
+      {{ form.submit }} <!--class is confirmButton-->
 
    </div>
 
@@ -138,7 +138,8 @@ Your Progress
    You still have some time to complete your latest training.....
 </p>
 
-<progress class="progressBar" value="{{ user.progress }}" max="100"> </progress>
+<p>{{ progressBar }}% completed</p>
+<progress class="progressBar" value="{{ progressBar }}" max="100"> </progress>
 
 </div>
 

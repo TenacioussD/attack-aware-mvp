@@ -13,8 +13,8 @@ from flask_wtf.csrf import CSRFProtect
 import os
 from profile import UpdateProfile, ProfileForm, changePasswordForm, changePassword
 from flask import send_from_directory
-from utils import commitUserInteraction, get_total_topics
-from models import db, User, CyberAttack, Scenario, Video 
+from utils import commitUserInteraction
+from models import db, User, CyberAttack, Scenario, Video, user_interaction
 
 
 def create_app():
@@ -63,6 +63,9 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 #customisable domain list for email in signup form
 allowed_domains = os.getenv('ALLOWED_DOMAINS', 'gmail.com,yahoo.com,outlook.com').split(',')
 
+#global topic counter will help us count how much threat Topics we have (see utils.py/get_total_topics)
+countUserInteractFunc = 0
+
 # Check if the file extension is allowed
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -106,6 +109,7 @@ def threats():
 def ransomware():
 
     commitUserInteraction('ransomware') #call the function from utils.py with the topic
+    #amountThreatTopics = get_total_topics()
 
     return render_template('ransomware.html')  # Renders ransomware HTML file from templates
 
@@ -113,6 +117,8 @@ def ransomware():
 def social_engineering():
 
     commitUserInteraction('social_engineering') #call the function from utils.py with the topic
+    
+    #amountThreatTopics = get_total_topics()
 
     return render_template('social_engineering.html')  # Renders social engineering HTML file from templates
 
@@ -120,6 +126,8 @@ def social_engineering():
 def cyber_hygiene():
 
     commitUserInteraction('cyber_hygiene')
+    
+    #amountThreatTopics = get_total_topics()
 
     return render_template('cyber_hygiene.html')  # Renders cyber hygiene HTML file from templates
 
@@ -127,13 +135,17 @@ def cyber_hygiene():
 def IoT():
 
     commitUserInteraction('IoT')
+    
+    #amountThreatTopics = get_total_topics()
 
     return render_template('IoT.html')  # Renders IoT HTML file from templates
 
 @app.route('/phishing_scams')
 def phishing_scams():
 
-    commitUserInteraction('phishing_scams')
+    commitUserInteraction('phishing_scams') 
+    
+   #amountThreatTopics = get_total_topics()
 
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
@@ -276,6 +288,17 @@ def profile():
 
     user=current_user
 
+    # Retrieve all interactions for the user
+    userInteractions = user_interaction.query.filter_by(userId=user.id).all()
+    interactedTopics = {interaction.topic for interaction in userInteractions}
+
+    # Dynamically count the total number of distinct topics (or actions)
+    totalTopics = user_interaction.query.distinct(user_interaction.topic).count()
+
+    # Calculate the progress for the progress bar
+    progressBar = (len(interactedTopics) / totalTopics) * 100 if totalTopics > 0 else 0
+
+
     form = ProfileForm()
     # Check if the form is submitted and validated
     if form.validate_on_submit():
@@ -288,19 +311,15 @@ def profile():
         changePassword_instance = changePassword()
         return changePassword_instance.post()
     
-    return render_template('profile.html', form=form, changePassword_form=changePassword_form, user=user)  # Pass form to template
+    return render_template('profile.html', form=form, changePassword_form=changePassword_form, user=user, progressBar = progressBar) 
 
 @app.route('/uploads/<filename>')
 def uploadedFile(filename):
     return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
 
-from utils import get_total_topics
-
 @app.route('/totalTopics')
 def totalTopics():
-    total_topics = get_total_topics()
-    # Do something with total_topics
-    return total_topics
+    return countUserInteractFunc
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
