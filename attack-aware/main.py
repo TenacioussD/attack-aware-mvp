@@ -308,6 +308,12 @@ def login():
     login_instance = Login()
     return login_instance.post()
 
+# Route to Signup
+@app.route('/signup', methods=['POST'])
+def signup():
+    signup_instance = Signup()
+    return signup_instance.post()
+
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
 

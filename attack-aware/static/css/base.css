@@ -121,12 +121,208 @@ header.navbar .auth-buttons .btn-outline-primary {
     color: #fff;
 }
 
+/* LOGIN FORM POPUP */
 
-/*  Extra button that has been removed.
-.navbar .auth-buttons .btn-primary {
-    background-color: #2AAA94;
-    border-color: #2AAA94;
+.blur-background {               /* Background Blur */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(5px);
+    transition: 0.1s ease;
 }
+
+.show-popup .blur-background {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.login-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 720px;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    background: #fff;
+    border: 2px solid #fff;
+    transform: translate(-50%, -100%);
+    border-radius: 5px;
+    z-index: 1050;                /* Ensure it stays on top of all page content */
+}
+
+.show-popup .login-popup {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease, opacity 0.1s;
+}
+
+.login-popup .close-btn {        /* Close Button */
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #878484;
+    cursor: pointer;
+}
+
+.login-popup .login-form {       /* Divides the 2 sections */
+    display: flex;
+}
+
+.login-form .left-info{          /* Left Content */
+    max-width: 330px;
+    width: 100%;
+    color: #fff;
+    display: flex;
+    padding: 0 20px;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.login .left-info {                                  /* Login Background */
+    background: url("../img/img/phishing.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.signup .left-info {                                 /* Signup Background */
+    background: url("../img/img/play.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.login-form h2 {                  /* Main Headings */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-form .form-content {       /* Right Content */
+    width: 100%;
+    padding: 35px;
+}
+
+.login-form form .input-field {               /* Email & Password Box Fields */
+    height: 50px;
+    width: 90%;
+    margin-top: 20px;
+    position: relative;
+}
+
+.login-form form .input-field input {         /* Email & Password Input Fields */
+    width: 100%;
+    height: 80%;
+    outline: none;
+    padding: 0 15px;
+    font-size: 0.95rem;
+    border-radius: 3px;
+    border: 1px solid #717171;
+}
+
+.input-field input:focus {        /* Border of Email and PW Box When Clicked On */
+    border-color: #698f6f;
+}
+
+.input-field input:is(:focus, :valid) {     /* Padding for input transition */
+    padding: 8px 14px 0;
+}
+
+.login-form form .input-field label {         /* Email & Password Labels */
+    position: absolute;
+    top: 42%;
+    left: 14px;
+    color: #717171;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: 0.2s ease;
+}
+
+.login-form form .input-field input:is(:focus, :valid) ~ label {  /* For moving email and password text when input is initiated */
+    color: #516d55;
+    font-size: 0.75rem;
+    transform: translateY(-100%);
+}
+
+.login-form a {                     /* Forget PW and Signup Links */
+    color: #285a31;
+    text-decoration: none;
+}
+
+.login-form a:hover {               /* Forget PW and Signup Links Hover */
+    text-decoration: underline;
+}
+
+.login-form :where(.forgot-password, .policy-text) {      /* Forgot PW & Policy Styling */
+    display: inline-flex;
+    margin-top: 14px;
+    font-size: 0.95rem;
+}
+
+.login-form form button {                       /* Login Button */
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px 0;
+    border-radius: 3px;
+    margin: 25px 0;
+    color: #fff;
+    cursor: pointer;
+    background: #516d55; 
+    transition: 0.2s ease;
+}
+
+.login-form form button:hover {      /* Login Button Hover */
+    background: #3f5843;
+}
+
+.login-form .bottom-link {           /* Signup Styling */
+    text-align: center;
+}
+
+.login-popup .signup,
+.login-popup.show-signup .login  {   /* Removes Signup/Login Section When Not on Display */
+    display: none;
+}
+
+.login-popup.show-signup .signup {   /* Shows Signup Section */
+    display: flex;
+}
+
+.signup .policy-text {              /* Policy Stying */
+    display: flex;
+    align-items: center;
+}
+
+.signup .policy-text input {
+    width: 14px;
+    height: 14px;
+    margin-right: 7px;
+}
+
+/* RESPONSIVE LOGIN/SIGNUP POPUP FORM */
+
+@media (max-width: 760px) {
+    .login-popup {
+        width: 80%;
+    }
+
+    .login-form .left-info {       /* Removes left content when scaled down */
+        display: none;
+    }
+
+    .login-form .form-content {
+        padding: 30px 20px;
+    }
+}
+
 
 /* FOOTER */
 

@@ -49,44 +49,12 @@
             <div class="d-flex align-items-center">
                 <div class="vertical-divider"></div>
                 <div class="auth-buttons">
-                    <a href="/login" class="btn btn-outline-primary me-2">Login</a>
+                    <button class="btn btn-outline-primary" id="show-login-popup">Login</button>
                 </div>
             </div>
         </div>
     </div>
 </header>
-
-<!-- LOGIN POPUP FORM -->
-<div class="login-popup" id="loginPopup">       
-    <div class="close-btn" id="closePopup">
-        <i class="fa-solid fa-x"></i>
-    </div>
-    <div class="login-form login">
-        <div class="left-info">
-            <h2>Welcome Back</h2>
-            <p>Please login using your account information.</p>
-        </div>
-        <div class="form-content">
-            <h2>LOGIN</h2>
-            <form action="{{ url_for('login') }}" method="post">                      
-                <div class="input-field">
-                    <input type="text" name="email" required>
-                    <label>Email</label>
-                </div>
-                <div class="input-field">
-                    <input type="password" name="password" required>
-                    <label>Password</label>
-                </div>
-                <a href="#" class="forgot-password">Forgot Password?</a>
-                <button type="submit" name="action" value="login">Log In</button>
-            </form>
-            <div class="bottom-link">
-                Don't have an account?
-                <a href="#" id="signupLink">Signup</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Main inheritable content -->
 <main> 
@@ -103,6 +71,71 @@
 {% endif %}
 {% endwith %}
 </main>
+
+<!-- LOGIN POP UP FORM -->
+<div class="login-popup">       
+    <div class="close-btn">                   <!-- Close Button -->
+        <i class="fa-solid fa-x"></i>
+    </div>
+    <div class="login-form login">            <!-- LOGIN -->
+        <div class="left-info">
+            <h2>Welcome Back</h2>
+            <p>Please login using your account information.</p>
+        </div>
+        <div class="form-content">
+            <h2>LOGIN</h2>
+            <form action="{{ url_for('login') }} " method="post">                      
+                <div class="input-field">          <!-- Email input -->
+                    <input type="text" name="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-field">          <!-- Password input -->
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot Password?</a>  <!-- Forgot Password Link -->
+                <button type="submit" name="action" value="login">Log In</button>
+            </form>
+            <div class="bottom-link">
+                Don't have an account?
+                <a href="#" id="signup-link">Signup</a>          <!-- Sign Up Link -->
+            </div>
+        </div>
+    </div>
+
+<!-- SIGNUP POPUP FORM -->   
+    <div class="login-form signup">           <!-- SIGNUP -->
+        <div class="left-info">
+            <h2>Create Account</h2>
+            <p>To become a part of our community, please sign up using your personal information.</p>
+        </div>
+        <div class="form-content">
+            <h2>SIGNUP</h2>
+            <form action="{{ url_for('signup') }} " method="post">                        
+                <div class="input-field">            <!-- Insert Email -->
+                    <input type="text" name="email" required>
+                    <label>Enter your email</label>
+                </div>
+                <div class="input-field">                   <!-- Create Password -->
+                    <input type="password" name="password" required>
+                    <label>Create password</label>
+                </div>
+                <div class="policy-text">
+                    <input type="checkbox" id="policy" required>
+                    <label for="policy">
+                        I agree to the 
+                        <a href="#">Terms & Conditions</a>
+                    </label>
+                </div>
+                <button type="submit" name="action" value="signup" >Sign Up</button>
+            </form>
+            <div class="bottom-link">
+                Already have an account?
+                <a href="#" id="login-link">Login</a>          <!-- Login Link -->
+            </div>
+        </div>
+    </div>
+</div>
 
 <footer>
 <!-- Footer content -->
@@ -166,5 +199,6 @@
     </div> 
 </footer>
 
+<script src="{{ url_for('static', filename='js/login_popup.js') }}"></script>
 </body>
 </html>

@@ -1,25 +1,25 @@
 // Function for the login popup
 
-document.addEventListener("DOMContentLoaded", () => {
-    const loginButton = document.querySelector(".auth-buttons .btn-outline-primary");
-    const loginPopup = document.getElementById("loginPopup");
-    const closePopup = document.getElementById("closePopup");
+// LOGIN POPUP FUNCTIONALITY
 
-    // Show the popup when the login button is clicked
-    loginButton.addEventListener("click", (e) => {
-        e.preventDefault();                          // Prevent the default link behavior
-        loginPopup.style.display = "block";          // Shows the popup
+const showPopupBtns = document.querySelectorAll('.btn-outline-primary');
+const formPopup = document.querySelector('.login-popup');
+const closePopupBtn = document.querySelector('.login-popup .close-btn');
+const loginSignUpLink = document.querySelectorAll('.login-form .bottom-link a');
+
+showPopupBtns.forEach(btn => {                        // Show Popup
+    btn.addEventListener('click', () => {
+        document.body.classList.add('show-popup');
     });
+});
 
-    // Close the popup when the close button is clicked
-    closePopup.addEventListener("click", () => {
-        loginPopup.style.display = "none";                      // Hides the popup
-    });
+closePopupBtn.addEventListener('click', () => {       // Close Popup
+    document.body.classList.remove('show-popup');
+});
 
-    // Close the popup when clicking outside of it
-    window.addEventListener("click", (e) => {
-        if (e.target === loginPopup) {
-            loginPopup.style.display = "none";                 // Hides the popup
-        }
+loginSignUpLink.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        formPopup.classList[link.id == "signup-link" ? 'add' : 'remove']('show-signup');
     });
 });
