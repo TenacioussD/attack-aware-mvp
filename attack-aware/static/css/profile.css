@@ -110,13 +110,20 @@ input {
     align-items: center; /* Ensure both buttons are aligned vertically */
 }
 
-.button, .confirmButton {
+.changePassword, .confirmButton {
     flex: 1; /* Ensures both buttons take up equal space */
     padding: 10px; /* Adds some padding to the buttons */
     text-align: center; /* Ensures text is centered inside the button */
     cursor: pointer; /* Changes cursor to pointer on hover */
     margin: 0; /* Remove any default margin that may affect alignment */
 
+}
+
+
+.changePassword {
+  background-image: linear-gradient(to left, #083F9B 0%, #7F56D9 100%);
+  color: white;
+  border: none;
 }
 
 /* CSS for popup window (Change Password) starts here */
@@ -139,7 +146,7 @@ input {
     background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
   }
   
-  .modal-content {
+.modal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
@@ -148,53 +155,66 @@ input {
     border-radius: 8px;
   }
   
-  .close {
+.close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
   }
   
-  .close:hover,
-  .close:focus {
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
   /* CSS for popup window (Change Password) ends here */
 
 
-  .yourProgressContainer {
+.yourProgressContainer {
     margin-top: 60px;
     background-image: linear-gradient(to bottom, #1459CA 7%, #7AA1E3 91%);
     padding-bottom: 15px;
-    width: 100%; /* Ensure the container spans full width */
-    margin-left: 0; /* Remove left margin */
-    margin-right: 0; /* Remove right margin */
+    width: 100%;
+    width: 100vh; /* Set container to full viewport height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
 
 }
 
 
-  .yourProgressGraph, .yourProgressHeading {
+.yourProgressGraph, .yourProgressHeading {
     color: white;
-  }
+}
 
-  .yourProgressHeading {
+.yourProgressHeading {
     margin-left: 20px;
     font-size: 40px;
     font-weight: bold;
-  }
+}
 
-  .yourProgressGraph {
+.yourProgressGraph {
     text-align: center;
     margin-top: 10px;           /* Add space between the graph and the text */
-  }
+}
+
   
-  .progressBar {
+.progressBar {
     display: block;           /* Make the progress bar a block element */
     margin: 20px auto;        /* Centers it horizontally and adds top/bottom space */
     width: 80%;               /* Adjust the width if necessary */
     padding-bottom: 20px;
-  }
+    margin-top: -20px;
+}
+
+.completed-text {
+  color: white; 
+}
+
+.userProgressComplete {
+  padding-left: 70px;
+}
 
