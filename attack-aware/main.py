@@ -210,7 +210,7 @@ def manage_attacks():
 @app.route('/attack/<int:attack_id>')
 def attack(attack_id):
     attack = CyberAttack.query.get_or_404(attack_id)
-    return render_template('attack.html', attack=attack)
+    return render_template('ransomware.html', attack=attack)
 
 @app.route('/admin/remove_attack/<int:attack_id>', methods=['POST'])
 def remove_attack(attack_id):
