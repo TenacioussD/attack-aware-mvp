@@ -46,6 +46,7 @@ def commitUserInteraction(topic):
 #we don't have a database for our threats topics
 #I'm mapping the topics images to use for the 
 # profile page for User's Favorite Topics
+#this data gets called in profile route and profile.html
 topicImage = {
     "Ransomware": "static/img/Ransomware.png",
     "Social Engineering": "static/img/Social_Engineering.png",
@@ -56,7 +57,7 @@ topicImage = {
 
 #I'll also be feeding the start of each Topic 
 # description to use in User's Favorite Topics
-
+#this data gets called in profile route and profile.html
 topicGraph = {
     "Ransomware": "Ransomware is a type of malicious software designed to block access to a computer system...",
     "Social Engineering": "...attacks manipulate people into sharing information that they shouldn’t share...",
