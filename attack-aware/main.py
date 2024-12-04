@@ -278,9 +278,9 @@ def profile():
     userInteractions = user_interaction.query.filter_by(userId=user.id).all()
     interactedTopics = {interaction.topic for interaction in userInteractions}
 
-    # Fetch the total number of topics 
+    # Fetch the total number of topics from utils.py
     ALL_TOPICS
-    totalTopics = len(ALL_TOPICS)
+    totalTopics = len(ALL_TOPICS) 
 
     # Calculate the progress for the progress bar
     progressBar = (len(interactedTopics) / totalTopics) * 100 if totalTopics > 0 else 0
