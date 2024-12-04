@@ -144,6 +144,44 @@ Your Progress
 </div>
 
 
+<div class="userFavTopics">
+
+   <p class="yourFavTopicsText">Your <span class="favText">favorite</span> topics</p>
+
+</div>
+
+<div class="favTopicsRows">
+
+   {% if favTopics %}
+
+    <!--Jinja will dynamically populate the topics based on the amount 
+    that was coded in app.route (limit = 3)-->
+   {% for topic in favTopics %}
+   <div class="favTopicsColumn">
+       <div class="favTopicsCard">
+
+         <img 
+         src="{{ topicImage.get(topic.topic, 'static/images/default.jpg') }}" 
+         alt="{{ topic.topic }}" class="favTopicImg">
+           <span class="userTopicfromDatabase">{{ topic.topic }}</span>
+         
+           <p class="favTopicGraph">
+            {{ topicGraph.get(topic.topic, 'Description not available.') }}
+           </p>
+       </div> 
+   </div>
+   {% endfor %}
+
+   {% else %}
+
+     <p>No topics found</p>
+
+   {% endif %}
+
+</div>
+
+
+
 <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 
 {% endblock %}

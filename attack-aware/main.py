@@ -13,7 +13,7 @@ from flask_wtf.csrf import CSRFProtect
 import os
 from profile import UpdateProfile, ProfileForm, changePasswordForm, changePassword
 from flask import send_from_directory
-from utils import commitUserInteraction
+from utils import commitUserInteraction, topicImage, topicGraph
 from models import db, User, CyberAttack, Scenario, Video, user_interaction
 
 
@@ -108,26 +108,21 @@ def threats():
 @app.route('/ransomware')
 def ransomware():
 
-    commitUserInteraction('ransomware') #call the function from utils.py with the topic
-    #amountThreatTopics = get_total_topics()
+    commitUserInteraction('Ransomware') #call the function from utils.py with the topic
 
     return render_template('ransomware.html')  # Renders ransomware HTML file from templates
 
 @app.route('/social_engineering')
 def social_engineering():
 
-    commitUserInteraction('social_engineering') #call the function from utils.py with the topic
-    
-    #amountThreatTopics = get_total_topics()
+    commitUserInteraction('Social Engineering') #call the function from utils.py with the topic
 
     return render_template('social_engineering.html')  # Renders social engineering HTML file from templates
 
 @app.route('/cyber_hygiene')
 def cyber_hygiene():
 
-    commitUserInteraction('cyber_hygiene')
-    
-    #amountThreatTopics = get_total_topics()
+    commitUserInteraction('Cyber Hygiene')
 
     return render_template('cyber_hygiene.html')  # Renders cyber hygiene HTML file from templates
 
@@ -135,21 +130,16 @@ def cyber_hygiene():
 def IoT():
 
     commitUserInteraction('IoT')
-    
-    #amountThreatTopics = get_total_topics()
 
     return render_template('IoT.html')  # Renders IoT HTML file from templates
 
 @app.route('/phishing_scams')
 def phishing_scams():
 
-    commitUserInteraction('phishing_scams') 
-    
-   #amountThreatTopics = get_total_topics()
+    commitUserInteraction('Phishing Scams') 
 
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
-# Route to render the contact-us page
 
 @app.route('/contact_us')
 def contact_us():
@@ -311,7 +301,14 @@ def profile():
         changePassword_instance = changePassword()
         return changePassword_instance.post()
     
-    return render_template('profile.html', form=form, changePassword_form=changePassword_form, user=user, progressBar = progressBar) 
+    #Query top 3 topics for the current user
+    favTopics = user_interaction.query \
+    .filter_by(userId=current_user.id) \
+    .order_by(user_interaction.clickCount.desc()) \
+    .limit(3) \
+    .all()
+    
+    return render_template('profile.html', form=form, changePassword_form=changePassword_form, user=user, progressBar = progressBar, favTopics=favTopics, topicImage=topicImage, topicGraph=topicGraph) 
 
 @app.route('/uploads/<filename>')
 def uploadedFile(filename):

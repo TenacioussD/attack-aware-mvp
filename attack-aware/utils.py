@@ -42,15 +42,28 @@ def commitUserInteraction(topic):
            db.session.commit()
         return countUserInteractFunc
 
-"""#global topic counter will help us count how much threat Topics we have
-#will help determine user progress for profilepage (progress bar)
-countThreatsTopics = 0
 
-def get_total_topics():
-    #Returns the total number of threat topics
-    global countThreatsTopics
-    countThreatsTopics += 1
-    return countThreatsTopics"""
+#we don't have a database for our threats topics
+#I'm mapping the topics images to use for the 
+# profile page for User's Favorite Topics
+topicImage = {
+    "Ransomware": "static/img/Ransomware.png",
+    "Social Engineering": "static/img/Social_Engineering.png",
+    "Cyber Hygiene": "static/img/Cyber_Hygiene.png",
+    "IoT": "static,img/IoT.png",
+    "Phishing Scams": "static/img/Phishing.png"
+}
+
+#I'll also be feeding the start of each Topic 
+# description to use in User's Favorite Topics
+
+topicGraph = {
+    "Ransomware": "Ransomware is a type of malicious software designed to block access to a computer system...",
+    "Social Engineering": "...attacks manipulate people into sharing information that they shouldn’t share...",
+    "Cyber Hygiene": "...essential if you want to keep yourself protected...",
+    "IoT": "IoT (Internet of Things) device hacking refers to exploiting vulnerabilities in internet-connected devices...",
+    "Phishing Scams": "...a technique used by hackers to trick people into giving personal details or taking an action..."
+}
 
     
 
