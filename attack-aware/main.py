@@ -100,6 +100,7 @@ def make_admin(user_id):
 def threats():
     return render_template('threats.html', is_admin=current_user.is_admin)  #app needs to check if user is admin to allow certain privileges to page
 
+
 # Route to render the ransomware page
 @app.route('/ransomware')
 def ransomware():
