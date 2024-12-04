@@ -100,6 +100,7 @@ def make_admin(user_id):
 def threats():
     return render_template('threats.html', is_admin=current_user.is_admin)  #app needs to check if user is admin to allow certain privileges to page
 
+
 # Route to render the ransomware page
 @app.route('/ransomware')
 def ransomware():
@@ -208,7 +209,7 @@ def manage_attacks():
 @app.route('/attack/<int:attack_id>')
 def attack(attack_id):
     attack = CyberAttack.query.get_or_404(attack_id)
-    return render_template('attack.html', attack=attack)
+    return render_template('ransomware.html', attack=attack)
 
 @app.route('/admin/remove_attack/<int:attack_id>', methods=['POST'])
 def remove_attack(attack_id):
