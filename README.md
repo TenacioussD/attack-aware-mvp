@@ -12,23 +12,33 @@
 
 *Attack Aware* is a minimum viable product (MVP) designed to enhance cybersecurity awareness. This web application aims to educate users about common cyber threats, empowering them to recognize and respond to potential attacks. Through engaging content and interactive features, Attack Aware fosters a proactive approach to cybersecurity, helping individuals and organizations stay safe online.
 
+## Who contributes to the project?
+
+We are three student developers working collaboratively on this project:
+
+Marietjie (MJ) Van der Westhuizen
+Tanisha Dyer
+Richard Hill
+
 
 
 ## Installation Instructions
 
 
-1. pip install flask
-2. pip install flask-login
-3. pip install flask-sqlalchemypip install --upgrade pip
-4. pip install flask flask-admin flask-sqlalchemy
-5. pip install flask-wtf
-6. pip install wtforms
-7. pip install email-validator
+1. Clone our repo: https://github.com/TenacioussD/attack-aware-mvp.git
+2. The flask app you'll be running is called main.py
+3.     pip install flask
+4.     pip install flask-login
+5.     pip install flask-sqlalchemypip install --upgrade pip
+6.     pip install flask flask-admin flask-sqlalchemy
+7.     pip install flask-wtf
+8.     pip install wtforms
+9.     pip install email-validator
 
 
 
 # Admin Login is
 Emain Address: admin@admin.com
 Password: admin
-Admin will be promt to make updates to their profile and at initial login.
+
 
