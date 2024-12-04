@@ -51,7 +51,7 @@ topicImage = {
     "Ransomware": "static/img/Ransomware.png",
     "Social Engineering": "static/img/Social_Engineering.png",
     "Cyber Hygiene": "static/img/Cyber_Hygiene.png",
-    "IoT": "static,img/IoT.png",
+    "IoT": "static/img/IoT.png",
     "Phishing Scams": "static/img/Phishing.png"
 }
 
