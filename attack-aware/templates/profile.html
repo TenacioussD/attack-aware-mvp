@@ -109,7 +109,7 @@
 
                <h2>Change Password</h2>
 
-             <form id="changePasswordForm" method="POST" 
+             <form class="changePasswordForm" id="changePasswordForm" method="POST" 
                    action="{{ url_for('profile') }}">
 
                    {{ changePassword_form.hidden_tag() }} 
@@ -127,7 +127,9 @@
               
 </div>
 
-<!--Create User Progress bar-->
+<!--Create User Progress bar that only generate for users /not admin-->
+
+{% if not current_user.is_admin %}
 
 <div class="yourProgressContainer">
 
@@ -180,7 +182,7 @@ Your Progress
 
 </div>
 
-
+{% endif %}
 
 <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 

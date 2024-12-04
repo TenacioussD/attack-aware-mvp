@@ -308,7 +308,11 @@ def profile():
     .limit(3) \
     .all()
     
-    return render_template('profile.html', form=form, changePassword_form=changePassword_form, user=user, progressBar = progressBar, favTopics=favTopics, topicImage=topicImage, topicGraph=topicGraph) 
+    return render_template('profile.html', form=form, 
+                           changePassword_form=changePassword_form, 
+                           user=user, progressBar = progressBar, 
+                           favTopics=favTopics, topicImage=topicImage, 
+                           topicGraph=topicGraph) 
 
 @app.route('/uploads/<filename>')
 def uploadedFile(filename):
