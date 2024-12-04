@@ -16,15 +16,9 @@ def convertBirthday(birthday_str, flash_category='signup' or 'login'):
     except ValueError:
         flash("Invalid birthday format. Please use YYYY-MM-DD", flash_category)
         return None
-    
-    #used to count how many times commitUserInteraction(topic) is used
-    #will determine topic amounts
-countUserInteractFunc = 0
 
 def commitUserInteraction(topic):
-        
-        global countUserInteractFunc
-        countUserInteractFunc += 1
+
 
         #Commits user interaction data for a specific topic to the database.
 
@@ -40,7 +34,6 @@ def commitUserInteraction(topic):
 
             #commit changes
            db.session.commit()
-        return countUserInteractFunc
 
 
 #we don't have a database for our threats topics
@@ -66,5 +59,8 @@ topicGraph = {
     "Phishing Scams": "...a technique used by hackers to trick people into giving personal details or taking an action..."
 }
 
-    
+#adding a hardcoded list for topics, this can be imporved on when database is added.
+ALL_TOPICS = ['Phishing Scams', 'IoT', 'Social Engineering', 'Ransomware', 'Cyber Hygiene']
+totalTopics = len(ALL_TOPICS)
+
 

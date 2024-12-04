@@ -13,9 +13,8 @@ from flask_wtf.csrf import CSRFProtect
 import os
 from profile import UpdateProfile, ProfileForm, changePasswordForm, changePassword
 from flask import send_from_directory
-from utils import commitUserInteraction, topicImage, topicGraph
+from utils import commitUserInteraction, topicImage, topicGraph, ALL_TOPICS
 from models import db, User, CyberAttack, Scenario, Video, user_interaction
-
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -62,9 +61,6 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 #customisable domain list for email in signup form
 allowed_domains = os.getenv('ALLOWED_DOMAINS', 'gmail.com,yahoo.com,outlook.com').split(',')
-
-#global topic counter will help us count how much threat Topics we have (see utils.py/get_total_topics)
-countUserInteractFunc = 0
 
 # Check if the file extension is allowed
 def allowed_file(filename):
@@ -282,8 +278,9 @@ def profile():
     userInteractions = user_interaction.query.filter_by(userId=user.id).all()
     interactedTopics = {interaction.topic for interaction in userInteractions}
 
-    # Dynamically count the total number of distinct topics (or actions)
-    totalTopics = user_interaction.query.distinct(user_interaction.topic).count()
+    # Fetch the total number of topics 
+    ALL_TOPICS
+    totalTopics = len(ALL_TOPICS)
 
     # Calculate the progress for the progress bar
     progressBar = (len(interactedTopics) / totalTopics) * 100 if totalTopics > 0 else 0
@@ -312,15 +309,11 @@ def profile():
                            changePassword_form=changePassword_form, 
                            user=user, progressBar = progressBar, 
                            favTopics=favTopics, topicImage=topicImage, 
-                           topicGraph=topicGraph) 
+                           topicGraph=topicGraph, totalTopics=totalTopics) 
 
 @app.route('/uploads/<filename>')
 def uploadedFile(filename):
     return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
-
-@app.route('/totalTopics')
-def totalTopics():
-    return countUserInteractFunc
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
