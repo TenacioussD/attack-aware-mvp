@@ -193,7 +193,7 @@ header.navbar .auth-buttons .btn-outline-primary {
 }
 
 .signup .left-info {                                 /* Signup Background */
-    background: url("../img/img/play.png");
+    background: url("../img/img/typing.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -226,7 +226,7 @@ header.navbar .auth-buttons .btn-outline-primary {
 }
 
 .input-field input:focus {        /* Border of Email and PW Box When Clicked On */
-    border-color: #698f6f;
+    border-color: #504EC1;
 }
 
 .input-field input:is(:focus, :valid) {     /* Padding for input transition */
@@ -244,13 +244,13 @@ header.navbar .auth-buttons .btn-outline-primary {
 }
 
 .login-form form .input-field input:is(:focus, :valid) ~ label {  /* For moving email and password text when input is initiated */
-    color: #516d55;
+    color: #2AAA94;
     font-size: 0.75rem;
     transform: translateY(-100%);
 }
 
 .login-form a {                     /* Forget PW and Signup Links */
-    color: #285a31;
+    color: #2AAA94;
     text-decoration: none;
 }
 
@@ -275,12 +275,12 @@ header.navbar .auth-buttons .btn-outline-primary {
     margin: 25px 0;
     color: #fff;
     cursor: pointer;
-    background: #516d55; 
+    background: #2AAA94; 
     transition: 0.2s ease;
 }
 
 .login-form form button:hover {      /* Login Button Hover */
-    background: #3f5843;
+    background: #7352E6;
 }
 
 .login-form .bottom-link {           /* Signup Styling */
