@@ -1,5 +1,7 @@
 <!-- Inheritable base template -->
 
+<!-- Inheritable base template -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,12 +51,7 @@
             <div class="d-flex align-items-center">
                 <div class="vertical-divider"></div>
                 <div class="auth-buttons">
-                    {% if current_user.is_authenticated %}
-                        <span class="navbar-text me-3">Welcome, {{ current_user.firstName or current_user.email }}</span>
-                        <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Logout</a>
-                    {% else %}
-                        <button class="btn btn-outline-primary" id="show-login-popup">Login</button>
-                    {% endif %}
+                    <button class="btn btn-outline-primary" id="show-login-popup">Login</button>
                 </div>
             </div>
         </div>
@@ -89,16 +86,17 @@
         </div>
         <div class="form-content">
             <h2>LOGIN</h2>
-            <form action="{{ url_for('login') }} " method="post">                      
-                <div class="input-field">          <!-- Email input -->
-                    <input type="text" name="email" required>
-                    <label>Email</label>
+            <form action="{{ url_for('login') }} " method="post">  
+                {{ login_form.hidden_tag() }} <!-- This includes the CSRF token -->
+                <div class="input-field">
+                    <!-- Email input -->
+                    {{ login_form.email.label }} {{ login_form.email(class='validate custom-email-class', id='email') }}
                 </div>
-                <div class="input-field">          <!-- Password input -->
-                    <input type="password" name="password" required>
-                    <label>Password</label>
+                <div class="input-field">
+                    <!-- Password input -->
+                    {{ login_form.password.label }} {{ login_form.password(class='validate custom-password-class', id='password') }}
                 </div>
-                <a href="#" class="forgot-password">Forgot Password?</a>  <!-- Forgot Password Link -->
+                <a href="#" class="forgot-password">Forgot Password?</a> <!-- Forgot Password Link -->
                 <button type="submit" name="action" value="login">Log In</button>
             </form>
             <div class="bottom-link">
@@ -108,7 +106,7 @@
         </div>
     </div>
 
-<!-- SIGNUP POPUP FORM -->   
+    <!-- SIGNUP POPUP FORM -->   
     <div class="login-form signup">           <!-- SIGNUP -->
         <div class="left-info">
             <!--<h2>Create Account</h2>
@@ -116,14 +114,15 @@
         </div>
         <div class="form-content">
             <h2>SIGNUP</h2>
-            <form action="{{ url_for('signup') }} " method="post">                        
-                <div class="input-field">            <!-- Insert Email -->
-                    <input type="text" name="email" required>
-                    <label>Enter your email</label>
+            <form action="{{ url_for('signup') }}" method="post"> <!-- Points to signup route -->
+                {{ signup_form.hidden_tag() }} <!-- This includes the CSRF token -->
+                <div class="input-field">
+                    <!-- Email input -->
+                    {{ signup_form.emailSignup.label }} {{ signup_form.emailSignup(class='validate custom-email-class', id='email') }}
                 </div>
-                <div class="input-field">                   <!-- Create Password -->
-                    <input type="password" name="password" required>
-                    <label>Create password</label>
+                <div class="input-field">
+                    <!-- Password input -->
+                    {{ signup_form.newPassword.label }} {{ signup_form.newPassword(class='validate custom-password-class', id='password') }}
                 </div>
                 <div class="policy-text">
                     <input type="checkbox" id="policy" required>
