@@ -49,7 +49,12 @@
             <div class="d-flex align-items-center">
                 <div class="vertical-divider"></div>
                 <div class="auth-buttons">
-                    <button class="btn btn-outline-primary" id="show-login-popup">Login</button>
+                    {% if current_user.is_authenticated %}
+                        <span class="navbar-text me-3">Welcome, {{ current_user.firstName or current_user.email }}</span>
+                        <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Logout</a>
+                    {% else %}
+                        <button class="btn btn-outline-primary" id="show-login-popup">Login</button>
+                    {% endif %}
                 </div>
             </div>
         </div>
