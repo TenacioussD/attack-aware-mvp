@@ -5,7 +5,7 @@
 
 
 from datetime import datetime
-from flask import flash, redirect, url_for, session
+from flask import flash, redirect, url_for, session, Flask
 from models import user_interaction, db
 
 
@@ -18,6 +18,7 @@ def convertBirthday(birthday_str, flash_category='signup' or 'login'):
         return None
 
 def commitUserInteraction(topic):
+
 
         #Commits user interaction data for a specific topic to the database.
 
@@ -34,7 +35,32 @@ def commitUserInteraction(topic):
             #commit changes
            db.session.commit()
 
-def get_total_topics():
-    """Returns the total number of unique topics in the user_interaction table."""
-    total_topics = user_interaction.query.with_entities(user_interaction.topic).distinct().count()
-    return total_topics
+
+#we don't have a database for our threats topics
+#I'm mapping the topics images to use for the 
+# profile page for User's Favorite Topics
+#this data gets called in profile route and profile.html
+topicImage = {
+    "Ransomware": "static/img/Ransomware.png",
+    "Social Engineering": "static/img/Social_Engineering.png",
+    "Cyber Hygiene": "static/img/Cyber_Hygiene.png",
+    "IoT": "static/img/IoT.png",
+    "Phishing Scams": "static/img/Phishing.png"
+}
+
+#I'll also be feeding the start of each Topic 
+# description to use in User's Favorite Topics
+#this data gets called in profile route and profile.html
+topicGraph = {
+    "Ransomware": "Ransomware is a type of malicious software designed to block access to a computer system...",
+    "Social Engineering": "...attacks manipulate people into sharing information that they shouldn’t share...",
+    "Cyber Hygiene": "...essential if you want to keep yourself protected...",
+    "IoT": "IoT (Internet of Things) device hacking refers to exploiting vulnerabilities in internet-connected devices...",
+    "Phishing Scams": "...a technique used by hackers to trick people into giving personal details or taking an action..."
+}
+
+#adding a hardcoded list for topics, this can be imporved on when database is added.
+ALL_TOPICS = ['Phishing Scams', 'IoT', 'Social Engineering', 'Ransomware', 'Cyber Hygiene']
+totalTopics = len(ALL_TOPICS)
+
+

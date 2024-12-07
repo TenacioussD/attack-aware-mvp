@@ -134,4 +134,5 @@ class changePassword():
     else:
         flash("Incorrect current password.", "error")
         return redirect(url_for('profile'))
+    
 
