@@ -139,9 +139,11 @@ def phishing_scams():
 
 # Route to render the contact-us page
 
-@app.route('/contact_us')
+@app.route('/contact_us',  methods=['GET', 'POST'])
 def contact_us():
-    return render_template('contact_us.html')  # Renders contact us HTML file from templates
+    login_form = LoginForm()   # Passes login form to contact page
+    signup_form = SignupForm()  # Passes signup form to contact page
+    return render_template('contact_us.html', login_form=login_form, signup_form=signup_form)  # Renders contact us HTML file from templates
 
 @app.route('/admin/attacks', methods=['GET', 'POST'])
 def manage_attacks():
