@@ -16,8 +16,8 @@
 
 We are three student developers working collaboratively on this project:
 
-Marietjie (MJ) Van der Westhuizen
-Tanisha Dyer
+Marietjie (MJ) Van der Westhuizen,
+Tanisha Dyer, and
 Richard Hill
 
 
