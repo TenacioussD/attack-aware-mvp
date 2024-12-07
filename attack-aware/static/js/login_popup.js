@@ -1,5 +1,3 @@
-// Function for the login popup
-
 // LOGIN POPUP FUNCTIONALITY
 
 const showPopupBtns = document.querySelectorAll('.btn-outline-primary');
