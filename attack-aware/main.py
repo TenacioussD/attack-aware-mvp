@@ -13,9 +13,8 @@ from flask_wtf.csrf import CSRFProtect
 import os
 from profile import UpdateProfile, ProfileForm, changePasswordForm, changePassword
 from flask import send_from_directory
-from utils import commitUserInteraction, get_total_topics
-from models import db, User, CyberAttack, Scenario, Video 
-
+from utils import commitUserInteraction, topicImage, topicGraph, ALL_TOPICS
+from models import db, User, CyberAttack, Scenario, Video, user_interaction
 
 def create_app():
     app = Flask(__name__)  # Initializes the application
@@ -101,25 +100,26 @@ def make_admin(user_id):
 def threats():
     return render_template('threats.html', is_admin=current_user.is_admin)  #app needs to check if user is admin to allow certain privileges to page
 
+
 # Route to render the ransomware page
 @app.route('/ransomware')
 def ransomware():
 
-    commitUserInteraction('ransomware') #call the function from utils.py with the topic
+    commitUserInteraction('Ransomware') #call the function from utils.py with the topic
 
     return render_template('ransomware.html')  # Renders ransomware HTML file from templates
 
 @app.route('/social_engineering')
 def social_engineering():
 
-    commitUserInteraction('social_engineering') #call the function from utils.py with the topic
+    commitUserInteraction('Social Engineering') #call the function from utils.py with the topic
 
     return render_template('social_engineering.html')  # Renders social engineering HTML file from templates
 
 @app.route('/cyber_hygiene')
 def cyber_hygiene():
 
-    commitUserInteraction('cyber_hygiene')
+    commitUserInteraction('Cyber Hygiene')
 
     return render_template('cyber_hygiene.html')  # Renders cyber hygiene HTML file from templates
 
@@ -133,11 +133,10 @@ def IoT():
 @app.route('/phishing_scams')
 def phishing_scams():
 
-    commitUserInteraction('phishing_scams')
+    commitUserInteraction('Phishing Scams') 
 
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
-# Route to render the contact-us page
 
 @app.route('/contact_us',  methods=['GET', 'POST'])
 def contact_us():
@@ -212,7 +211,7 @@ def manage_attacks():
 @app.route('/attack/<int:attack_id>')
 def attack(attack_id):
     attack = CyberAttack.query.get_or_404(attack_id)
-    return render_template('attack.html', attack=attack)
+    return render_template('ransomware.html', attack=attack)
 
 @app.route('/admin/remove_attack/<int:attack_id>', methods=['POST'])
 def remove_attack(attack_id):
@@ -278,6 +277,18 @@ def profile():
 
     user=current_user
 
+    # Retrieve all interactions for the user
+    userInteractions = user_interaction.query.filter_by(userId=user.id).all()
+    interactedTopics = {interaction.topic for interaction in userInteractions}
+
+    # Fetch the total number of topics from utils.py
+    ALL_TOPICS
+    totalTopics = len(ALL_TOPICS) 
+
+    # Calculate the progress for the progress bar
+    progressBar = (len(interactedTopics) / totalTopics) * 100 if totalTopics > 0 else 0
+
+
     form = ProfileForm()
     # Check if the form is submitted and validated
     if form.validate_on_submit():
@@ -290,7 +301,18 @@ def profile():
         changePassword_instance = changePassword()
         return changePassword_instance.post()
     
-    return render_template('profile.html', form=form, changePassword_form=changePassword_form, user=user)  # Pass form to template
+    #Query top 3 topics for the current user
+    favTopics = user_interaction.query \
+    .filter_by(userId=current_user.id) \
+    .order_by(user_interaction.clickCount.desc()) \
+    .limit(3) \
+    .all()
+    
+    return render_template('profile.html', form=form, 
+                           changePassword_form=changePassword_form, 
+                           user=user, progressBar = progressBar, 
+                           favTopics=favTopics, topicImage=topicImage, 
+                           topicGraph=topicGraph, totalTopics=totalTopics) 
 
 @app.route('/uploads/<filename>')
 def uploadedFile(filename):
