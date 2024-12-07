@@ -316,6 +316,38 @@ def profile():
 def uploadedFile(filename):
     return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
 
+from utils import get_total_topics
+
+@app.route('/totalTopics')
+def totalTopics():
+    total_topics = get_total_topics()
+    # Do something with total_topics
+    return total_topics
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    login_form = LoginForm()
+
+    # Handles the login form
+    if login_form.validate_on_submit():
+        login_instance = Login()  # Create an instance of Login
+        return login_instance.post()
+
+    # Render both forms in the base template
+    return render_template('base.html', login_form=login_form)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    signup_form = SignupForm()
+
+    # Handle the signup form
+    if signup_form.validate_on_submit():
+        signup_instance = Signup()  # Create an instance of Signup
+        return signup_instance.post()
+
+    # Render both forms in the base template
+    return render_template('base.html', signup_form=signup_form)
+
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
 
