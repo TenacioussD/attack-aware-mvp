@@ -38,7 +38,7 @@ Richard Hill
 
 
 # Admin Login is
-Emain Address: admin@admin.com
+Email Address: admin@admin.com
 Password: admin
 
 
