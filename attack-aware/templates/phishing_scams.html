@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phishing Scams</title>
-    <!-- Use Flask's url_for to dynamically generate the path to your static CSS file -->
+{% extends "base.html" %}
+
+{% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/phishing_scams.css') }}">
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
     <div class="header"> <!-- Header section -->
         <h1>Phishing Scams</h1>
-        <div class="blue-line"></div>                    <!-- Blue line -->
+        <div class="blue-line"></div> <!-- Blue line -->
     </div>
 
     <div class="content"> <!-- Main Content of page -->
 
-
-      <!-- Full-width image section -->
-      <div class="image-section">
-         <img src="{{ url_for('static', filename='img/img/phishing.png') }}" alt="phishing_scams Image">
-      </div>
+        <!-- Full-width image section -->
+        <div class="image-section">
+            <img src="{{ url_for('static', filename='img/img/phishing.png') }}" alt="phishing_scams Image">
+        </div>
 
         <div class="section">
             <h2 class="phishing_scam-heading">What is <span class="highlight">a Phishing Scam?</span></h2>
@@ -44,28 +40,25 @@
         <div class="section">
             <h2 class="ransomware-heading">What to Do If You’re a victim of <span class="highlight">Phishing Scam?</span></h2>
 
+            <!-- Warning message styled as per the requirements -->
+            <div class="dangerous-action">
+                <span class="highlight">DONT</span> <span class="bold">GET</span> <span class="white">HOOKED</span>
+            </div>
 
-        <!-- Warning message styled as per the requirements -->
-        <div class="dangerous-action">
-             <span class="highlight">DONT</span> <span class="bold">GET</span> <span class="white">HOOKED</span>
-        </div>
-
-             <ol>
-                <li>Disconnect Your Device from the Internet - In order to reduce the risk of malware propagating throughout your network, the first step to take is to disconnect your device from the network. Either locate your Wi-Fi settings and disconnect from the network or simply unplug the internet cable from your device..</li>
+            <ol>
+                <li>Disconnect Your Device from the Internet - In order to reduce the risk of malware propagating throughout your network, the first step to take is to disconnect your device from the network. Either locate your Wi-Fi settings and disconnect from the network or simply unplug the internet cable from your device.</li>
                 <li>Change Passwords - Change the passwords of the hacked device, your home router, and any associated accounts. Ensure the new passwords are strong and unique for each device and account. If the device has a default password, replace it right away.</li>
-                <li>Check for Signs of Identify Theft - If you believe that you have been the victim of a phishing scam, you should review all relevant accounts for signs of identity theft. For example, you will need to look at your bank statements for suspicious transactions. In most cases, your bank will alert you of any suspicious account activity.</li>
+                <li>Check for Signs of Identity Theft - If you believe that you have been the victim of a phishing scam, you should review all relevant accounts for signs of identity theft. For example, you will need to look at your bank statements for suspicious transactions. In most cases, your bank will alert you of any suspicious account activity.</li>
                 <li>Take a Backup and Update Your Software - It’s a good idea to take a backup of your data following a cyber-attack in case any of your data gets erased during the remediation process. You will also need to ensure that all software is patched in a timely manner as many forms of malware will try to exploit software vulnerabilities in order to spread to other parts of the network.</li>
-             </ol>
+            </ol>
         </div>
 
-
-          <div class="video-section">
-        <div class="video-block">
-          <h3><span class="info-text">For more Information</span>, <span class="highlight-text">watch this</span></h3>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/4lcAZgB_iVg" frameborder="0" allowfullscreen></iframe>
+        <div class="video-section">
+            <div class="video-block">
+                <h3><span class="info-text">For more Information</span>, <span class="highlight-text">watch this</span></h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/4lcAZgB_iVg" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
 
-</div>
-
-</body>
-</html>
+    </div>
+{% endblock %}

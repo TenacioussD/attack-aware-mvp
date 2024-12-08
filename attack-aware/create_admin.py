@@ -1,21 +1,24 @@
 from models import db, User
 from werkzeug.security import generate_password_hash
+import os
+
+admin_email = os.getenv('ADMIN_EMAIL', 'admin@admin.com')
+admin_password = os.getenv('ADMIN_PASSWORD', 'admin')
+
 
 def create_initial_admin():
-    # Check if an admin user already exists
-    admin_user = User.query.filter_by(email='admin@admin.com').first()
-    if not admin_user:
-        # Create the admin user with predefined values
-        admin_user = User(
-            firstName='admin',
-            lastName='admin',
-            email='admin@admin.com',
-            password=generate_password_hash('admin'),  # Use a secure hash for the password
-            is_admin=True
-        )
-        db.session.add(admin_user)
-        db.session.commit()
+    # Check if an admin already exists
+    existing_admin = User.query.filter_by(is_admin=True).first()
+    if existing_admin:
+        return
 
-# Run this function to seed the database
-if __name__ == "__main__":
-    create_initial_admin()
+    # If no admin exists, create one
+    admin_user = User(
+        firstName='Admin',
+        lastName='User',
+        email=admin_email,
+        password=generate_password_hash(admin_password),
+        is_admin=True
+    )
+    db.session.add(admin_user)
+    db.session.commit()

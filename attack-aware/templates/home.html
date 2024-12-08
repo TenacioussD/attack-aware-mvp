@@ -42,24 +42,17 @@
 
 
 <form action=" {{ url_for('home') }} " method="post"> 
-
-  {{ login_form.hidden_tag() }}  <!--CSFR tag protects against 
-                                  Cross-Site Request Forgery (CSRF) 
-                                 attacks-->
-
-<div class="inputContainer"> <!-- New container for inputs and button -->
-  <div class="emailDiv">
-    {{ login_form.email.label }} {{ login_form.email }}
-  </div>
-
-  <div class="passwordDiv">
-   {{ login_form.password.label }} {{ login_form.password }}
-  </div>
-
-  <div class="loginDiv" >
-
-        {{ login_form.submit }}
-  </div>
+  <input type="hidden" name="csrf_token" id="csrf_token_login1" value="{{ login_form.csrf_token._value() }}"> <!-- CSRF token with unique ID -->
+  <div class="inputContainer"> <!-- New container for inputs and button -->
+    <div class="emailDiv">
+      {{ login_form.email.label }} {{ login_form.email(autocomplete="email") }} <!-- Added auto complete for email -->
+    </div>
+    <div class="passwordDiv">
+      {{ login_form.password.label }} {{ login_form.password }}
+    </div>
+    <div class="loginDiv" >
+      {{ login_form.submit(id="submit_login") }} <!-- Added unique ID for submit button as need unique names if more than one on page -->
+    </div>
 
   <div class="archContainer">
     <img class="largeArchImg" src="{{ url_for('static', filename='img/icons/Arch.png') }}">
@@ -89,9 +82,7 @@
 <div class="signUpForm">
 
 <form action="{{ url_for('home') }}" method="post">    
-  
-  {{ signup_form.hidden_tag() }}
-
+  <input type="hidden" name="csrf_token" id="csrf_token_signup1" value="{{ signup_form.csrf_token._value() }}">
       <h1>Sign Up</h1>
       <p>Create an Account</p>
       <br>
@@ -119,10 +110,10 @@
 
     </div>
 
-      {{ signup_form.email }}
+      {{ signup_form.emailSignup }}
       {{ signup_form.newPassword }}
       {{ signup_form.birthday }}
-      {{ signup_form.submit }}
+      {{ signup_form.submit(id="submit_signup") }} <!-- Added unique identifier -->
 
 </form>
 

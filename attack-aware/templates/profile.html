@@ -86,18 +86,103 @@
    {{ form.lastName.label }} {{ form.lastName(value=user.lastName) }}
    {{ form.email.label }} {{ form.email(value=user.email) }}
    {{ form.birthday.label }} {{ form.birthday(value=user.birthday.strftime('%Y-%m-%d') if user.birthday else '') }}
-
-
+         
    <div class="flexButtons">
-      <input class="button" name="" type="button" value="Change Password">
-      {{ form.submit }}
+      <!-- Change Password Button -->
+      <input class="changePassword" type="button" value="Change Password" onclick="showPasswordModal()">
+
+      {{ form.submit }} 
+
    </div>
-   </div>
+</div>
 
    </form>
 
 
+
+         <div id="passwordModal" class="modal">
+
+            <div class="modal-content">
+               <span class="close" onclick="closePasswordModal()">
+                   &times;
+               </span>
+
+               <h2>Change Password</h2>
+
+             <form class="changePasswordForm" id="changePasswordForm" method="POST" 
+                   action="{{ url_for('profile') }}">
+
+                   {{ changePassword_form.hidden_tag() }} 
+
+                      {{ changePassword_form.oldPassword.label }}
+                      {{ changePassword_form.oldPassword }}                        
+
+                      {{ changePassword_form.newPassword.label }}
+                      {{ changePassword_form.newPassword }}                          
+
+                      {{ changePassword_form.submit }}      
+             </form>
+             
+           </div>
+              
 </div>
+
+<!--Create User Progress bar that only generate for users /not admin-->
+
+{% if not current_user.is_admin %}
+
+<div class="yourProgressContainer">
+
+<div class="yourProgressHeading">
+Your Progress
+</div>
+<p class="yourProgressGraph">
+   You still have some time to complete your latest training.....
+</p>
+
+<p class="userProgressComplete">{{ progressBar }}%  <span class="completed-text">completed</span></p>
+<progress class="progressBar" value="{{ progressBar }}" min="0" max="100" > </progress>
+
+</div>
+
+
+<div class="userFavTopics">
+
+   <p class="yourFavTopicsText">Your <span class="favText">favorite</span> topics</p>
+
+</div>
+
+<div class="favTopicsRows">
+
+   {% if favTopics %}
+
+    <!--Jinja will dynamically populate the topics based on the amount 
+    that was coded in app.route (limit = 3)-->
+   {% for topic in favTopics %}
+   <div class="favTopicsColumn">
+       <div class="favTopicsCard">
+
+         <img 
+         src="{{ topicImage.get(topic.topic, 'static/images/default.jpg') }}" 
+         alt="{{ topic.topic }}" class="favTopicImg">
+           <span class="userTopicfromDatabase">{{ topic.topic }}</span>
+         
+           <p class="favTopicGraph">
+            {{ topicGraph.get(topic.topic, 'Description not available.') }}
+           </p>
+       </div> 
+   </div>
+   {% endfor %}
+
+   {% else %}
+
+     <p>No topics found</p>
+
+   {% endif %}
+
+</div>
+
+{% endif %}
 
 <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 
