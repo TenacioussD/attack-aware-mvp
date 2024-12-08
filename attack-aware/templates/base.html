@@ -55,7 +55,7 @@
                     {% if current_user.is_authenticated %}
                         <!-- Logout button if the user is logged in -->
                         <form action="{{ url_for('logout') }}" method="post">
-                            <button class="btn btn-outline-primary" type="submit" id="logout-btn">Logout</button>
+                            <button class="btn btn-outline-primary" id="logoutBtn">Logout</button>
                         </form>
                     {% else %}
                         <!-- Login button if the user is not logged in -->
@@ -161,9 +161,7 @@
         <div class="form-content">
             <h2>LOGIN</h2>
             <form action="{{ url_for('login') }} " method="post">  
-                {% if login_form %}
-                    {{ login_form.hidden_tag() }}  <!-- This includes the CSRF token -->
-                {% endif %}  
+                <input type="hidden" name="csrf_token" id="csrf_token_login" value="{{ login_form.csrf_token._value() }}">  <!-- Manually render CSRF token -->  
                 <div class="input-field">
                     <!-- Email input -->
                     {{ login_form.email.label }} 
@@ -193,7 +191,7 @@
         <div class="form-content">
             <h2>SIGNUP</h2>
             <form action="{{ url_for('signup') }}" method="post"> <!-- Points to signup route -->
-                {{ signup_form.hidden_tag() }}  <!-- This includes the CSRF token -->
+                <input type="hidden" name="csrf_token" id="csrf_token_signup" value="{{ signup_form.csrf_token._value() }}">  <!-- Manually render CSRF token -->
                 <div class="input-field">
                     <!-- Email input -->
                     {{ signup_form.emailSignup.label }}

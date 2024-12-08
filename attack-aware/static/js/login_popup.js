@@ -5,7 +5,6 @@ const formPopup = document.querySelector('.login-popup');
 const closePopupBtn = document.querySelector('.login-popup .close-btn');
 const loginSignUpLink = document.querySelectorAll('.login-form .bottom-link a');
 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');  // Extracts the CSRF token from the meta tag
-const logoutBtn = document.getElementById('logout-btn'); // Gets the logout button
 
 
 // Shows the popup when the user clicks on the login button
@@ -29,31 +28,37 @@ loginSignUpLink.forEach(link => {
 
 // LOGOUT FUNCTIONALITY
 
-logoutBtn.addEventListener('click', function(e) {
-    e.preventDefault();                 // Prevents the default form submission
+document.addEventListener('DOMContentLoaded', () => {
+    const checkForLogoutBtn = setInterval(() => {
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();  // Prevents the default form submission
 
-    // Hides the login popup before logout
-    document.body.classList.remove('show-popup');
-    
-    // Creates a POST request using Fetch API
-    fetch('/logout', {
-        method: 'POST',       // POST request for logout
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded', 
-            'X-CSRFToken': csrfToken    // Includes the CSRF token in the request header
-        },
-        body: new URLSearchParams({ csrf_token: csrfToken })  // Send CSRF token in the request body
-    })
-
-    .then(response => {
-        if (response.ok) {
-            window.location.href = '/';   // Redirects after logout
-        } else {
-            alert("Logout failed!");
+                // Hides the login popup before logout
+                document.body.classList.remove('show-popup');
+            
+                // Creates a POST request using Fetch API
+                fetch('/logout', {
+                    method: 'POST',  // POST request for logout
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': csrfToken  // Includes the CSRF token in the request header
+                    },
+                    body: new URLSearchParams({ csrf_token: csrfToken })  // Send CSRF token in the request body
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/';  // Redirects after logout
+                    } else {
+                        alert("Logout failed!");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during logout:', error);
+                });
+            });
+            clearInterval(checkForLogoutBtn);  // Clears the interval once the logout button is found
         }
-    })
-
-    .catch(error => {
-        console.error('Error during logout:', error);
-    });
+    }, 100);  // Checks every 100ms until the button is found
 });
