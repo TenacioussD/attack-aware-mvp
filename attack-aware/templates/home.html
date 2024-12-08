@@ -45,7 +45,7 @@
   <input type="hidden" name="csrf_token" id="csrf_token_login1" value="{{ login_form.csrf_token._value() }}"> <!-- CSRF token with unique ID -->
   <div class="inputContainer"> <!-- New container for inputs and button -->
     <div class="emailDiv">
-      {{ login_form.email.label }} {{ login_form.email }}
+      {{ login_form.email.label }} {{ login_form.email(autocomplete="email") }} <!-- Added auto complete for email -->
     </div>
     <div class="passwordDiv">
       {{ login_form.password.label }} {{ login_form.password }}

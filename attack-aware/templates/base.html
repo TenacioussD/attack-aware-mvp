@@ -165,7 +165,7 @@
                 <div class="input-field">
                     <!-- Email input -->
                     {{ login_form.email.label }} 
-                    {{ login_form.email(class='form-control', id='email_login') }}
+                    {{ login_form.email(class='form-control', id='email_login', autocomplete='email') }}
                 </div>
                 <div class="input-field">
                     <!-- Password input -->
@@ -195,7 +195,7 @@
                 <div class="input-field">
                     <!-- Email input -->
                     {{ signup_form.emailSignup.label }}
-                    {{ signup_form.emailSignup(class='form-control', id='email_signup') }}  <!-- Added unique IDs -->
+                    {{ signup_form.emailSignup(class='form-control', id='email_signup', autocomplete='email') }}  <!-- Added unique IDs -->
                 </div>
                 <div class="input-field">
                     <!-- Password input -->
