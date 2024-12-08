@@ -20,7 +20,7 @@ def create_app():
     app.secret_key = 'attackaware'  # Needed for flashing messages
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_profile.db'  # The database that will be created
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = 'your-secret-key'
+    app.config['SECRET_KEY'] = '123456'
     app.config['UPLOAD_FOLDER'] = 'static/uploads'
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit to files to avoid overloads
     app.config['WTF_CSRF_TIME_LIMIT'] = 3600  # Set the expiration time to 1 hour (in seconds)
@@ -98,7 +98,10 @@ def make_admin(user_id):
 
 @app.route('/threats')
 def threats():
-    return render_template('threats.html', is_admin=current_user.is_admin)  #app needs to check if user is admin to allow certain privileges to page
+    login_form = LoginForm()
+    signup_form = SignupForm()
+
+    return render_template('threats.html', is_admin=current_user.is_admin, login_form=login_form, signup_form=signup_form)  #app needs to check if user is admin to allow certain privileges to page
 
 
 # Route to render the ransomware page
@@ -350,13 +353,19 @@ def signup():
     # Render the form in the home template
     return render_template('home.html', signup_form=signup_form, login_form=login_form)
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 @login_required
 def logout():
-    logout_user()  # clears the session data
-    flash('You have logged out.', 'login') #let flash pop-up on home login form
-    return redirect(url_for('home'))
-
+    app.logger.info("CSRF Token: %s", request.form.get('_csrf_token'))  # Log CSRF token for debugging
+    
+    try:
+        logout_user()
+        flash("You have successfully logged out.", 'info')
+        return redirect(url_for('home'))
+    except Exception as e:
+        flash(f"An error occurred: {str(e)}", 'danger')
+        return redirect(url_for('home'))
+    
 #Error handlers
 @app.errorhandler(404)
 def page_not_found(e):
@@ -365,6 +374,14 @@ def page_not_found(e):
 @app.errorhandler(500)
 def server_error(e):
     return render_template('500.html'), 500
+
+# Context processor to handle login and signup instances across all pages
+@app.context_processor
+def inject_forms():
+    return {
+        'login_form': LoginForm(),
+        'signup_form': SignupForm()
+    }
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made
