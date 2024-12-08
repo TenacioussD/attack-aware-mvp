@@ -7,7 +7,6 @@ from flask_login import current_user, LoginManager, login_required, logout_user
 from login import Login, LoginForm
 from admin import Admin
 from create_admin import create_initial_admin
-from models import db, User, CyberAttack, Scenario
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import CSRFProtect
 import os
@@ -26,6 +25,7 @@ def create_app():
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit to files to avoid overloads
     app.config['WTF_CSRF_TIME_LIMIT'] = 3600  # Set the expiration time to 1 hour (in seconds)
     app.config['WTF_CSRF_SECRET_KEY'] = 'another-random-key'
+    app.config['WTF_CSRF_ENABLED'] = True
 
     # Check if the uploads folder exists, create it if it does not
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
@@ -92,7 +92,7 @@ def make_admin(user_id):
         flash("You do not have permission to perform this action.", 'admin')
         return redirect(url_for('home'))
 
-    result = Admin.promore_to_admin(user_id)
+    result = Admin.promote_to_admin(user_id) # Fixed a typo in the function name
     flash(result)
     return redirect(url_for('home'))
 
@@ -256,13 +256,6 @@ def remove_video(video_id):
     db.session.commit()
     return redirect(url_for('manage_videos'))
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    flash('You have logged out.', 'login') #let flash pop-up on home login form
-    return redirect(url_for('home'))
-
 @login_manager.user_loader
 def load_user(user_id):
     user = User.query.get(int(user_id))
@@ -288,7 +281,6 @@ def profile():
     # Calculate the progress for the progress bar
     progressBar = (len(interactedTopics) / totalTopics) * 100 if totalTopics > 0 else 0
 
-
     form = ProfileForm()
     # Check if the form is submitted and validated
     if form.validate_on_submit():
@@ -308,8 +300,14 @@ def profile():
     .limit(3) \
     .all()
     
+     # Instantiate the login and signup forms
+    login_form = LoginForm()
+    signup_form = SignupForm()
+    
     return render_template('profile.html', form=form, 
-                           changePassword_form=changePassword_form, 
+                           changePassword_form=changePassword_form,
+                           login_form=login_form,
+                           signup_form=signup_form, 
                            user=user, progressBar = progressBar, 
                            favTopics=favTopics, topicImage=topicImage, 
                            topicGraph=topicGraph, totalTopics=totalTopics) 
@@ -329,26 +327,44 @@ def totalTopics():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
+    signup_form = SignupForm()
 
     # Handles the login form
     if login_form.validate_on_submit():
         login_instance = Login()  # Create an instance of Login
         return login_instance.post()
 
-    # Render both forms in the base template
-    return render_template('base.html', login_form=login_form)
+    # Render the form in the home template
+    return render_template('home.html', login_form=login_form, signup_form=signup_form)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     signup_form = SignupForm()
+    login_form = LoginForm()
 
     # Handle the signup form
     if signup_form.validate_on_submit():
         signup_instance = Signup()  # Create an instance of Signup
         return signup_instance.post()
 
-    # Render both forms in the base template
-    return render_template('base.html', signup_form=signup_form)
+    # Render the form in the home template
+    return render_template('home.html', signup_form=signup_form, login_form=login_form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()  # clears the session data
+    flash('You have logged out.', 'login') #let flash pop-up on home login form
+    return redirect(url_for('home'))
+
+#Error handlers
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('500.html'), 500
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made

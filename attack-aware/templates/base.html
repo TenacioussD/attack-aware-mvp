@@ -108,8 +108,8 @@
             </div>
         </div>
 
-            <!-- Vertical divider -->
-            <!--<div class="vertical-divider"></div>-->
+        <!-- Vertical divider -->
+        <!--<div class="vertical-divider"></div>-->
 
         <!-- Contact info -->
         <div class="contact-info">
@@ -151,14 +151,18 @@
         <div class="form-content">
             <h2>LOGIN</h2>
             <form action="{{ url_for('login') }} " method="post">  
-                {{ login_form.hidden_tag() }} <!-- This includes the CSRF token -->
+                {% if login_form %}
+                {{ login_form.hidden_tag() }}
+                {% endif %}  <!-- This includes the CSRF token -->
                 <div class="input-field">
                     <!-- Email input -->
-                    {{ login_form.email.label }} {{ login_form.email(class='validate custom-email-class', id='email') }}
+                    {{ login_form.email.label }} 
+                    {{ login_form.email(class='form-control', id='email') }}
                 </div>
                 <div class="input-field">
                     <!-- Password input -->
-                    {{ login_form.password.label }} {{ login_form.password(class='validate custom-password-class', id='password') }}
+                    {{ login_form.password.label }}
+                    {{ login_form.password(class='form-control', id='password') }}
                 </div>
                 <a href="#" class="forgot-password">Forgot Password?</a> <!-- Forgot Password Link -->
                 <button type="submit" name="action" value="login">Log In</button>
@@ -179,14 +183,16 @@
         <div class="form-content">
             <h2>SIGNUP</h2>
             <form action="{{ url_for('signup') }}" method="post"> <!-- Points to signup route -->
-                {{ signup_form.hidden_tag() }} <!-- This includes the CSRF token -->
+                {{ signup_form.hidden_tag() }}  <!-- This includes the CSRF token -->
                 <div class="input-field">
                     <!-- Email input -->
-                    {{ signup_form.emailSignup.label }} {{ signup_form.emailSignup(class='validate custom-email-class', id='email') }}
+                    {{ signup_form.emailSignup.label }}
+                    {{ signup_form.emailSignup(class='form-control', id='email') }}
                 </div>
                 <div class="input-field">
                     <!-- Password input -->
-                    {{ signup_form.newPassword.label }} {{ signup_form.newPassword(class='validate custom-password-class', id='password') }}
+                    {{ signup_form.newPassword.label }}
+                    {{ signup_form.newPassword(class='form-control', id='password') }}
                 </div>
                 <div class="policy-text">
                     <input type="checkbox" id="policy" required>
