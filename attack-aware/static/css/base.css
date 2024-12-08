@@ -297,7 +297,8 @@ body.show-popup .blur-background {
 }
 
 /* Login Button */
-.login-form form button {
+.login-form form button,
+.login-form #submit_signup1 {
     width: 100%;
     outline: none;
     border: none;
@@ -313,7 +314,8 @@ body.show-popup .blur-background {
 }
 
 /* Login Button Hover */
-.login-form form button:hover {     
+.login-form form button:hover,
+.login-form #submit_signup1:hover {     
     background: #7352E6;
 }
 

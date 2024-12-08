@@ -101,7 +101,9 @@ def threats():
     login_form = LoginForm()
     signup_form = SignupForm()
 
-    return render_template('threats.html', is_admin=current_user.is_admin, login_form=login_form, signup_form=signup_form)  #app needs to check if user is admin to allow certain privileges to page
+    is_admin = getattr(current_user, 'is_admin', False) if current_user.is_authenticated else False
+
+    return render_template('threats.html', is_admin=is_admin, login_form=login_form, signup_form=signup_form)  #app needs to check if user is admin to allow certain privileges to page
 
 
 # Route to render the ransomware page
@@ -330,34 +332,46 @@ def totalTopics():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
-    signup_form = SignupForm()
 
     # Handles the login form
     if login_form.validate_on_submit():
         login_instance = Login()  # Create an instance of Login
-        return login_instance.post()
+        result = login_instance.post()
+
+        if result:
+            flash("Logged in successfully!", 'info')
+            return redirect(url_for('profile'))  # Redirect to profile page
+        else:
+            flash("Invalid credentials. Please try again.", 'error')
 
     # Render the form in the home template
-    return render_template('home.html', login_form=login_form, signup_form=signup_form)
+    return render_template('base.html', login_form=login_form)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     signup_form = SignupForm()
-    login_form = LoginForm()
 
-    # Handle the signup form
+
+    # Handles the signup form
     if signup_form.validate_on_submit():
-        signup_instance = Signup()  # Create an instance of Signup
-        return signup_instance.post()
+        signup_instance = Signup()  # Creates an instance of Signup
+        success = signup_instance.post()
 
-    # Render the form in the home template
-    return render_template('home.html', signup_form=signup_form, login_form=login_form)
+        # Redirects to login after successful signup
+        if success:
+            flash("Account created successfully! Please log in.", 'info')
+            return redirect(url_for('home'))  # Redirects to home page after signup
+        else:
+            flash("There was an error with the signup. Please try again.", 'error')
+
+    # Renders the form in the home template
+    return render_template('home.html', signup_form=signup_form)
 
 @app.route('/logout', methods=['POST'])
 @login_required
 def logout():
     app.logger.info("CSRF Token: %s", request.form.get('_csrf_token'))  # Log CSRF token for debugging
-    
+
     try:
         logout_user()
         flash("You have successfully logged out.", 'info')
