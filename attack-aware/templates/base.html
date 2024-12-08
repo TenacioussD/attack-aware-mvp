@@ -165,12 +165,12 @@
                 <div class="input-field">
                     <!-- Email input -->
                     {{ login_form.email.label }} 
-                    {{ login_form.email(class='form-control', id='email') }}
+                    {{ login_form.email(class='form-control', id='email_login') }}
                 </div>
                 <div class="input-field">
                     <!-- Password input -->
                     {{ login_form.password.label }}
-                    {{ login_form.password(class='form-control', id='password') }}
+                    {{ login_form.password(class='form-control', id='password_login') }}
                 </div>
                 <a href="#" class="forgot-password">Forgot Password?</a> <!-- Forgot Password Link -->
                 <button type="submit" name="action" value="login">Log In</button>
@@ -195,12 +195,12 @@
                 <div class="input-field">
                     <!-- Email input -->
                     {{ signup_form.emailSignup.label }}
-                    {{ signup_form.emailSignup(class='form-control', id='email') }}
+                    {{ signup_form.emailSignup(class='form-control', id='email_signup') }}  <!-- Added unique IDs -->
                 </div>
                 <div class="input-field">
                     <!-- Password input -->
                     {{ signup_form.newPassword.label }}
-                    {{ signup_form.newPassword(class='form-control', id='password') }}
+                    {{ signup_form.newPassword(class='form-control', id='password_signup') }} <!-- Added unique IDs -->
                 </div>
                 <div class="policy-text">
                     <input type="checkbox" id="policy" required>
