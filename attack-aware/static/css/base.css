@@ -107,18 +107,25 @@ header.navbar .auth-buttons .btn-outline-primary, header .auth-buttons .btn-prim
 /* Outline styling for login button */
 header.navbar .auth-buttons .btn-outline-primary {
     border-color: #2AAA94;
-    color: #2AAA94;
-    margin-left: 25px;
-    margin-right: 20px;
+    color: #2AAA94 !important;
+    margin-left: 20px;
     padding-left: 30px;
     padding-right: 30px;
 }
 
 /* Hover effect for outline */
-.navbar .auth-buttons .btn-outline-primary:hover {
-    background-color: #504EC1;
+header .navbar .auth-buttons .btn-outline-primary:hover {
+    background-color: #39b1a6;
     border-color: #2AAA94;
     color: #fff;
+}
+
+/* For drop down styling - login button */
+.navbar-collapse .auth-buttons .btn-outline-primary {
+    padding-left: 15px; 
+    margin-left: 0;   /* Changes the left margin */
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* LOGIN FORM POPUP */
@@ -290,7 +297,8 @@ body.show-popup .blur-background {
 }
 
 /* Login Button */
-.login-form form button {
+.login-form form button,
+.login-form #submit_signup1 {
     width: 100%;
     outline: none;
     border: none;
@@ -306,7 +314,8 @@ body.show-popup .blur-background {
 }
 
 /* Login Button Hover */
-.login-form form button:hover {     
+.login-form form button:hover,
+.login-form #submit_signup1:hover {     
     background: #7352E6;
 }
 

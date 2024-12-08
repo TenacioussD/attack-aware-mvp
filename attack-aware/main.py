@@ -7,7 +7,6 @@ from flask_login import current_user, LoginManager, login_required, logout_user
 from login import Login, LoginForm
 from admin import Admin
 from create_admin import create_initial_admin
-from models import db, User, CyberAttack, Scenario
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import CSRFProtect
 import os
@@ -21,11 +20,12 @@ def create_app():
     app.secret_key = 'attackaware'  # Needed for flashing messages
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_profile.db'  # The database that will be created
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = 'your-secret-key'
+    app.config['SECRET_KEY'] = '123456'
     app.config['UPLOAD_FOLDER'] = 'static/uploads'
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit to files to avoid overloads
     app.config['WTF_CSRF_TIME_LIMIT'] = 3600  # Set the expiration time to 1 hour (in seconds)
     app.config['WTF_CSRF_SECRET_KEY'] = 'another-random-key'
+    app.config['WTF_CSRF_ENABLED'] = True
 
     # Check if the uploads folder exists, create it if it does not
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
@@ -92,13 +92,18 @@ def make_admin(user_id):
         flash("You do not have permission to perform this action.", 'admin')
         return redirect(url_for('home'))
 
-    result = Admin.promore_to_admin(user_id)
+    result = Admin.promote_to_admin(user_id) # Fixed a typo in the function name
     flash(result)
     return redirect(url_for('home'))
 
 @app.route('/threats')
 def threats():
-    return render_template('threats.html', is_admin=current_user.is_admin)  #app needs to check if user is admin to allow certain privileges to page
+    login_form = LoginForm()
+    signup_form = SignupForm()
+
+    is_admin = getattr(current_user, 'is_admin', False) if current_user.is_authenticated else False
+
+    return render_template('threats.html', is_admin=is_admin, login_form=login_form, signup_form=signup_form)  #app needs to check if user is admin to allow certain privileges to page
 
 
 # Route to render the ransomware page
@@ -138,9 +143,11 @@ def phishing_scams():
     return render_template('phishing_scams.html')       # Renders phishing scams HTML file from templates
 
 
-@app.route('/contact_us')
+@app.route('/contact_us',  methods=['GET', 'POST'])
 def contact_us():
-    return render_template('contact_us.html')  # Renders contact us HTML file from templates
+    login_form = LoginForm()   # Passes login form to contact page
+    signup_form = SignupForm()  # Passes signup form to contact page
+    return render_template('contact_us.html', login_form=login_form, signup_form=signup_form)  # Renders contact us HTML file from templates
 
 @app.route('/admin/attacks', methods=['GET', 'POST'])
 def manage_attacks():
@@ -254,13 +261,6 @@ def remove_video(video_id):
     db.session.commit()
     return redirect(url_for('manage_videos'))
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    flash('You have logged out.', 'login') #let flash pop-up on home login form
-    return redirect(url_for('home'))
-
 @login_manager.user_loader
 def load_user(user_id):
     user = User.query.get(int(user_id))
@@ -286,7 +286,6 @@ def profile():
     # Calculate the progress for the progress bar
     progressBar = (len(interactedTopics) / totalTopics) * 100 if totalTopics > 0 else 0
 
-
     form = ProfileForm()
     # Check if the form is submitted and validated
     if form.validate_on_submit():
@@ -306,8 +305,14 @@ def profile():
     .limit(3) \
     .all()
     
+     # Instantiate the login and signup forms
+    login_form = LoginForm()
+    signup_form = SignupForm()
+    
     return render_template('profile.html', form=form, 
-                           changePassword_form=changePassword_form, 
+                           changePassword_form=changePassword_form,
+                           login_form=login_form,
+                           signup_form=signup_form, 
                            user=user, progressBar = progressBar, 
                            favTopics=favTopics, topicImage=topicImage, 
                            topicGraph=topicGraph, totalTopics=totalTopics) 
@@ -331,22 +336,66 @@ def login():
     # Handles the login form
     if login_form.validate_on_submit():
         login_instance = Login()  # Create an instance of Login
-        return login_instance.post()
+        result = login_instance.post()
 
-    # Render both forms in the base template
+        if result:
+            flash("Logged in successfully!", 'info')
+            return redirect(url_for('profile'))  # Redirect to profile page
+        else:
+            flash("Invalid credentials. Please try again.", 'error')
+
+    # Render the form in the home template
     return render_template('base.html', login_form=login_form)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     signup_form = SignupForm()
 
-    # Handle the signup form
-    if signup_form.validate_on_submit():
-        signup_instance = Signup()  # Create an instance of Signup
-        return signup_instance.post()
 
-    # Render both forms in the base template
-    return render_template('base.html', signup_form=signup_form)
+    # Handles the signup form
+    if signup_form.validate_on_submit():
+        signup_instance = Signup()  # Creates an instance of Signup
+        success = signup_instance.post()
+
+        # Redirects to login after successful signup
+        if success:
+            flash("Account created successfully! Please log in.", 'info')
+            return redirect(url_for('home'))  # Redirects to home page after signup
+        else:
+            flash("There was an error with the signup. Please try again.", 'error')
+
+    # Renders the form in the home template
+    return render_template('home.html', signup_form=signup_form)
+
+@app.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    app.logger.info("CSRF Token: %s", request.form.get('_csrf_token'))  # Log CSRF token for debugging
+
+    try:
+        logout_user()
+        flash("You have successfully logged out.", 'info')
+        return redirect(url_for('home'))
+    except Exception as e:
+        flash(f"An error occurred: {str(e)}", 'danger')
+        return redirect(url_for('home'))
+    
+#Error handlers
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('500.html'), 500
+
+# Context processor to handle login and signup instances across all pages
+@app.context_processor
+def inject_forms():
+    return {
+        'login_form': LoginForm(),
+        'signup_form': SignupForm()
+    }
 
 if __name__ == "__main__":
     app.run(debug=True)  # Enables debug mode to rerun the application when changes are made

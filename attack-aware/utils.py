@@ -63,4 +63,5 @@ topicGraph = {
 ALL_TOPICS = ['Phishing Scams', 'IoT', 'Social Engineering', 'Ransomware', 'Cyber Hygiene']
 totalTopics = len(ALL_TOPICS)
 
-
+def get_total_topics():  # Had to insert this code because of circular import. If you need to remove it, please do so - T
+    return totalTopics

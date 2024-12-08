@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- For responsive webpage, mobile friendly-->
+    <meta name="csrf-token" content="{{ csrf_token() }}"> <!-- CSRF token for forms -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"> <!-- Bootstrap css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/logos/favicon.ico') }}" type="image/x-icon"> <!-- Favicon -->
@@ -51,81 +52,21 @@
             <div class="d-flex align-items-center">
                 <div class="vertical-divider"></div>
                 <div class="auth-buttons">
-                    <button class="btn btn-outline-primary" id="show-login-popup">Login</button>
+                    {% if current_user.is_authenticated %}
+                        <!-- Logout button if the user is logged in -->
+                        <form action="{{ url_for('logout') }}" method="post">
+                            <button class="btn btn-outline-primary" id="logoutBtn">Logout</button>
+                        </form>
+                    {% else %}
+                        <!-- Login button if the user is not logged in -->
+                        <button class="btn btn-outline-primary" id="show-login-popup">Login</button>
+                    {% endif %}
+                    <!-- <button class="btn btn-outline-primary" id="show-login-popup">Login</button> -->
                 </div>
             </div>
         </div>
     </div>
 </header>
-
-<div class="blur-background"></div>
-
-<!-- LOGIN POP UP FORM -->
-<div class="login-popup">       
-    <div class="close-btn">                   <!-- Close Button -->
-        <i class="fa-solid fa-x"></i>
-    </div>
-    <div class="login-form login">            <!-- LOGIN -->
-        <div class="left-info">
-         <!--  <h2>Welcome Back</h2>
-            <p>Please login using your account information.</p> --> 
-        </div>
-        <div class="form-content">
-            <h2>LOGIN</h2>
-            <form action="{{ url_for('login') }} " method="post">  
-                {{ login_form.hidden_tag() }} <!-- This includes the CSRF token -->
-                <div class="input-field">
-                    <!-- Email input -->
-                    {{ login_form.email.label }} {{ login_form.email(class='validate custom-email-class', id='email') }}
-                </div>
-                <div class="input-field">
-                    <!-- Password input -->
-                    {{ login_form.password.label }} {{ login_form.password(class='validate custom-password-class', id='password') }}
-                </div>
-                <a href="#" class="forgot-password">Forgot Password?</a> <!-- Forgot Password Link -->
-                <button type="submit" name="action" value="login">Log In</button>
-            </form>
-            <div class="bottom-link">
-                Don't have an account?
-                <a href="#" id="signup-link">Signup</a>          <!-- Sign Up Link -->
-            </div>
-        </div>
-    </div>
-
-    <!-- SIGNUP POPUP FORM -->   
-    <div class="login-form signup">           <!-- SIGNUP -->
-        <div class="left-info">
-            <!--<h2>Create Account</h2>
-            <p>To become a part of our community, please sign up using your personal information.</p>-->
-        </div>
-        <div class="form-content">
-            <h2>SIGNUP</h2>
-            <form action="{{ url_for('signup') }}" method="post"> <!-- Points to signup route -->
-                {{ signup_form.hidden_tag() }} <!-- This includes the CSRF token -->
-                <div class="input-field">
-                    <!-- Email input -->
-                    {{ signup_form.emailSignup.label }} {{ signup_form.emailSignup(class='validate custom-email-class', id='email') }}
-                </div>
-                <div class="input-field">
-                    <!-- Password input -->
-                    {{ signup_form.newPassword.label }} {{ signup_form.newPassword(class='validate custom-password-class', id='password') }}
-                </div>
-                <div class="policy-text">
-                    <input type="checkbox" id="policy" required>
-                    <label for="policy">
-                        I agree to the 
-                        <a href="#">Terms & Conditions</a>
-                    </label>
-                </div>
-                <button type="submit" name="action" value="signup" >Sign Up</button>
-            </form>
-            <div class="bottom-link">
-                Already have an account?
-                <a href="#" id="login-link">Login</a>          <!-- Login Link -->
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Main inheritable content -->
 <main> 
@@ -177,8 +118,8 @@
             </div>
         </div>
 
-            <!-- Vertical divider -->
-            <!--<div class="vertical-divider"></div>-->
+        <!-- Vertical divider -->
+        <!--<div class="vertical-divider"></div>-->
 
         <!-- Contact info -->
         <div class="contact-info">
@@ -205,7 +146,80 @@
     </div> 
 </footer>
 
-F
+<div class="blur-background"></div>
+
+<!-- LOGIN POP UP FORM -->
+<div class="login-popup">       
+    <div class="close-btn">                   <!-- Close Button -->
+        <i class="fa-solid fa-x"></i>
+    </div>
+    <div class="login-form login">            <!-- LOGIN -->
+        <div class="left-info">
+         <!--  <h2>Welcome Back</h2>
+            <p>Please login using your account information.</p> --> 
+        </div>
+        <div class="form-content">
+            <h2>LOGIN</h2>
+            <form action="{{ url_for('login') }} " method="post">  
+                <input type="hidden" name="csrf_token" id="csrf_token_login" value="{{ login_form.csrf_token._value() }}">  <!-- Manually render CSRF token -->  
+                <div class="input-field">
+                    <!-- Email input -->
+                    {{ login_form.email.label }} 
+                    {{ login_form.email(class='form-control', id='email_login', autocomplete='email') }}
+                </div>
+                <div class="input-field">
+                    <!-- Password input -->
+                    {{ login_form.password.label }}
+                    {{ login_form.password(class='form-control', id='password_login') }}
+                </div>
+                <a href="#" class="forgot-password">Forgot Password?</a> <!-- Forgot Password Link -->
+                <button type="submit" name="action" value="login">Log In</button>
+            </form>
+            <div class="bottom-link">
+                Don't have an account?
+                <a href="#" id="signup-link">Signup</a>          <!-- Sign Up Link -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNUP POPUP FORM -->   
+    <div class="login-form signup">           <!-- SIGNUP -->
+        <div class="left-info">
+            <!--<h2>Create Account</h2>
+            <p>To become a part of our community, please sign up using your personal information.</p>-->
+        </div>
+        <div class="form-content">
+            <h2>SIGNUP</h2>
+            <form action="{{ url_for('signup') }}" method="post"> <!-- Points to signup route -->
+                <input type="hidden" name="csrf_token" id="csrf_token_signup" value="{{ signup_form.csrf_token._value() }}">  <!-- Manually render CSRF token -->
+                <div class="input-field">
+                    <!-- Email input -->
+                    {{ signup_form.emailSignup.label }}
+                    {{ signup_form.emailSignup(class='form-control', id='email_signup', autocomplete='email') }}  <!-- Added unique IDs -->
+                </div>
+                <div class="input-field">
+                    <!-- Password input -->
+                    {{ signup_form.newPassword.label }}
+                    {{ signup_form.newPassword(class='form-control', id='password_signup') }} <!-- Added unique IDs -->
+                </div>
+                <div class="policy-text">
+                    <input type="checkbox" id="policy" required>
+                    <label for="policy">
+                        I agree to the 
+                        <a href="#">Terms & Conditions</a>
+                    </label>
+                </div>
+                {{ signup_form.submit(id="submit_signup1") }}
+            </form>
+            <div class="bottom-link">
+                Already have an account?
+                <a href="#" id="login-link">Login</a>          <!-- Login Link -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script for login/signup popup functionality -->
 <script src="{{ url_for('static', filename='js/login_popup.js') }}"></script>
 </body>
 </html>
